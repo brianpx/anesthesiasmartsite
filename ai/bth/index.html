@@ -1,343 +1,397 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beyond the Hype — AI in Anesthesiology</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Beyond the Hype: a practical, ethical AI framework for anesthesiologists featuring the VDD (Verify-Decide-Document) approach for safer patient care.">
+  <title>Beyond the Hype — AI in Anesthesiology</title>
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0f1a;
-            color: #e2e8f0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+  <!-- Theme flash prevention -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 
-        /* Navigation Bar */
-        .navbar {
-            width: 100%;
-            padding: 1.25rem 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-        }
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { dark: '#2b7a9e', mid: '#2b9fd4', light: '#5ec8e6', accent: '#4a9ead' },
+            surface: {
+              DEFAULT: 'var(--color-bg)',
+              card: 'var(--color-card-bg)',
+              'card-hover': 'var(--color-card-bg-hover)',
+            },
+          },
+        },
+      },
+    };
+  </script>
 
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+  <!-- Fonts & Shared Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/shared.css">
 
-        .nav-links {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
+  <style>
+    /* Page-specific styles */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem 2rem;
+      position: relative;
+    }
 
-        .nav-link {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 0.625rem 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 0.375rem;
-            transition: all 0.2s ease;
-            letter-spacing: 0.01em;
-            background: rgba(255, 255, 255, 0.03);
-        }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, var(--color-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
 
-        .nav-link:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.3);
-            color: #f1f5f9;
-        }
+    .conference-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius-full);
+      background: var(--color-badge-bg);
+      border: 1px solid var(--color-border-light);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.01em;
+    }
 
-        .hero {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem 2rem 0;
-            position: relative;
-        }
+    .conference-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d4a843;
+    }
 
-        /* Subtle radial glow behind title */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 400px;
-            background: radial-gradient(ellipse, rgba(255,255,255,0.02) 0%, transparent 70%);
-            pointer-events: none;
-        }
+    .title-block {
+      margin-bottom: 1.25rem;
+      line-height: 1;
+    }
 
-        .conference-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1.25rem;
-            border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: #94a3b8;
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.01em;
-        }
+    .title-main {
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      font-weight: 800;
+      color: var(--color-text-heading);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
 
-        .conference-badge .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #d4a843;
-        }
+    .title-hype {
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      padding-top: 0.05em;
+      display: block;
+    }
 
-        .title-block {
-            margin-bottom: 1.25rem;
-            line-height: 1;
-        }
+    .title-hype .letter-h { color: #4a9ead; }
+    .title-hype .letter-y { color: #5baab8; }
+    .title-hype .letter-p { color: #b8a44a; }
+    .title-hype .letter-e { color: #8b9a3e; }
+    .title-hype .letter-dot { color: var(--color-text-heading); }
 
-        .title-main {
-            font-size: clamp(3.5rem, 8vw, 6.5rem);
-            font-weight: 800;
-            color: #f1f5f9;
-            letter-spacing: -0.03em;
-            line-height: 1.05;
-        }
+    .subtitle {
+      max-width: 640px;
+      margin: 0 auto 1.75rem;
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+      font-weight: 400;
+    }
 
-        .title-hype {
-            font-size: clamp(3.5rem, 8vw, 6.5rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            line-height: 1.15;
-            padding-top: 0.05em;
-            display: block;
-        }
+    .pdf-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, rgba(74, 158, 173, 0.15), rgba(184, 164, 74, 0.15));
+      border: 1px solid rgba(74, 158, 173, 0.3);
+      color: var(--color-text-nav);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: all var(--transition-base);
+      margin-bottom: 1.5rem;
+    }
 
-        .title-hype .letter-h {
-            color: #4a9ead;
-        }
-        .title-hype .letter-y {
-            color: #5baab8;
-        }
-        .title-hype .letter-p {
-            color: #b8a44a;
-        }
-        .title-hype .letter-e {
-            color: #8b9a3e;
-        }
-        .title-hype .letter-dot {
-            color: #f1f5f9;
-        }
+    .pdf-download:hover {
+      background: linear-gradient(135deg, rgba(74, 158, 173, 0.25), rgba(184, 164, 74, 0.25));
+      border-color: rgba(74, 158, 173, 0.5);
+      color: var(--color-text-heading);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(74, 158, 173, 0.15);
+    }
 
-        .subtitle {
-            max-width: 640px;
-            margin: 0 auto 1.75rem;
-            font-size: 1.125rem;
-            line-height: 1.7;
-            color: #7e8a9a;
-            font-weight: 400;
-        }
+    .pdf-download svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
 
-        /* PDF Download Button */
-        .pdf-download {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 2rem;
-            border-radius: 0.5rem;
-            background: linear-gradient(135deg, rgba(74, 158, 173, 0.15), rgba(184, 164, 74, 0.15));
-            border: 1px solid rgba(74, 158, 173, 0.3);
-            color: #cbd5e1;
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            letter-spacing: 0.01em;
-            transition: all 0.3s ease;
-            margin-bottom: 1.5rem;
-        }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
 
-        .pdf-download:hover {
-            background: linear-gradient(135deg, rgba(74, 158, 173, 0.25), rgba(184, 164, 74, 0.25));
-            border-color: rgba(74, 158, 173, 0.5);
-            color: #f1f5f9;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(74, 158, 173, 0.15);
-        }
+    .tag {
+      padding: 0.375rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--color-footer-text);
+      letter-spacing: 0.02em;
+    }
 
-        .pdf-download svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
+    .tag::before {
+      content: '\00B7';
+      margin-right: 0.5rem;
+      color: var(--color-footer-muted);
+    }
 
-        .tag-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
+    .credentials {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-footer-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
 
-        .tag {
-            padding: 0.375rem 0.75rem;
-            font-size: 0.8rem;
-            font-weight: 400;
-            color: #64748b;
-            letter-spacing: 0.02em;
-        }
+    .credentials .sep {
+      color: var(--color-border-light);
+    }
 
-        .tag::before {
-            content: '·';
-            margin-right: 0.5rem;
-            color: #475569;
-        }
+    @media (max-width: 768px) {
+      .hero {
+        padding: 2rem 1.25rem;
+      }
 
-        .credentials {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: #4a5568;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-        }
+      .credentials {
+        flex-direction: column;
+        gap: 0.25rem;
+      }
 
-        .credentials .sep {
-            color: #334155;
-        }
-
-        /* Bottom section */
-        .bottom-section {
-            width: 100%;
-            text-align: center;
-            padding: 40px 2rem 1.25rem;
-        }
-
-        /* Full-width separator line */
-        .footer-line {
-            width: 100%;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            margin: 0 0 0.75rem;
-        }
-
-        .footer-text {
-            font-size: 0.8rem;
-            color: #4a5568;
-            font-weight: 400;
-            letter-spacing: 0.02em;
-            text-align: center;
-        }
-
-        @media (max-width: 768px) {
-            .nav-content {
-                justify-content: center;
-            }
-
-            .nav-links {
-                gap: 0.75rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero {
-                padding: 2rem 1.25rem 2rem;
-            }
-
-            .credentials {
-                flex-direction: column;
-                gap: 0.25rem;
-            }
-
-            .credentials .sep {
-                display: none;
-            }
-
-            .bottom-section {
-                padding: 0 1.25rem 2rem;
-            }
-        }
-    </style>
+      .credentials .sep {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-content">
-            <div class="nav-links">
-                <a href="resource-guide.html" class="nav-link">Resource Guide</a>
-                <a href="https://www.anesthesiasmartsite.com/ai/resources/beyond-the-hype-quiz.html" class="nav-link">Quiz</a>
-            </div>
-        </div>
-    </nav>
+<!-- Navigation -->
+<nav class="navbar" aria-label="Primary navigation">
+  <div class="nav-content">
+    <a href="../../" class="logo" aria-label="Anesthesia SmartSite home">
+      <img src="../../img/logo-icon.png" alt="" width="44" height="44">
+      <div class="logo-text">
+        <span class="logo-title"><span class="logo-anesthesia">Anesthesia </span><span class="logo-smartsite">SmartSite</span></span>
+        <span class="logo-subtitle">Advancing Anesthesia Education with AI</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="../../#ai" class="nav-link">AI Resources</a>
+      <a href="../../#education" class="nav-link">Clinical Education</a>
+      <a href="../../#education" class="nav-link">Protocols</a>
+      <a href="../../#about" class="nav-link">About</a>
+      <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <svg viewBox="0 0 24 24">
+        <line class="hamburger-line" x1="3" y1="6" x2="21" y2="6"/>
+        <line class="hamburger-line" x1="3" y1="12" x2="21" y2="12"/>
+        <line class="hamburger-line" x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
 
-    <div class="hero">
-        <div class="conference-badge">
-            <span class="dot"></span>
-            36th Annual UC Davis Anesthesiology Update · Napa 2026
-        </div>
+<div class="mobile-overlay" id="mobile-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <button class="mobile-nav-close" aria-label="Close menu" id="mobile-nav-close">
+    <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+  <a href="../../#ai" class="nav-link">AI Resources</a>
+  <a href="../../#education" class="nav-link">Clinical Education</a>
+  <a href="../../#education" class="nav-link">Protocols</a>
+  <a href="../../#about" class="nav-link">About</a>
+  <div class="mobile-theme-toggle">
+    <span class="mobile-theme-label">Appearance</span>
+    <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode">
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
 
-        <div class="title-block">
-            <div class="title-main">Beyond the</div>
-            <span class="title-hype"><span class="letter-h">H</span><span class="letter-y">y</span><span class="letter-p">p</span><span class="letter-e">e</span><span class="letter-dot">.</span></span>
-        </div>
+<!-- Breadcrumb -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="../../">Home</a>
+  <span class="separator" aria-hidden="true">&rsaquo;</span>
+  <a href="../../#ai">AI Resources</a>
+  <span class="separator" aria-hidden="true">&rsaquo;</span>
+  <span class="current" aria-current="page">Beyond the Hype</span>
+</nav>
 
-        <p class="subtitle">
-            Practical, ethical AI for anesthesiologists—the VDD (Verify–Decide–Document) framework for safer patient care.
-        </p>
+<!-- Main Content -->
+<main id="main-content">
 
-        <!-- PDF Download Button -->
-        <a href="AI-in-Anesthesiology_Beyond-the-Hype_Brian-Pitts.pdf" class="pdf-download" download>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-            </svg>
-            Download Presentation Slides
-        </a>
-
-        <div class="tag-row">
-            <span class="tag">Five Tools</span>
-            <span class="tag">Supervised Use</span>
-            <span class="tag">Defensible Practice</span>
-            <span class="tag">Verify · Decide · Document</span>
-        </div>
-
-        <div class="credentials">
-            <span>Brian Pitts, MD, MS, MEHP</span>
-            <span class="sep">·</span>
-            <span>Anesthesiology &amp; Pain Medicine</span>
-            <span class="sep">·</span>
-            <span>UC Davis Health</span>
-        </div>
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="conference-badge">
+      <span class="dot"></span>
+      36th Annual Anesthesiology Update &middot; Napa 2026
     </div>
 
-    <div class="bottom-section">
-        <!-- Full-width line spanning the entire page -->
-        <div class="footer-line"></div>
-
-        <p class="footer-text">Brian Pitts, MD, MS, MEHP · 2026</p>
+    <div class="title-block">
+      <h1 id="hero-title">
+        <span class="title-main">Beyond the</span>
+        <span class="title-hype"><span class="letter-h">H</span><span class="letter-y">y</span><span class="letter-p">p</span><span class="letter-e">e</span><span class="letter-dot">.</span></span>
+      </h1>
     </div>
 
+    <p class="subtitle">
+      Practical, ethical AI for anesthesiologists -- the VDD (Verify&ndash;Decide&ndash;Document) framework for safer patient care.
+    </p>
+
+    <a href="AI-in-Anesthesiology_Beyond-the-Hype_Brian-Pitts.pdf" class="pdf-download" download>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+      </svg>
+      Download Presentation Slides
+    </a>
+
+    <div class="tag-row" aria-label="Key topics">
+      <span class="tag">Five Tools</span>
+      <span class="tag">Supervised Use</span>
+      <span class="tag">Defensible Practice</span>
+      <span class="tag">Verify &middot; Decide &middot; Document</span>
+    </div>
+
+    <address class="credentials">
+      <span>Brian Pitts, MD, MS, MEHP</span>
+      <span class="sep">&middot;</span>
+      <span>Anesthesiology &amp; Pain Medicine</span>
+    </address>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="site-footer" id="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__author">Brian Pitts, MD, MS, MEHP &middot; Clinical Professor of Anesthesiology &amp; Pain Medicine, UC Davis Health</p>
+    <div class="site-footer__links">
+      <button class="site-footer__link" data-modal="disclaimer">Disclaimer</button>
+      <button class="site-footer__link" data-modal="privacy">Privacy Policy</button>
+      <button class="site-footer__link" data-modal="terms">Terms of Service</button>
+    </div>
+  </div>
+</footer>
+
+<!-- Legal Modal -->
+<div class="modal-overlay" id="legal-modal" role="dialog" aria-modal="true" aria-label="Legal information">
+  <div class="modal">
+    <button class="modal-close" id="modal-close" aria-label="Close">
+      <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+    <div id="modal-content-disclaimer" style="display:none;">
+      <h2>Disclaimer</h2>
+      <p>This is a personal educational site created and maintained by Brian Pitts, MD, MS, MEHP. The content, views, and opinions expressed here are solely those of the author and do not necessarily reflect the official policy or position of UC Davis, UC Davis Health, or the Department of Anesthesiology &amp; Pain Medicine.</p>
+      <p>The information provided on this site is intended for educational purposes only and should not be considered a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of a qualified healthcare provider with any questions regarding a medical condition or clinical decision-making.</p>
+      <p>While every effort is made to ensure accuracy, the author makes no warranties or representations regarding the completeness, reliability, or timeliness of the content. Use of any information on this site is at your own risk.</p>
+    </div>
+    <div id="modal-content-privacy" style="display:none;">
+      <h2>Privacy Policy</h2>
+      <p>AnesthesiaSmartSite is committed to protecting your privacy. This policy describes how information is collected and used when you visit this site.</p>
+      <h3>Information Collection</h3>
+      <p>This site does not collect personally identifiable information unless you voluntarily provide it. Standard web server logs may record technical information such as your IP address, browser type, and pages visited for site maintenance and analytics purposes.</p>
+      <h3>Cookies</h3>
+      <p>This site may use cookies or local storage to remember your preferences, such as your light/dark mode setting. No tracking cookies or third-party advertising cookies are used.</p>
+      <h3>Third-Party Services</h3>
+      <p>This site may use third-party services such as web fonts. These services may collect anonymous usage data subject to their own privacy policies.</p>
+      <h3>Data Sharing</h3>
+      <p>No personal information is sold, traded, or otherwise transferred to third parties. Anonymous, aggregated usage statistics may be reviewed to improve the site.</p>
+    </div>
+    <div id="modal-content-terms" style="display:none;">
+      <h2>Terms of Service</h2>
+      <p>By accessing and using AnesthesiaSmartSite, you agree to the following terms and conditions.</p>
+      <h3>Educational Use</h3>
+      <p>All content on this site is provided for educational and informational purposes only. It is not intended to serve as medical advice or to replace the clinical judgment of a licensed healthcare professional.</p>
+      <h3>Intellectual Property</h3>
+      <p>Unless otherwise noted, all content on this site is the intellectual property of the author. You may reference and share content for non-commercial educational purposes with appropriate attribution.</p>
+      <h3>Accuracy</h3>
+      <p>While the author strives to provide accurate and current information, medicine is a rapidly evolving field. The author does not guarantee that all content is complete, current, or error-free.</p>
+      <h3>Limitation of Liability</h3>
+      <p>The author shall not be held liable for any damages arising from the use of or reliance on information provided on this site. Clinical decisions should always be based on individual patient assessment and current evidence-based guidelines.</p>
+      <h3>Changes</h3>
+      <p>These terms may be updated from time to time. Continued use of the site constitutes acceptance of any changes.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "PresentationDigitalDocument",
+  "name": "Beyond the Hype: AI in Anesthesiology",
+  "description": "A practical, ethical AI framework for anesthesiologists featuring the VDD (Verify-Decide-Document) approach for safer patient care.",
+  "url": "https://www.anesthesiasmartsite.com/ai/bth/",
+  "author": {
+    "@type": "Person",
+    "name": "Brian Pitts",
+    "jobTitle": "Clinical Professor of Anesthesiology & Pain Medicine",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "UC Davis Health"
+    }
+  },
+  "about": [
+    { "@type": "Thing", "name": "Artificial Intelligence in Medicine" },
+    { "@type": "Thing", "name": "Anesthesiology" },
+    { "@type": "Thing", "name": "Clinical Decision Support" }
+  ],
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Anesthesia SmartSite",
+    "url": "https://www.anesthesiasmartsite.com"
+  }
+}
+</script>
+
+<script src="../../js/site.js"></script>
 </body>
 </html>

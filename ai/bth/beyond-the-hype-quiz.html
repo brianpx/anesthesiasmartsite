@@ -3,20 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Board-style assessment quiz for AI in anesthesiology. Test your knowledge of the VDD framework, automation bias, clinical AI governance, and verification methods.">
 <title>Beyond the Hype — Board-Style Assessment</title>
+
+<!-- Theme flash prevention -->
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: ['selector', '[data-theme="dark"]'],
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+        colors: {
+          brand: { dark: '#2b7a9e', mid: '#2b9fd4', light: '#5ec8e6', accent: '#4a9ead' },
+        },
+      },
+    },
+  };
+</script>
+
+<!-- Fonts & Shared Styles -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/shared.css">
+
+<!-- jsPDF for quiz PDF generation -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
+  /* ─── Quiz Design Tokens (integrated with shared token system) ─── */
   :root {
-    --bg-primary: #0a0f1a;
+    --bg-primary: var(--color-bg);
     --bg-card: #141722;
     --bg-card-hover: #1a1e2e;
     --bg-option: #181c2a;
     --bg-option-hover: #1f2438;
-    --border-subtle: #252a3a;
+    --border-subtle: var(--color-border);
     --border-active: #3b82f6;
-    --text-primary: #e2e8f0;
-    --text-secondary: #8b92a8;
+    --text-primary: var(--color-text-heading);
+    --text-secondary: var(--color-text-muted);
     --text-muted: #5c6380;
     --accent-blue: #3b82f6;
     --accent-blue-dim: rgba(59, 130, 246, 0.12);
@@ -32,15 +59,13 @@
     --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.65;
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
+  [data-theme="light"] {
+    --bg-card: rgba(255, 255, 255, 0.7);
+    --bg-card-hover: rgba(255, 255, 255, 0.85);
+    --bg-option: rgba(255, 255, 255, 0.5);
+    --bg-option-hover: rgba(255, 255, 255, 0.75);
+    --text-muted: #94a3b8;
+    --shadow-card: 0 2px 12px rgba(0,0,0,0.08);
   }
 
   body::before {
@@ -50,83 +75,6 @@
       radial-gradient(ellipse at 20% 0%, rgba(59,130,246,0.06) 0%, transparent 50%),
       radial-gradient(ellipse at 80% 100%, rgba(139,92,246,0.04) 0%, transparent 50%);
     pointer-events: none; z-index: 0;
-  }
-
-  /* ─── Navigation Bar - Matching index.html & resource-guide.html ─── */
-  .top-nav {
-    position: sticky;
-    top: 0;
-    z-index: 200;
-    width: 100%;
-    padding: 1.25rem 2rem;
-    background: rgba(15, 23, 42, 0.95);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-
-  .nav-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .nav-link {
-    color: #cbd5e1;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    padding: 0.625rem 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 0.375rem;
-    transition: all 0.2s ease;
-    letter-spacing: 0.01em;
-    background: rgba(255, 255, 255, 0.03);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .nav-link:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.3);
-    color: #f1f5f9;
-  }
-
-  .btn-icon {
-    padding: 0.625rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 0.375rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #cbd5e1;
-  }
-
-  .btn-icon:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .icon {
-    width: 20px;
-    height: 20px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 2;
-  }
-
-  @media (max-width: 768px) {
-    .top-nav { padding: 0.75rem 1rem; }
-    .nav-content { flex-wrap: wrap; gap: 0.5rem; }
-    .nav-link span { display: none; }
-    .nav-link { padding: 0.625rem; }
   }
 
   .container {
@@ -164,8 +112,8 @@
 
   /* ─── Progress ─── */
   .progress-bar {
-    position: sticky; top: 69px; z-index: 100;
-    background: rgba(10, 15, 26, 0.9);
+    position: sticky; top: 69px; z-index: 50;
+    background: var(--color-bg-alpha, rgba(10, 15, 26, 0.9));
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     padding: 14px 0; margin: 0 -24px 40px;
     border-bottom: 1px solid var(--border-subtle);
@@ -314,14 +262,14 @@
     font-family: 'Inter', sans-serif;
     font-size: 14px; font-weight: 600;
     color: var(--text-primary); background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--color-border-light, rgba(255, 255, 255, 0.2));
     border-radius: 8px; padding: 12px 32px;
     cursor: pointer; transition: all var(--transition);
   }
-  .reset-btn:hover { 
-    background: rgba(255, 255, 255, 0.08); 
-    border-color: rgba(255, 255, 255, 0.3); 
-    color: #f1f5f9; 
+  .reset-btn:hover {
+    background: var(--color-card-bg-hover, rgba(255, 255, 255, 0.08));
+    border-color: var(--color-accent, rgba(255, 255, 255, 0.3));
+    color: var(--text-primary);
   }
 
   .review-content-btn {
@@ -329,24 +277,18 @@
   }
   .review-content-btn.visible { display: inline-block; }
 
-  .footer {
-    text-align: center; margin-top: 56px; padding-top: 28px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 12px; color: #4a5568;
-  }
-
   /* ═══════════════════════════════════════════
-     MODAL
+     QUIZ COMPLETION MODAL
      ═══════════════════════════════════════════ */
-  .modal-overlay {
+  .quiz-modal-overlay {
     display: none; position: fixed; inset: 0; z-index: 9000;
     background: rgba(6, 7, 11, 0.82);
     backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     align-items: center; justify-content: center;
   }
-  .modal-overlay.visible { display: flex; }
+  .quiz-modal-overlay.visible { display: flex; }
 
-  .modal {
+  .quiz-modal {
     background: var(--bg-card); border: 1px solid var(--border-subtle);
     border-radius: 16px; padding: 44px 40px 36px;
     max-width: 480px; width: 90%; text-align: center;
@@ -358,40 +300,40 @@
     to { opacity: 1; transform: scale(1) translateY(0); }
   }
 
-  .modal__icon {
+  .quiz-modal__icon {
     width: 64px; height: 64px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     margin: 0 auto 20px; font-size: 28px;
   }
-  .modal__icon--great { background: var(--accent-green-dim); color: var(--accent-green); }
-  .modal__icon--okay { background: var(--accent-amber-dim); color: var(--accent-amber); }
-  .modal__icon--needs-work { background: var(--accent-red-dim); color: var(--accent-red); }
+  .quiz-modal__icon--great { background: var(--accent-green-dim); color: var(--accent-green); }
+  .quiz-modal__icon--okay { background: var(--accent-amber-dim); color: var(--accent-amber); }
+  .quiz-modal__icon--needs-work { background: var(--accent-red-dim); color: var(--accent-red); }
 
-  .modal__title { font-weight: 700; font-size: 22px; letter-spacing: -0.02em; margin-bottom: 6px; }
+  .quiz-modal__title { font-weight: 700; font-size: 22px; letter-spacing: -0.02em; margin-bottom: 6px; color: var(--text-primary); }
 
-  .modal__score {
+  .quiz-modal__score {
     font-family: 'JetBrains Mono', monospace;
     font-size: 42px; font-weight: 700;
     letter-spacing: -0.03em; margin: 12px 0 4px;
   }
-  .modal__score--great { color: var(--accent-green); }
-  .modal__score--okay { color: var(--accent-amber); }
-  .modal__score--needs-work { color: var(--accent-red); }
+  .quiz-modal__score--great { color: var(--accent-green); }
+  .quiz-modal__score--okay { color: var(--accent-amber); }
+  .quiz-modal__score--needs-work { color: var(--accent-red); }
 
-  .modal__score-label { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
-  .modal__prompt { font-size: 15px; color: var(--text-secondary); margin-bottom: 28px; line-height: 1.55; }
-  .modal__actions { display: flex; gap: 12px; justify-content: center; }
+  .quiz-modal__score-label { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+  .quiz-modal__prompt { font-size: 15px; color: var(--text-secondary); margin-bottom: 28px; line-height: 1.55; }
+  .quiz-modal__actions { display: flex; gap: 12px; justify-content: center; }
 
-  .modal__btn {
+  .quiz-modal__btn {
     font-family: 'Inter', sans-serif;
     font-size: 14px; font-weight: 600;
     padding: 12px 28px; border-radius: 8px;
     cursor: pointer; transition: all var(--transition); border: none;
   }
-  .modal__btn--primary { background: var(--accent-blue); color: #fff; }
-  .modal__btn--primary:hover { background: #2563eb; }
-  .modal__btn--secondary { background: transparent; color: var(--text-secondary); border: 1px solid var(--border-subtle); }
-  .modal__btn--secondary:hover { border-color: var(--text-muted); color: var(--text-primary); }
+  .quiz-modal__btn--primary { background: var(--accent-blue); color: #fff; }
+  .quiz-modal__btn--primary:hover { background: #2563eb; }
+  .quiz-modal__btn--secondary { background: transparent; color: var(--text-secondary); border: 1px solid var(--border-subtle); }
+  .quiz-modal__btn--secondary:hover { border-color: var(--text-muted); color: var(--text-primary); }
 
   /* ═══════════════════════════════════════════
      REVIEW PAGE
@@ -414,6 +356,7 @@
   .review-header__title {
     font-family: 'Inter', sans-serif; font-weight: 800;
     font-size: clamp(24px, 4vw, 34px); letter-spacing: -0.03em; margin-bottom: 10px;
+    color: var(--text-primary);
   }
 
   .review-header__subtitle { font-size: 15px; color: var(--text-secondary); max-width: 560px; margin: 0 auto; }
@@ -491,35 +434,7 @@
   .teaching-block__concept-text { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
 
   /* ─── Mobile Responsive Styles ─── */
-  @media (max-width: 1024px) {
-    .nav-content { 
-      gap: 0.75rem; 
-    }
-    .nav-link {
-      padding: 0.5rem 1rem;
-      font-size: 0.85rem;
-    }
-  }
-
   @media (max-width: 768px) {
-    .top-nav { 
-      padding: 0.875rem 1rem; 
-    }
-    .nav-content { 
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .nav-link {
-      padding: 0.5rem 0.875rem;
-      font-size: 0.8rem;
-    }
-    .nav-link span {
-      display: inline;
-    }
-    .icon {
-      width: 16px;
-      height: 16px;
-    }
     .header__title {
       font-size: 32px;
     }
@@ -527,37 +442,11 @@
       font-size: 14px;
     }
     .progress-bar {
-      top: 63px;
+      top: 57px;
     }
   }
 
-  /* ─── Mobile ─── */
   @media (max-width: 600px) {
-    .top-nav {
-      padding: 0.75rem 0.875rem;
-    }
-    .nav-content {
-      gap: 0.5rem;
-      padding: 0;
-    }
-    .nav-link {
-      flex: 1 1 auto;
-      min-width: 0;
-      padding: 0.5rem 0.75rem;
-      font-size: 0.75rem;
-      justify-content: center;
-    }
-    .nav-link span {
-      display: inline;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .icon {
-      width: 14px;
-      height: 14px;
-      flex-shrink: 0;
-    }
     .container { padding: 32px 16px 60px; }
     .header__badge {
       font-size: 10px;
@@ -570,11 +459,11 @@
       font-size: 13px;
     }
     .question-card, .review-card { padding: 22px 18px; }
-    .progress-bar { margin: 0 -16px 32px; top: 66px; }
+    .progress-bar { margin: 0 -16px 32px; top: 57px; }
     .progress-bar__inner { padding: 0 16px; }
-    .modal { padding: 32px 24px 28px; }
-    .modal__actions { flex-direction: column; }
-    .modal__btn { width: 100%; }
+    .quiz-modal { padding: 32px 24px 28px; }
+    .quiz-modal__actions { flex-direction: column; }
+    .quiz-modal__btn { width: 100%; }
     .question__stem { font-size: 15px; }
     .option { padding: 12px 14px; gap: 10px; }
     .option__text { font-size: 14px; }
@@ -589,18 +478,6 @@
   }
 
   @media (max-width: 380px) {
-    .nav-link {
-      padding: 0.45rem 0.5rem;
-      font-size: 0.7rem;
-      gap: 0.25rem;
-    }
-    .nav-link span {
-      font-size: 0.7rem;
-    }
-    .icon {
-      width: 12px;
-      height: 12px;
-    }
     .header__title { font-size: 24px; }
     .header__subtitle { font-size: 12px; }
     .question__stem { font-size: 14px; }
@@ -609,44 +486,72 @@
     .score-chip { font-size: 11px; padding: 4px 8px; }
     .reset-btn { padding: 8px 16px; font-size: 12px; }
   }
-
-  @media (max-width: 320px) {
-    .nav-content {
-      flex-direction: column;
-      width: 100%;
-      gap: 0.5rem;
-    }
-    .nav-link {
-      width: 100%;
-      padding: 0.625rem;
-      font-size: 0.75rem;
-      justify-content: center;
-    }
-    .progress-bar {
-      top: 180px;
-    }
-  }
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
-<!-- ─── Navigation Bar ─── -->
-<nav class="top-nav">
+<!-- Navigation -->
+<nav class="navbar" aria-label="Primary navigation">
   <div class="nav-content">
-    <a href="index.html" class="nav-link">
-      <svg class="icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-      <span>Home</span>
+    <a href="../../" class="logo" aria-label="Anesthesia SmartSite home">
+      <img src="../../img/logo-icon.png" alt="" width="44" height="44">
+      <div class="logo-text">
+        <span class="logo-title"><span class="logo-anesthesia">Anesthesia </span><span class="logo-smartsite">SmartSite</span></span>
+        <span class="logo-subtitle">Advancing Anesthesia Education with AI</span>
+      </div>
     </a>
-    <a href="resource-guide.html" class="nav-link">
-      <span>Resource Guide</span>
-    </a>
-    <button class="nav-link" onclick="generateQuizPDF()" style="cursor: pointer; border: 1px solid rgba(255, 255, 255, 0.2);">
-      <svg class="icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-      <span>Download Quiz</span>
+    <div class="nav-links">
+      <a href="../../#ai" class="nav-link">AI Resources</a>
+      <a href="../../#education" class="nav-link">Clinical Education</a>
+      <a href="../../#education" class="nav-link">Protocols</a>
+      <a href="../../#about" class="nav-link">About</a>
+      <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <svg viewBox="0 0 24 24">
+        <line class="hamburger-line" x1="3" y1="6" x2="21" y2="6"/>
+        <line class="hamburger-line" x1="3" y1="12" x2="21" y2="12"/>
+        <line class="hamburger-line" x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
     </button>
   </div>
 </nav>
 
+<div class="mobile-overlay" id="mobile-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <button class="mobile-nav-close" aria-label="Close menu" id="mobile-nav-close">
+    <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+  <a href="../../#ai" class="nav-link">AI Resources</a>
+  <a href="../../#education" class="nav-link">Clinical Education</a>
+  <a href="../../#education" class="nav-link">Protocols</a>
+  <a href="../../#about" class="nav-link">About</a>
+  <div class="mobile-theme-toggle">
+    <span class="mobile-theme-label">Appearance</span>
+    <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode">
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Breadcrumb -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="../../">Home</a>
+  <span class="separator" aria-hidden="true">&rsaquo;</span>
+  <a href="../../#ai">AI Resources</a>
+  <span class="separator" aria-hidden="true">&rsaquo;</span>
+  <a href="./">Beyond the Hype</a>
+  <span class="separator" aria-hidden="true">&rsaquo;</span>
+  <span class="current" aria-current="page">Knowledge Quiz</span>
+</nav>
+
+<!-- Main Content -->
+<main id="main-content">
 <div class="container">
 
   <!-- ═══ QUIZ PAGE ═══ -->
@@ -657,7 +562,7 @@
       <p class="header__subtitle">Ethical, Practical AI Solutions for the Anesthesiologist — 10 multiple-choice questions at the board-examination level.</p>
     </header>
 
-    <div class="progress-bar" id="progressBar">
+    <div class="progress-bar" id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10" aria-label="Quiz progress">
       <div class="progress-bar__inner">
         <div class="progress-bar__track">
           <div class="progress-bar__fill" id="progressFill"></div>
@@ -666,23 +571,19 @@
       </div>
     </div>
 
-    <div class="score-summary" id="scoreSummary">
+    <div class="score-summary" id="scoreSummary" aria-live="polite" aria-atomic="true">
       <span class="score-chip score-chip--correct" id="chipCorrect">0 correct</span>
       <span class="score-chip score-chip--incorrect" id="chipIncorrect">0 incorrect</span>
       <span class="score-chip score-chip--unanswered" id="chipUnanswered">10 remaining</span>
     </div>
 
-    <div id="quizContainer"></div>
+    <div id="quizContainer" role="list" aria-label="Quiz questions"></div>
 
     <div class="btn-row">
       <button class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+      <button class="reset-btn" onclick="generateQuizPDF()">Download Quiz</button>
       <button class="reset-btn review-content-btn" id="remediateBtn" onclick="openReview()">Review Content</button>
     </div>
-
-    <footer class="footer">
-      <div style="width: 100%; height: 1px; background: rgba(255, 255, 255, 0.1); margin: 0 0 0.75rem;"></div>
-      <p style="color: #4a5568;">Brian Pitts, MD, MS, MEHP · 2026</p>
-    </footer>
   </div>
 
   <!-- ═══ REVIEW PAGE ═══ -->
@@ -697,25 +598,107 @@
       <button class="reset-btn" onclick="backToQuiz()">← Back to Quiz</button>
       <button class="reset-btn" onclick="retakeQuiz()">Retake Quiz</button>
     </div>
-    <footer class="footer" style="margin-top:48px">
-      <div style="width: 100%; height: 1px; background: rgba(255, 255, 255, 0.1); margin: 0 0 0.75rem;"></div>
-      <p style="color: #4a5568;">Brian Pitts, MD, MS, MEHP · 2026</p>
-    </footer>
+  </div>
+
+</div>
+</main>
+
+<!-- ═══ QUIZ COMPLETION MODAL ═══ -->
+<div class="quiz-modal-overlay" id="completionModal" role="dialog" aria-modal="true" aria-label="Quiz results">
+  <div class="quiz-modal">
+    <div class="quiz-modal__icon" id="modalIcon"></div>
+    <div class="quiz-modal__title" id="modalTitle"></div>
+    <div class="quiz-modal__score" id="modalScore"></div>
+    <div class="quiz-modal__score-label" id="modalScoreLabel"></div>
+    <div class="quiz-modal__prompt" id="modalPrompt"></div>
+    <div class="quiz-modal__actions" id="modalActions"></div>
   </div>
 </div>
 
-<!-- ═══ COMPLETION MODAL ═══ -->
-<div class="modal-overlay" id="completionModal">
+<!-- Footer -->
+<footer class="site-footer" id="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__author">Brian Pitts, MD, MS, MEHP &middot; Clinical Professor of Anesthesiology &amp; Pain Medicine, UC Davis Health</p>
+    <div class="site-footer__links">
+      <button class="site-footer__link" data-modal="disclaimer">Disclaimer</button>
+      <button class="site-footer__link" data-modal="privacy">Privacy Policy</button>
+      <button class="site-footer__link" data-modal="terms">Terms of Service</button>
+    </div>
+  </div>
+</footer>
+
+<!-- Legal Modal -->
+<div class="modal-overlay" id="legal-modal" role="dialog" aria-modal="true" aria-label="Legal information">
   <div class="modal">
-    <div class="modal__icon" id="modalIcon"></div>
-    <div class="modal__title" id="modalTitle"></div>
-    <div class="modal__score" id="modalScore"></div>
-    <div class="modal__score-label" id="modalScoreLabel"></div>
-    <div class="modal__prompt" id="modalPrompt"></div>
-    <div class="modal__actions" id="modalActions"></div>
+    <button class="modal-close" id="modal-close" aria-label="Close">
+      <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+    <div id="modal-content-disclaimer" style="display:none;">
+      <h2>Disclaimer</h2>
+      <p>This is a personal educational site created and maintained by Brian Pitts, MD, MS, MEHP. The content, views, and opinions expressed here are solely those of the author and do not necessarily reflect the official policy or position of UC Davis, UC Davis Health, or the Department of Anesthesiology &amp; Pain Medicine.</p>
+      <p>The information provided on this site is intended for educational purposes only and should not be considered a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of a qualified healthcare provider with any questions regarding a medical condition or clinical decision-making.</p>
+      <p>While every effort is made to ensure accuracy, the author makes no warranties or representations regarding the completeness, reliability, or timeliness of the content. Use of any information on this site is at your own risk.</p>
+    </div>
+    <div id="modal-content-privacy" style="display:none;">
+      <h2>Privacy Policy</h2>
+      <p>AnesthesiaSmartSite is committed to protecting your privacy. This policy describes how information is collected and used when you visit this site.</p>
+      <h3>Information Collection</h3>
+      <p>This site does not collect personally identifiable information unless you voluntarily provide it. Standard web server logs may record technical information such as your IP address, browser type, and pages visited for site maintenance and analytics purposes.</p>
+      <h3>Cookies</h3>
+      <p>This site may use cookies or local storage to remember your preferences, such as your light/dark mode setting. No tracking cookies or third-party advertising cookies are used.</p>
+      <h3>Third-Party Services</h3>
+      <p>This site may use third-party services such as web fonts. These services may collect anonymous usage data subject to their own privacy policies.</p>
+      <h3>Data Sharing</h3>
+      <p>No personal information is sold, traded, or otherwise transferred to third parties. Anonymous, aggregated usage statistics may be reviewed to improve the site.</p>
+    </div>
+    <div id="modal-content-terms" style="display:none;">
+      <h2>Terms of Service</h2>
+      <p>By accessing and using AnesthesiaSmartSite, you agree to the following terms and conditions.</p>
+      <h3>Educational Use</h3>
+      <p>All content on this site is provided for educational and informational purposes only. It is not intended to serve as medical advice or to replace the clinical judgment of a licensed healthcare professional.</p>
+      <h3>Intellectual Property</h3>
+      <p>Unless otherwise noted, all content on this site is the intellectual property of the author. You may reference and share content for non-commercial educational purposes with appropriate attribution.</p>
+      <h3>Accuracy</h3>
+      <p>While the author strives to provide accurate and current information, medicine is a rapidly evolving field. The author does not guarantee that all content is complete, current, or error-free.</p>
+      <h3>Limitation of Liability</h3>
+      <p>The author shall not be held liable for any damages arising from the use of or reliance on information provided on this site. Clinical decisions should always be based on individual patient assessment and current evidence-based guidelines.</p>
+      <h3>Changes</h3>
+      <p>These terms may be updated from time to time. Continued use of the site constitutes acceptance of any changes.</p>
+    </div>
   </div>
 </div>
 
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  "name": "Beyond the Hype — Board-Style Assessment",
+  "description": "Board-style assessment quiz covering AI in anesthesiology: the VDD framework, automation bias, clinical AI governance, verification methods, and the Ring Model of accountability.",
+  "educationalLevel": "Professional/Postgraduate",
+  "about": {
+    "@type": "Thing",
+    "name": "Artificial Intelligence in Anesthesiology"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Brian Pitts",
+    "jobTitle": "Clinical Professor of Anesthesiology & Pain Medicine",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "UC Davis Health"
+    }
+  },
+  "numberOfQuestions": 10,
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Anesthesia SmartSite",
+    "url": "https://www.anesthesiasmartsite.com"
+  }
+}
+</script>
+
+<script src="../../js/site.js"></script>
 <script>
 const L = ['A','B','C','D'];
 
@@ -872,16 +855,17 @@ function renderQuiz() {
     const card = document.createElement('div');
     card.className = 'question-card';
     card.id = `card-${qi}`;
+    card.setAttribute('role', 'listitem');
     card.style.animationDelay = `${qi * 0.04}s`;
     let opts = '';
     q.options.forEach((o, oi) => {
-      opts += `<li class="option" id="opt-${qi}-${oi}" onclick="selectAnswer(${qi},${oi})">
+      opts += `<li class="option" id="opt-${qi}-${oi}" onclick="selectAnswer(${qi},${oi})" role="button" tabindex="0" aria-label="Option ${L[oi]}: ${o.replace(/"/g, '&quot;')}">
         <span class="option__marker">${L[oi]}</span>
         <span class="option__text">${o}</span></li>`;
     });
     card.innerHTML = `<div class="question__number">Question ${qi+1} of ${questions.length}</div>
       <div class="question__stem">${q.stem}</div>
-      <ul class="options-list">${opts}</ul>
+      <ul class="options-list" role="group" aria-label="Answer options for question ${qi+1}">${opts}</ul>
       <div class="explanation" id="exp-${qi}">
         <div class="explanation__heading">Explanation</div>
         <div class="explanation__text">${q.explanation}</div>
@@ -899,6 +883,8 @@ function selectAnswer(qi, oi) {
   q.options.forEach((_, i) => {
     const el = document.getElementById(`opt-${qi}-${i}`);
     el.classList.add('disabled');
+    el.removeAttribute('tabindex');
+    el.removeAttribute('role');
     if (i === oi && ok) el.classList.add('selected-correct');
     else if (i === oi && !ok) el.classList.add('selected-incorrect');
     else if (i === q.correct && !ok) el.classList.add('reveal-correct');
@@ -912,6 +898,8 @@ function selectAnswer(qi, oi) {
 }
 
 function updateProgress() {
+  const pBar = document.getElementById('progressBar');
+  pBar.setAttribute('aria-valuenow', answered);
   document.getElementById('progressFill').style.width = `${(answered/questions.length)*100}%`;
   document.getElementById('progressLabel').textContent = `${answered} / ${questions.length}`;
   document.getElementById('chipCorrect').textContent = `${correctCount} correct`;
@@ -926,10 +914,10 @@ function showCompletionModal() {
   else if (pct >= 60) { tier = 'okay'; icon = '→'; title = 'Solid Foundation'; }
   else { tier = 'needs-work'; icon = '↻'; title = 'Room to Grow'; }
 
-  document.getElementById('modalIcon').className = `modal__icon modal__icon--${tier}`;
+  document.getElementById('modalIcon').className = `quiz-modal__icon quiz-modal__icon--${tier}`;
   document.getElementById('modalIcon').textContent = icon;
   document.getElementById('modalTitle').textContent = title;
-  document.getElementById('modalScore').className = `modal__score modal__score--${tier}`;
+  document.getElementById('modalScore').className = `quiz-modal__score quiz-modal__score--${tier}`;
   document.getElementById('modalScore').textContent = `${pct}%`;
   document.getElementById('modalScoreLabel').textContent = `${correctCount} of ${questions.length} correct`;
 
@@ -939,14 +927,14 @@ function showCompletionModal() {
     document.getElementById('modalPrompt').textContent =
       `You missed ${incorrectCount} item${incorrectCount > 1 ? 's' : ''}. Would you like to review the missed questions with detailed teaching points?`;
     actionsEl.innerHTML =
-      `<button class="modal__btn modal__btn--primary" onclick="openReview()">Yes, Review Content</button>
-       <button class="modal__btn modal__btn--secondary" onclick="closeModal()">No, I'm Done</button>`;
+      `<button class="quiz-modal__btn quiz-modal__btn--primary" onclick="openReview()">Yes, Review Content</button>
+       <button class="quiz-modal__btn quiz-modal__btn--secondary" onclick="closeModal()">No, I'm Done</button>`;
     remBtn.classList.add('visible');
   } else {
     document.getElementById('modalPrompt').textContent = 'Perfect score — every item correct. No review needed.';
     actionsEl.innerHTML =
-      `<button class="modal__btn modal__btn--primary" onclick="closeModal()">Done</button>
-       <button class="modal__btn modal__btn--secondary" onclick="retakeQuiz()">Retake Quiz</button>`;
+      `<button class="quiz-modal__btn quiz-modal__btn--primary" onclick="closeModal()">Done</button>
+       <button class="quiz-modal__btn quiz-modal__btn--secondary" onclick="retakeQuiz()">Retake Quiz</button>`;
     remBtn.classList.remove('visible');
   }
   document.getElementById('completionModal').classList.add('visible');
@@ -1028,13 +1016,13 @@ function resetQuiz() { retakeQuiz(); }
 function generateQuizPDF() {
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
-  
+
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
   const margin = 20;
   const maxWidth = pageWidth - (margin * 2);
   let yPos = margin;
-  
+
   // Helper function to add new page if needed
   function checkPageBreak(spaceNeeded) {
     if (yPos + spaceNeeded > pageHeight - margin) {
@@ -1044,7 +1032,7 @@ function generateQuizPDF() {
     }
     return false;
   }
-  
+
   // Helper function to wrap text
   function addWrappedText(text, x, y, maxWidth, fontSize, style = 'normal') {
     doc.setFontSize(fontSize);
@@ -1056,54 +1044,54 @@ function generateQuizPDF() {
     });
     return lines.length * fontSize * 0.4;
   }
-  
+
   // Title page
   doc.setFontSize(24);
   doc.setFont('helvetica', 'bold');
   doc.text('Beyond the Hype', pageWidth / 2, 40, { align: 'center' });
-  
+
   doc.setFontSize(14);
   doc.setFont('helvetica', 'normal');
   doc.text('Board-Style Assessment', pageWidth / 2, 50, { align: 'center' });
-  
+
   doc.setFontSize(10);
   doc.setTextColor(100);
   doc.text('Ethical, Practical AI Solutions for the Anesthesiologist', pageWidth / 2, 58, { align: 'center' });
   doc.text('36th Annual UC Davis Anesthesiology Update · Napa 2026', pageWidth / 2, 64, { align: 'center' });
-  
+
   doc.setTextColor(0);
   yPos = 80;
-  
+
   doc.setFontSize(11);
   doc.setFont('helvetica', 'italic');
   const intro = doc.splitTextToSize('This assessment contains 10 multiple-choice questions at the board-examination level. Each question includes the correct answer, a detailed explanation, and teaching points with key concepts.', maxWidth);
   intro.forEach((line, i) => {
     doc.text(line, margin, yPos + (i * 5));
   });
-  
+
   yPos += intro.length * 5 + 15;
-  
+
   // Author
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
   doc.text('Brian Pitts, MD, MS, MEHP', pageWidth / 2, yPos, { align: 'center' });
   doc.text('Anesthesiology & Pain Medicine · UC Davis Health', pageWidth / 2, yPos + 5, { align: 'center' });
-  
+
   // Start questions on new page
   doc.addPage();
   yPos = margin;
-  
+
   // Process each question
   questions.forEach((q, qi) => {
     checkPageBreak(30);
-    
+
     // Question number
     doc.setFontSize(10);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(59, 130, 246);
     doc.text(`QUESTION ${qi + 1}`, margin, yPos);
     yPos += 8;
-    
+
     // Question stem
     doc.setTextColor(0);
     doc.setFontSize(11);
@@ -1115,16 +1103,16 @@ function generateQuizPDF() {
       yPos += 5;
     });
     yPos += 3;
-    
+
     // Options
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
     q.options.forEach((opt, oi) => {
       checkPageBreak(15);
-      
+
       const isCorrect = oi === q.correct;
       const prefix = `${L[oi]}. `;
-      
+
       if (isCorrect) {
         doc.setFont('helvetica', 'bold');
         doc.setTextColor(34, 197, 94);
@@ -1132,17 +1120,17 @@ function generateQuizPDF() {
         doc.setFont('helvetica', 'normal');
         doc.setTextColor(0);
       }
-      
+
       doc.text(prefix, margin + 5, yPos);
-      
+
       const optLines = doc.splitTextToSize(opt, maxWidth - 15);
       optLines.forEach((line, i) => {
         checkPageBreak(5);
         doc.text(line, margin + 15, yPos + (i * 4.5));
       });
-      
+
       yPos += optLines.length * 4.5 + 2;
-      
+
       if (isCorrect) {
         doc.setFontSize(9);
         doc.setTextColor(34, 197, 94);
@@ -1151,9 +1139,9 @@ function generateQuizPDF() {
         yPos += 5;
       }
     });
-    
+
     yPos += 3;
-    
+
     // Explanation
     checkPageBreak(25);
     doc.setFontSize(9);
@@ -1161,7 +1149,7 @@ function generateQuizPDF() {
     doc.setTextColor(59, 130, 246);
     doc.text('EXPLANATION:', margin, yPos);
     yPos += 5;
-    
+
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(0);
@@ -1172,7 +1160,7 @@ function generateQuizPDF() {
       yPos += 4.5;
     });
     yPos += 5;
-    
+
     // Teaching point
     checkPageBreak(25);
     doc.setFontSize(9);
@@ -1180,7 +1168,7 @@ function generateQuizPDF() {
     doc.setTextColor(59, 130, 246);
     doc.text('TEACHING POINT:', margin, yPos);
     yPos += 5;
-    
+
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(0);
@@ -1193,7 +1181,7 @@ function generateQuizPDF() {
       yPos += 4.5;
     });
     yPos += 5;
-    
+
     // Key concept
     checkPageBreak(20);
     doc.setFontSize(9);
@@ -1201,7 +1189,7 @@ function generateQuizPDF() {
     doc.setTextColor(59, 130, 246);
     doc.text(`KEY CONCEPT — ${q.teachingConcept.toUpperCase()}:`, margin, yPos);
     yPos += 5;
-    
+
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(0);
@@ -1211,10 +1199,10 @@ function generateQuizPDF() {
       doc.text(line, margin, yPos);
       yPos += 4.5;
     });
-    
+
     // Add spacing between questions
     yPos += 10;
-    
+
     // Add separator line if not last question
     if (qi < questions.length - 1) {
       checkPageBreak(10);
@@ -1223,7 +1211,7 @@ function generateQuizPDF() {
       yPos += 10;
     }
   });
-  
+
   // Save the PDF
   doc.save('Beyond-the-Hype-Quiz-Answer-Key.pdf');
 }

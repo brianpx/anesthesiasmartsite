@@ -1,1115 +1,1105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beyond The Hype: Clinical Resource Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Clinical resource guide for safe AI supervision in anesthesia practice — VDD framework, governance checklists, calibration concepts, and annotated bibliography.">
+  <title>Clinical Resource Guide — Beyond the Hype | Anesthesia SmartSite</title>
 
-        :root {
-            --primary-blue: #2563eb;
-            --primary-blue-light: #3b82f6;
-            --secondary-slate: #475569;
-            --accent-emerald: #059669;
-            --bg-light: #ffffff;
-            --bg-subtle: #f8fafc;
-            --bg-card: #ffffff;
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --border-light: #e2e8f0;
-            --border-medium: #cbd5e1;
-        }
+  <!-- Theme flash prevention -->
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(to bottom, #f8fafc, #ffffff);
-            color: var(--text-primary);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['selector', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            brand: { dark: '#2b7a9e', mid: '#2b9fd4', light: '#5ec8e6', accent: '#4a9ead' },
+            surface: {
+              DEFAULT: 'var(--color-bg)',
+              card: 'var(--color-card-bg)',
+              'card-hover': 'var(--color-card-bg-hover)',
+            },
+          },
+        },
+      },
+    };
+  </script>
 
-        body.dark-mode {
-            --bg-light: #0f172a;
-            --bg-subtle: #1e293b;
-            --bg-card: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --border-light: #334155;
-            --border-medium: #475569;
-            background: linear-gradient(to bottom, #0a0f1a, #0f172a);
-        }
+  <!-- Fonts & Shared Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/shared.css">
 
-        /* Header */
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-light);
-            padding: 1rem 2rem;
-        }
+  <style>
+    /* ---- Page-specific content styles ---- */
 
-        body.dark-mode header {
-            background: rgba(15, 23, 42, 0.95);
-        }
+    /* Hero Section */
+    .hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
 
-        .header-content {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--color-text-heading);
+      letter-spacing: -0.025em;
+    }
 
-        .logo {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--primary-blue);
-        }
+    .hero p {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 42rem;
+      margin: 0 auto 2rem;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      margin-top: 1.5rem;
+    }
 
-        .nav-btn {
-            padding: 0.5rem 1rem;
-            background: transparent;
-            border: 1px solid var(--border-medium);
-            border-radius: 0.5rem;
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+    /* Main Content */
+    .page-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+    }
 
-        .nav-btn:hover {
-            background: var(--bg-subtle);
-            border-color: var(--primary-blue);
-            color: var(--primary-blue);
-        }
+    /* Resource Cards */
+    .resource {
+      background: var(--color-card-bg);
+      border: 1px solid var(--color-border-light);
+      border-radius: 1rem;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: box-shadow var(--transition-base);
+    }
 
-        .nav-btn.primary {
-            background: var(--primary-blue);
-            color: white;
-            border-color: var(--primary-blue);
-        }
+    .resource:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
 
-        .nav-btn.primary:hover {
-            background: var(--primary-blue-light);
-        }
+    .resource-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
 
-        .theme-icon {
-            transition: all 0.2s;
-        }
+    .resource-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--color-brand-mid);
+      color: white;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 1.125rem;
+      flex-shrink: 0;
+    }
 
-        /* Hero Section */
-        .hero {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 4rem 2rem 3rem;
-            text-align: center;
-        }
+    .resource h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--color-text-heading);
+      margin: 0;
+      letter-spacing: -0.025em;
+    }
 
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            letter-spacing: -0.025em;
-        }
+    .resource-subtitle {
+      color: var(--color-text-muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      padding-left: 3.5rem;
+    }
 
-        .hero p {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            max-width: 42rem;
-            margin: 0 auto 2rem;
-        }
+    /* Framework Grid */
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
 
-        .hero-meta {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin-top: 1.5rem;
-        }
+    .framework-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
 
-        /* Main Content */
-        main {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 2rem 2rem 4rem;
-        }
+    .framework-card:hover {
+      border-color: var(--color-brand-mid);
+      box-shadow: 0 2px 8px rgba(43, 159, 212, 0.1);
+    }
 
-        /* Resource Cards */
-        .resource {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: 1rem;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-        }
+    .framework-card h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--color-text-heading);
+    }
 
-        .resource:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
+    .framework-card .subtitle {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
 
-        .resource-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
+    .check-item {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.9375rem;
+    }
 
-        .resource-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 2.5rem;
-            height: 2.5rem;
-            background: var(--primary-blue);
-            color: white;
-            border-radius: 0.5rem;
-            font-weight: 700;
-            font-size: 1.125rem;
-            flex-shrink: 0;
-        }
+    .check-icon {
+      color: #059669;
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+      font-weight: 700;
+    }
 
-        .resource h2 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin: 0;
-            letter-spacing: -0.025em;
-        }
+    /* Checklist */
+    .checklist-section {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
 
-        .resource-subtitle {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            margin-bottom: 2rem;
-            padding-left: 3.5rem;
-        }
+    .checklist-section h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--color-text-heading);
+    }
 
-        /* Framework Grid */
-        .framework-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
+    .checklist-item {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.9375rem;
+    }
 
-        .framework-card {
-            background: var(--bg-subtle);
-            border: 1px solid var(--border-light);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            transition: all 0.2s;
-        }
+    .checklist-item input[type="checkbox"] {
+      margin-top: 0.25rem;
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
+    }
 
-        .framework-card:hover {
-            border-color: var(--primary-blue);
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
-        }
+    /* Comparison Table */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
 
-        .framework-card h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: var(--text-primary);
-        }
+    .comparison-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+    }
 
-        .framework-card .subtitle {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
+    .comparison-card h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--color-brand-mid);
+    }
 
-        .check-item {
-            display: flex;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            font-size: 0.9375rem;
-        }
+    .comparison-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin-bottom: 1rem;
+    }
 
-        .check-icon {
-            color: var(--accent-emerald);
-            flex-shrink: 0;
-            margin-top: 0.125rem;
-            font-weight: 700;
-        }
+    .comparison-item {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9375rem;
+    }
 
-        /* Checklist */
-        .checklist-section {
-            background: var(--bg-subtle);
-            border: 1px solid var(--border-light);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
+    .bullet {
+      color: var(--color-brand-mid);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
 
-        .checklist-section h4 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
+    /* Highlight Box */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(43, 159, 212, 0.1), rgba(43, 159, 212, 0.05));
+      border: 1px solid var(--color-brand-mid);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.125rem;
+      margin: 2rem 0;
+      color: var(--color-brand-mid);
+    }
 
-        .checklist-item {
-            display: flex;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-            font-size: 0.9375rem;
-        }
+    [data-theme="light"] .highlight-box {
+      background: linear-gradient(135deg, rgba(43, 159, 212, 0.08), rgba(43, 159, 212, 0.03));
+    }
 
-        .checklist-item input[type="checkbox"] {
-            margin-top: 0.25rem;
-            width: 1rem;
-            height: 1rem;
-            flex-shrink: 0;
-        }
+    /* Bibliography */
+    .bib-section {
+      margin: 2rem 0 1rem;
+    }
 
-        /* Comparison Table */
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
+    .bib-section h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--color-text-heading);
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--color-border-light);
+    }
 
-        .comparison-card {
-            background: var(--bg-subtle);
-            border: 1px solid var(--border-light);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-        }
+    .bib-item {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--color-border-light);
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
 
-        .comparison-card h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--primary-blue);
-        }
+    .bib-item:last-child {
+      border-bottom: none;
+    }
 
-        .comparison-label {
-            font-size: 0.8125rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
+    .bib-number {
+      font-weight: 600;
+      color: var(--color-brand-mid);
+      margin-right: 0.5rem;
+    }
 
-        .comparison-item {
-            display: flex;
-            gap: 0.75rem;
-            margin-bottom: 0.5rem;
-            font-size: 0.9375rem;
-        }
+    .bib-authors {
+      font-weight: 500;
+      color: var(--color-text-heading);
+    }
 
-        .bullet {
-            color: var(--primary-blue);
-            font-weight: 700;
-            flex-shrink: 0;
-        }
+    .bib-title {
+      color: var(--color-text-muted);
+    }
 
-        /* Highlight Box */
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(37, 99, 235, 0.02));
-            border: 1px solid var(--primary-blue);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.125rem;
-            margin: 2rem 0;
-            color: var(--primary-blue);
-        }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
 
-        body.dark-mode .highlight-box {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
-        }
+      .hero p {
+        font-size: 1rem;
+      }
 
-        /* Bibliography */
-        .bib-section {
-            margin: 2rem 0 1rem;
-        }
+      .framework-grid,
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
 
-        .bib-section h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border-light);
-        }
+      .resource {
+        padding: 1.5rem;
+      }
 
-        .bib-item {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border-light);
-            font-size: 0.9375rem;
-            line-height: 1.6;
-        }
+      .resource h2 {
+        font-size: 1.5rem;
+      }
 
-        .bib-item:last-child {
-            border-bottom: none;
-        }
-
-        .bib-number {
-            font-weight: 600;
-            color: var(--primary-blue);
-            margin-right: 0.5rem;
-        }
-
-        .bib-authors {
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .bib-title {
-            color: var(--text-secondary);
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border-light);
-            background: var(--bg-subtle);
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin-top: 4rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .framework-grid,
-            .comparison-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .resource {
-                padding: 1.5rem;
-            }
-
-            .resource h2 {
-                font-size: 1.5rem;
-            }
-
-            .hero-meta {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-        }
-    </style>
+      .hero-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
 </head>
-<body class="dark-mode">
-    <header>
-        <div class="header-content">
-            <div class="logo">Beyond The Hype</div>
-            <div class="nav-links">
-                <a href="index.html" class="nav-btn">Home</a>
-                <a href="https://www.anesthesiasmartsite.com/ai/resources/beyond-the-hype-quiz.html" class="nav-btn">Quiz</a>
-                <button class="nav-btn" onclick="window.print()">Print</button>
-                <button class="nav-btn" onclick="toggleDarkMode()" id="theme-toggle">
-                    <svg id="sun-icon" class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                    <svg id="moon-icon" class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                </button>
-            </div>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- Navigation -->
+<nav class="navbar" aria-label="Primary navigation">
+  <div class="nav-content">
+    <a href="../../" class="logo" aria-label="Anesthesia SmartSite home">
+      <img src="../../img/logo-icon.png" alt="" width="44" height="44">
+      <div class="logo-text">
+        <span class="logo-title"><span class="logo-anesthesia">Anesthesia </span><span class="logo-smartsite">SmartSite</span></span>
+        <span class="logo-subtitle">Advancing Anesthesia Education with AI</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="../../#ai" class="nav-link">AI Resources</a>
+      <a href="../../#education" class="nav-link">Clinical Education</a>
+      <a href="../../#education" class="nav-link">Protocols</a>
+      <a href="../../#about" class="nav-link">About</a>
+      <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <svg viewBox="0 0 24 24">
+        <line class="hamburger-line" x1="3" y1="6" x2="21" y2="6"/>
+        <line class="hamburger-line" x1="3" y1="12" x2="21" y2="12"/>
+        <line class="hamburger-line" x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-overlay" id="mobile-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <button class="mobile-nav-close" aria-label="Close menu" id="mobile-nav-close">
+    <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+  <a href="../../#ai" class="nav-link">AI Resources</a>
+  <a href="../../#education" class="nav-link">Clinical Education</a>
+  <a href="../../#education" class="nav-link">Protocols</a>
+  <a href="../../#about" class="nav-link">About</a>
+  <div class="mobile-theme-toggle">
+    <span class="mobile-theme-label">Appearance</span>
+    <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode">
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Breadcrumb -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="../../">Home</a>
+  <span class="separator" aria-hidden="true">&rsaquo;</span>
+  <a href="../../#ai">AI Resources</a>
+  <span class="separator" aria-hidden="true">&rsaquo;</span>
+  <a href="./">Beyond the Hype</a>
+  <span class="separator" aria-hidden="true">&rsaquo;</span>
+  <span class="current" aria-current="page">Resource Guide</span>
+</nav>
+
+<!-- Main Content -->
+<main id="main-content">
+  <section class="hero" aria-labelledby="hero-title">
+    <h1 id="hero-title">Clinical Resource Guide</h1>
+    <p>Essential tools for safe AI supervision in anesthesia practice — from bedside reference cards to department governance frameworks</p>
+    <div class="hero-meta">
+      <span>Brian Pitts, MD, MS, MEHP</span>
+    </div>
+  </section>
+
+  <div class="page-content">
+    <!-- RESOURCE 1: VDD Framework -->
+    <article class="resource" aria-labelledby="resource-1-title">
+      <div class="resource-header">
+        <div class="resource-number" aria-hidden="true">1</div>
+        <h2 id="resource-1-title">Clinical AI Decision Card</h2>
+      </div>
+      <p class="resource-subtitle">Verify → Decide → Document · Bedside Quick Reference</p>
+
+      <div class="framework-grid">
+        <div class="framework-card">
+          <h3>① Verify</h3>
+          <p class="subtitle">Does the signal match independent clinical assessment?</p>
+          <div class="check-item">
+            <span class="check-icon" aria-hidden="true">✓</span>
+            <span>Is the signal plausible given patient context?</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon" aria-hidden="true">✓</span>
+            <span>Could this be artifact or equipment error?</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon" aria-hidden="true">✓</span>
+            <span>What does direct patient assessment show?</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon" aria-hidden="true">✓</span>
+            <span>Can I trace the data source?</span>
+          </div>
         </div>
-    </header>
 
-    <section class="hero">
-        <h1>Clinical Resource Guide</h1>
-        <p>Essential tools for safe AI supervision in anesthesia practice — from bedside reference cards to department governance frameworks</p>
-        <div class="hero-meta">
-            <span>UC Davis Anesthesiology Update 2026</span>
-            <span>•</span>
-            <span>Brian Pitts, MD, MS, MEHP</span>
+        <div class="framework-card">
+          <h3>② Decide</h3>
+          <p class="subtitle">AI informs. You own the judgment boundary.</p>
+          <div class="check-item">
+            <span class="check-icon" aria-hidden="true">✓</span>
+            <span>Patient history and comorbidities</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon" aria-hidden="true">✓</span>
+            <span>Balance of competing harms</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon" aria-hidden="true">✓</span>
+            <span>Reversibility of proposed action</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon" aria-hidden="true">✓</span>
+            <span>Surgical team communication</span>
+          </div>
         </div>
-    </section>
 
-    <main>
-        <!-- RESOURCE 1: VDD Framework -->
-        <article class="resource">
-            <div class="resource-header">
-                <div class="resource-number">1</div>
-                <h2>Clinical AI Decision Card</h2>
-            </div>
-            <p class="resource-subtitle">Verify → Decide → Document · Bedside Quick Reference</p>
+        <div class="framework-card">
+          <h3>③ Document</h3>
+          <p class="subtitle">Chart your reasoning, not the algorithm.</p>
+          <div class="check-item">
+            <span class="check-icon" aria-hidden="true">✓</span>
+            <span>Name the alert or tool evaluated</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon" aria-hidden="true">✓</span>
+            <span>Record your independent assessment</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon" aria-hidden="true">✓</span>
+            <span>State your decision with rationale</span>
+          </div>
+          <div class="check-item">
+            <span class="check-icon" aria-hidden="true">✓</span>
+            <span>Never write "AI recommended; agreed"</span>
+          </div>
+        </div>
+      </div>
 
-            <div class="framework-grid">
-                <div class="framework-card">
-                    <h3>① Verify</h3>
-                    <p class="subtitle">Does the signal match independent clinical assessment?</p>
-                    <div class="check-item">
-                        <span class="check-icon">✓</span>
-                        <span>Is the signal plausible given patient context?</span>
-                    </div>
-                    <div class="check-item">
-                        <span class="check-icon">✓</span>
-                        <span>Could this be artifact or equipment error?</span>
-                    </div>
-                    <div class="check-item">
-                        <span class="check-icon">✓</span>
-                        <span>What does direct patient assessment show?</span>
-                    </div>
-                    <div class="check-item">
-                        <span class="check-icon">✓</span>
-                        <span>Can I trace the data source?</span>
-                    </div>
-                </div>
+      <div class="checklist-section">
+        <h4>Documentation Template</h4>
+        <p style="font-style: italic; margin-bottom: 1rem; font-size: 0.9375rem;">"[Tool name] alert evaluated. [Clinical finding]. [Relevant vitals/context]. [Conclusion: artifact suspected / clinically consistent / etc.]. [Action or no action and reason]."</p>
+        <p style="font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9375rem;">Example:</p>
+        <p style="font-size: 0.9375rem;">"HPI alert 87 evaluated. A-line waveform damped. MAP 68, stable. Artifact suspected. No vasopressor at this time. Will reassess in 5 minutes."</p>
+      </div>
 
-                <div class="framework-card">
-                    <h3>② Decide</h3>
-                    <p class="subtitle">AI informs. You own the judgment boundary.</p>
-                    <div class="check-item">
-                        <span class="check-icon">✓</span>
-                        <span>Patient history and comorbidities</span>
-                    </div>
-                    <div class="check-item">
-                        <span class="check-icon">✓</span>
-                        <span>Balance of competing harms</span>
-                    </div>
-                    <div class="check-item">
-                        <span class="check-icon">✓</span>
-                        <span>Reversibility of proposed action</span>
-                    </div>
-                    <div class="check-item">
-                        <span class="check-icon">✓</span>
-                        <span>Surgical team communication</span>
-                    </div>
-                </div>
+      <div class="highlight-box">
+        AI reasons. Humans judge. Verify. Decide. Document.
+      </div>
+    </article>
 
-                <div class="framework-card">
-                    <h3>③ Document</h3>
-                    <p class="subtitle">Chart your reasoning, not the algorithm.</p>
-                    <div class="check-item">
-                        <span class="check-icon">✓</span>
-                        <span>Name the alert or tool evaluated</span>
-                    </div>
-                    <div class="check-item">
-                        <span class="check-icon">✓</span>
-                        <span>Record your independent assessment</span>
-                    </div>
-                    <div class="check-item">
-                        <span class="check-icon">✓</span>
-                        <span>State your decision with rationale</span>
-                    </div>
-                    <div class="check-item">
-                        <span class="check-icon">✓</span>
-                        <span>Never write "AI recommended; agreed"</span>
-                    </div>
-                </div>
-            </div>
+    <!-- RESOURCE 2: Cognitive vs Clinical AI -->
+    <article class="resource" aria-labelledby="resource-2-title">
+      <div class="resource-header">
+        <div class="resource-number" aria-hidden="true">2</div>
+        <h2 id="resource-2-title">Two Categories of AI</h2>
+      </div>
+      <p class="resource-subtitle">Understanding the distinction between cognitive and clinical AI tools</p>
 
-            <div class="checklist-section">
-                <h4>Documentation Template</h4>
-                <p style="font-style: italic; margin-bottom: 1rem; font-size: 0.9375rem;">"[Tool name] alert evaluated. [Clinical finding]. [Relevant vitals/context]. [Conclusion: artifact suspected / clinically consistent / etc.]. [Action or no action and reason]."</p>
-                <p style="font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9375rem;">Example:</p>
-                <p style="font-size: 0.9375rem;">"HPI alert 87 evaluated. A-line waveform damped. MAP 68, stable. Artifact suspected. No vasopressor at this time. Will reassess in 5 minutes."</p>
-            </div>
+      <div class="comparison-grid">
+        <div class="comparison-card">
+          <h3>Cognitive AI</h3>
+          <p class="comparison-label">Summarizes · Explains · Drafts · Compares</p>
+          <div class="comparison-item">
+            <span class="bullet" aria-hidden="true">•</span>
+            <span>ChatGPT, Claude, Gemini (consumer platforms)</span>
+          </div>
+          <div class="comparison-item">
+            <span class="bullet" aria-hidden="true">•</span>
+            <span>Use to think, brainstorm, and explore concepts</span>
+          </div>
+          <div class="comparison-item">
+            <span class="bullet" aria-hidden="true">•</span>
+            <span>Never for patient-specific clinical decisions</span>
+          </div>
+          <div class="comparison-item">
+            <span class="bullet" aria-hidden="true">•</span>
+            <span>No PHI outside approved, governed pathways</span>
+          </div>
+          <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border-light); font-weight: 600;">
+            Rule: Use it to think. Never use it to decide.
+          </div>
+        </div>
 
-            <div class="highlight-box">
-                AI reasons. Humans judge. Verify. Decide. Document.
-            </div>
-        </article>
+        <div class="comparison-card">
+          <h3>Clinical AI</h3>
+          <p class="comparison-label">Detects · Predicts · Overlays · Flags</p>
+          <div class="comparison-item">
+            <span class="bullet" aria-hidden="true">•</span>
+            <span>HPI, echo overlay, ambient documentation</span>
+          </div>
+          <div class="comparison-item">
+            <span class="bullet" aria-hidden="true">•</span>
+            <span>FDA-cleared, enterprise-deployed systems</span>
+          </div>
+          <div class="comparison-item">
+            <span class="bullet" aria-hidden="true">•</span>
+            <span>Requires VDD supervision with every use</span>
+          </div>
+          <div class="comparison-item">
+            <span class="bullet" aria-hidden="true">•</span>
+            <span>Prediction is not permission to treat</span>
+          </div>
+          <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border-light); font-weight: 600;">
+            Rule: AI informs. You judge. Always document.
+          </div>
+        </div>
+      </div>
+    </article>
 
-        <!-- RESOURCE 2: Cognitive vs Clinical AI -->
-        <article class="resource">
-            <div class="resource-header">
-                <div class="resource-number">2</div>
-                <h2>Two Categories of AI</h2>
-            </div>
-            <p class="resource-subtitle">Understanding the distinction between cognitive and clinical AI tools</p>
+    <!-- RESOURCE 3: Five Pre-Deployment Questions -->
+    <article class="resource" aria-labelledby="resource-3-title">
+      <div class="resource-header">
+        <div class="resource-number" aria-hidden="true">3</div>
+        <h2 id="resource-3-title">Five Pre-Deployment Questions</h2>
+      </div>
+      <p class="resource-subtitle">Essential validation before any AI tool goes live</p>
 
-            <div class="comparison-grid">
-                <div class="comparison-card">
-                    <h3>Cognitive AI</h3>
-                    <p class="comparison-label">Summarizes · Explains · Drafts · Compares</p>
-                    <div class="comparison-item">
-                        <span class="bullet">•</span>
-                        <span>ChatGPT, Claude, Gemini (consumer platforms)</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span class="bullet">•</span>
-                        <span>Use to think, brainstorm, and explore concepts</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span class="bullet">•</span>
-                        <span>Never for patient-specific clinical decisions</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span class="bullet">•</span>
-                        <span>No PHI outside approved, governed pathways</span>
-                    </div>
-                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-light); font-weight: 600;">
-                        Rule: Use it to think. Never use it to decide.
-                    </div>
-                </div>
+      <div class="checklist-section">
+        <h4>Before any clinical AI deployment, these five questions must be answered clearly:</h4>
 
-                <div class="comparison-card">
-                    <h3>Clinical AI</h3>
-                    <p class="comparison-label">Detects · Predicts · Overlays · Flags</p>
-                    <div class="comparison-item">
-                        <span class="bullet">•</span>
-                        <span>HPI, echo overlay, ambient documentation</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span class="bullet">•</span>
-                        <span>FDA-cleared, enterprise-deployed systems</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span class="bullet">•</span>
-                        <span>Requires VDD supervision with every use</span>
-                    </div>
-                    <div class="comparison-item">
-                        <span class="bullet">•</span>
-                        <span>Prediction is not permission to treat</span>
-                    </div>
-                    <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-light); font-weight: 600;">
-                        Rule: AI informs. You judge. Always document.
-                    </div>
-                </div>
-            </div>
-        </article>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Does it represent my patients?">
+          <span><strong>Does it represent my patients?</strong> Was the tool trained and validated on data that reflects your actual patient population, case mix, and clinical workflows?</span>
+        </div>
 
-        <!-- RESOURCE 3: Five Pre-Deployment Questions -->
-        <article class="resource">
-            <div class="resource-header">
-                <div class="resource-number">3</div>
-                <h2>Five Pre-Deployment Questions</h2>
-            </div>
-            <p class="resource-subtitle">Essential validation before any AI tool goes live</p>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Was it validated here?">
+          <span><strong>Was it validated here?</strong> Local pilot with real cases in your environment — not just vendor slides or published papers from other institutions.</span>
+        </div>
 
-            <div class="checklist-section">
-                <h4>Before any clinical AI deployment, these five questions must be answered clearly:</h4>
-                
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span><strong>Does it represent my patients?</strong> Was the tool trained and validated on data that reflects your actual patient population, case mix, and clinical workflows?</span>
-                </div>
-                
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span><strong>Was it validated here?</strong> Local pilot with real cases in your environment — not just vendor slides or published papers from other institutions.</span>
-                </div>
-                
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span><strong>Can I defend "follow" or "override"?</strong> You must understand the tool's failure modes well enough to justify both agreement and disagreement with its output.</span>
-                </div>
-                
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span><strong>Who owns failure?</strong> When the system is wrong, who is accountable? Not in theory — in practice. A named Clinical Owner must be assigned before deployment.</span>
-                </div>
-                
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span><strong>Who owns the kill switch?</strong> If the tool starts causing harm or over-alerting, who has the authority to suspend it immediately without committee approval?</span>
-                </div>
-            </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Can I defend follow or override?">
+          <span><strong>Can I defend "follow" or "override"?</strong> You must understand the tool's failure modes well enough to justify both agreement and disagreement with its output.</span>
+        </div>
 
-            <div class="highlight-box">
-                If these five questions cannot be answered clearly — that is a hard stop, not a soft concern.
-            </div>
-        </article>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Who owns failure?">
+          <span><strong>Who owns failure?</strong> When the system is wrong, who is accountable? Not in theory — in practice. A named Clinical Owner must be assigned before deployment.</span>
+        </div>
 
-        <!-- RESOURCE 4: Governance Readiness Checklist -->
-        <article class="resource">
-            <div class="resource-header">
-                <div class="resource-number">4</div>
-                <h2>Department Governance Readiness</h2>
-            </div>
-            <p class="resource-subtitle">Pre-deployment gap analysis to prevent another Sedasys failure</p>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Who owns the kill switch?">
+          <span><strong>Who owns the kill switch?</strong> If the tool starts causing harm or over-alerting, who has the authority to suspend it immediately without committee approval?</span>
+        </div>
+      </div>
 
-            <div class="checklist-section">
-                <h4>A. CLINICAL OWNERSHIP</h4>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>A named physician is designated as Clinical Owner for this tool</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Clinical Owner has reviewed the validation study and understands failure modes</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Clinical Owner has authority to suspend the tool without committee approval</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Backup Clinical Owner is named for coverage during absence</span>
-                </div>
-            </div>
+      <div class="highlight-box">
+        If these five questions cannot be answered clearly — that is a hard stop, not a soft concern.
+      </div>
+    </article>
 
-            <div class="checklist-section">
-                <h4>B. KILL SWITCH & ESCALATION</h4>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Suspension protocol exists: who initiates, how, and in what timeframe</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Kill switch authority is documented and known to frontline staff</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Escalation path is defined: clinical owner → department chief → risk management</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Post-suspension review process is defined</span>
-                </div>
-            </div>
+    <!-- RESOURCE 4: Governance Readiness Checklist -->
+    <article class="resource" aria-labelledby="resource-4-title">
+      <div class="resource-header">
+        <div class="resource-number" aria-hidden="true">4</div>
+        <h2 id="resource-4-title">Department Governance Readiness</h2>
+      </div>
+      <p class="resource-subtitle">Pre-deployment gap analysis to prevent another Sedasys failure</p>
 
-            <div class="checklist-section">
-                <h4>C. LOCAL VALIDATION</h4>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Tool was validated in a local pilot before full deployment</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Pilot cohort reflected actual case mix and patient population</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Performance metrics were measured in local workflow</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Alert threshold was calibrated to local false-positive/false-negative tolerance</span>
-                </div>
-            </div>
+      <div class="checklist-section">
+        <h4>A. CLINICAL OWNERSHIP</h4>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Named physician designated as Clinical Owner">
+          <span>A named physician is designated as Clinical Owner for this tool</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Clinical Owner reviewed validation study">
+          <span>Clinical Owner has reviewed the validation study and understands failure modes</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Clinical Owner has suspension authority">
+          <span>Clinical Owner has authority to suspend the tool without committee approval</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Backup Clinical Owner named">
+          <span>Backup Clinical Owner is named for coverage during absence</span>
+        </div>
+      </div>
 
-            <div class="checklist-section">
-                <h4>D. DOCUMENTATION STANDARD</h4>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Documentation template exists for this specific tool</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Template shared with all clinical staff who use this tool</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Template captures: signal acknowledged, independent assessment, decision rationale</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Prohibited phrase "AI recommended; agreed" is flagged in onboarding</span>
-                </div>
-            </div>
+      <div class="checklist-section">
+        <h4>B. KILL SWITCH &amp; ESCALATION</h4>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Suspension protocol exists">
+          <span>Suspension protocol exists: who initiates, how, and in what timeframe</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Kill switch authority documented">
+          <span>Kill switch authority is documented and known to frontline staff</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Escalation path defined">
+          <span>Escalation path is defined: clinical owner → department chief → risk management</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Post-suspension review process defined">
+          <span>Post-suspension review process is defined</span>
+        </div>
+      </div>
 
-            <div class="checklist-section">
-                <h4>E. ONGOING MONITORING</h4>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Metric set established before go-live (override rate, alert burden, adverse events)</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Baseline measurement recorded at launch</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Review cadence scheduled (minimum: quarterly)</span>
-                </div>
-                <div class="checklist-item">
-                    <input type="checkbox">
-                    <span>Alert performance reviewed and compared to baseline</span>
-                </div>
-            </div>
-        </article>
+      <div class="checklist-section">
+        <h4>C. LOCAL VALIDATION</h4>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Tool validated in local pilot">
+          <span>Tool was validated in a local pilot before full deployment</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Pilot cohort reflected actual case mix">
+          <span>Pilot cohort reflected actual case mix and patient population</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Performance metrics measured locally">
+          <span>Performance metrics were measured in local workflow</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Alert threshold calibrated">
+          <span>Alert threshold was calibrated to local false-positive/false-negative tolerance</span>
+        </div>
+      </div>
 
-        <!-- RESOURCE 5: Calibration vs Discrimination -->
-        <article class="resource">
-            <div class="resource-header">
-                <div class="resource-number">5</div>
-                <h2>Calibration vs. Discrimination</h2>
-            </div>
-            <p class="resource-subtitle">Understanding what AI performance metrics actually tell you</p>
+      <div class="checklist-section">
+        <h4>D. DOCUMENTATION STANDARD</h4>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Documentation template exists">
+          <span>Documentation template exists for this specific tool</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Template shared with all clinical staff">
+          <span>Template shared with all clinical staff who use this tool</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Template captures signal, assessment, rationale">
+          <span>Template captures: signal acknowledged, independent assessment, decision rationale</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Prohibited phrase flagged in onboarding">
+          <span>Prohibited phrase "AI recommended; agreed" is flagged in onboarding</span>
+        </div>
+      </div>
 
-            <p style="margin-bottom: 2rem;">Vendors present AUROC. Patients need calibration. These are different questions — and confusing them is one of the most common errors in clinical AI evaluation.</p>
+      <div class="checklist-section">
+        <h4>E. ONGOING MONITORING</h4>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Metric set established before go-live">
+          <span>Metric set established before go-live (override rate, alert burden, adverse events)</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Baseline measurement recorded">
+          <span>Baseline measurement recorded at launch</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Review cadence scheduled">
+          <span>Review cadence scheduled (minimum: quarterly)</span>
+        </div>
+        <div class="checklist-item">
+          <input type="checkbox" aria-label="Alert performance reviewed">
+          <span>Alert performance reviewed and compared to baseline</span>
+        </div>
+      </div>
+    </article>
 
-            <div class="comparison-grid">
-                <div class="comparison-card">
-                    <h3>Discrimination (AUROC)</h3>
-                    <p style="margin: 1rem 0;"><strong>The question it answers:</strong></p>
-                    <p style="font-style: italic; color: var(--text-secondary); margin-bottom: 1rem;">"Can the model rank high-risk patients above low-risk ones?"</p>
-                    
-                    <p><strong>How it's reported:</strong></p>
-                    <p style="margin-bottom: 1rem;">AUROC (Area Under ROC), also called AUC or c-statistic. Ranges from 0.5 (coin flip) to 1.0 (perfect).</p>
-                    
-                    <p><strong>What high AUROC tells you:</strong></p>
-                    <p style="margin-bottom: 1rem;">The model separates high-risk from low-risk patients in the test dataset. Says nothing about whether predicted probabilities are accurate.</p>
-                    
-                    <p><strong>Clinical reality:</strong></p>
-                    <p>A model correctly ranking a sick patient above a healthy one has good discrimination — even if it predicts 99% risk when true risk is 60%.</p>
-                </div>
+    <!-- RESOURCE 5: Calibration vs Discrimination -->
+    <article class="resource" aria-labelledby="resource-5-title">
+      <div class="resource-header">
+        <div class="resource-number" aria-hidden="true">5</div>
+        <h2 id="resource-5-title">Calibration vs. Discrimination</h2>
+      </div>
+      <p class="resource-subtitle">Understanding what AI performance metrics actually tell you</p>
 
-                <div class="comparison-card">
-                    <h3>Calibration</h3>
-                    <p style="margin: 1rem 0;"><strong>The question it answers:</strong></p>
-                    <p style="font-style: italic; color: var(--text-secondary); margin-bottom: 1rem;">"When the model says 80% probability, does the event actually happen 80% of the time — in my patients?"</p>
-                    
-                    <p><strong>How it's reported:</strong></p>
-                    <p style="margin-bottom: 1rem;">Calibration plots, Hosmer-Lemeshow test, Expected/Observed (E/O) ratio. Rarely shown in vendor presentations.</p>
-                    
-                    <p><strong>What good calibration tells you:</strong></p>
-                    <p style="margin-bottom: 1rem;">Predicted probabilities are trustworthy as absolute numbers. A 30% alert means something different than a 90% alert.</p>
-                    
-                    <p><strong>Clinical reality:</strong></p>
-                    <p>A weather app ranking rainy days above sunny ones but saying 90% rain when actual rate is 40% leaves you carrying an umbrella unnecessarily.</p>
-                </div>
-            </div>
+      <p style="margin-bottom: 2rem;">Vendors present AUROC. Patients need calibration. These are different questions — and confusing them is one of the most common errors in clinical AI evaluation.</p>
 
-            <div class="checklist-section">
-                <h4>Three Critical Questions to Ask Every Vendor</h4>
-                <div style="margin-top: 1rem;">
-                    <p style="margin-bottom: 0.75rem;"><strong>Q1:</strong> "What is the calibration of this model in your external validation cohort, and do you have a calibration plot we can review?"</p>
-                    <p style="margin-bottom: 1.5rem; padding-left: 1rem; color: var(--text-secondary);">Red flag: Vendor only shows AUROC and cannot produce a calibration plot.</p>
-                    
-                    <p style="margin-bottom: 0.75rem;"><strong>Q2:</strong> "Was this model validated on a population similar to ours — in terms of age, ASA class, procedure type, and EMR platform?"</p>
-                    <p style="margin-bottom: 1.5rem; padding-left: 1rem; color: var(--text-secondary);">Red flag: Validation cohort is academic, predominantly young, or from a single institution with different workflows.</p>
-                    
-                    <p style="margin-bottom: 0.75rem;"><strong>Q3:</strong> "When was the model last recalibrated? Do you offer local recalibration, and what does that process look like?"</p>
-                    <p style="padding-left: 1rem; color: var(--text-secondary);">Red flag: Vendor cannot define a recalibration schedule or says it is not needed post-deployment.</p>
-                </div>
-            </div>
+      <div class="comparison-grid">
+        <div class="comparison-card">
+          <h3>Discrimination (AUROC)</h3>
+          <p style="margin: 1rem 0;"><strong>The question it answers:</strong></p>
+          <p style="font-style: italic; color: var(--color-text-muted); margin-bottom: 1rem;">"Can the model rank high-risk patients above low-risk ones?"</p>
 
-            <div class="highlight-box">
-                High ROC ≠ Local Trustworthiness
-            </div>
-        </article>
+          <p><strong>How it's reported:</strong></p>
+          <p style="margin-bottom: 1rem;">AUROC (Area Under ROC), also called AUC or c-statistic. Ranges from 0.5 (coin flip) to 1.0 (perfect).</p>
 
-        <!-- RESOURCE 6: How to Build Department AI Guide -->
-        <article class="resource">
-            <div class="resource-header">
-                <div class="resource-number">6</div>
-                <h2>How to Build a Department AI Guide</h2>
-            </div>
-            <p class="resource-subtitle">Strategic roadmap for institutional AI governance</p>
+          <p><strong>What high AUROC tells you:</strong></p>
+          <p style="margin-bottom: 1rem;">The model separates high-risk from low-risk patients in the test dataset. Says nothing about whether predicted probabilities are accurate.</p>
 
-            <p style="margin-bottom: 2rem;">A department-specific AI guide is a written strategic roadmap that answers three fundamental questions for your specialty:</p>
+          <p><strong>Clinical reality:</strong></p>
+          <p>A model correctly ranking a sick patient above a healthy one has good discrimination — even if it predicts 99% risk when true risk is 60%.</p>
+        </div>
 
-            <div class="framework-grid">
-                <div class="framework-card">
-                    <h3>What AI tools are relevant?</h3>
-                    <p>How do we evaluate tools for clinical fit, safety, and evidence quality?</p>
-                </div>
-                <div class="framework-card">
-                    <h3>How do we deploy them?</h3>
-                    <p>What governance structures ensure responsible implementation and ongoing monitoring?</p>
-                </div>
-                <div class="framework-card">
-                    <h3>How do we train people?</h3>
-                    <p>What competencies do clinicians need to safely supervise AI tools?</p>
-                </div>
-            </div>
+        <div class="comparison-card">
+          <h3>Calibration</h3>
+          <p style="margin: 1rem 0;"><strong>The question it answers:</strong></p>
+          <p style="font-style: italic; color: var(--color-text-muted); margin-bottom: 1rem;">"When the model says 80% probability, does the event actually happen 80% of the time — in my patients?"</p>
 
-            <div class="checklist-section">
-                <h4>Why Your Department Needs One</h4>
-                <div class="check-item">
-                    <span class="check-icon">✓</span>
-                    <span><strong>AI tools are already arriving</strong> — in vendor contracts, Epic updates, and residents' pockets, with or without department guidance</span>
-                </div>
-                <div class="check-item">
-                    <span class="check-icon">✓</span>
-                    <span><strong>Governance vacuums cause harm</strong> — Sedasys failed not from bad technology but from unclear ownership and no escalation path</span>
-                </div>
-                <div class="check-item">
-                    <span class="check-icon">✓</span>
-                    <span><strong>Clinicians need a framework</strong> — 76% of UC Davis staff wanted AI training; 50% had never used AI professionally</span>
-                </div>
-                <div class="check-item">
-                    <span class="check-icon">✓</span>
-                    <span><strong>External frameworks don't fit</strong> — NIST, AMA, FDA guidance is general. Your specialty's workflows and risks are specific</span>
-                </div>
-            </div>
+          <p><strong>How it's reported:</strong></p>
+          <p style="margin-bottom: 1rem;">Calibration plots, Hosmer-Lemeshow test, Expected/Observed (E/O) ratio. Rarely shown in vendor presentations.</p>
 
-            <div class="checklist-section">
-                <h4>Essential Components</h4>
-                <div class="comparison-item">
-                    <span class="bullet">1.</span>
-                    <span><strong>Needs Assessment:</strong> Survey current AI use, identify adoption gaps, document barriers by role</span>
-                </div>
-                <div class="comparison-item">
-                    <span class="bullet">2.</span>
-                    <span><strong>Task Force Composition:</strong> Named membership with defined roles, meeting cadence, methodology transparency</span>
-                </div>
-                <div class="comparison-item">
-                    <span class="bullet">3.</span>
-                    <span><strong>Governance Framework:</strong> Approved platforms, oversight committee, human-in-the-loop policy, PHI rules</span>
-                </div>
-                <div class="comparison-item">
-                    <span class="bullet">4.</span>
-                    <span><strong>Clinical Use Cases:</strong> Specialty-specific applications with supervision requirements</span>
-                </div>
-                <div class="comparison-item">
-                    <span class="bullet">5.</span>
-                    <span><strong>Training & Competency:</strong> Role-based education, verification methods, documentation standards</span>
-                </div>
-                <div class="comparison-item">
-                    <span class="bullet">6.</span>
-                    <span><strong>Ongoing Monitoring:</strong> Performance metrics, drift detection, periodic review schedule</span>
-                </div>
-                <div class="comparison-item">
-                    <span class="bullet">7.</span>
-                    <span><strong>Escalation Protocol:</strong> Clear ownership, suspension authority, post-incident review process</span>
-                </div>
-                <div class="comparison-item">
-                    <span class="bullet">8.</span>
-                    <span><strong>Annual Review:</strong> Update cycle, version control, stakeholder feedback mechanism</span>
-                </div>
-            </div>
-        </article>
+          <p><strong>What good calibration tells you:</strong></p>
+          <p style="margin-bottom: 1rem;">Predicted probabilities are trustworthy as absolute numbers. A 30% alert means something different than a 90% alert.</p>
 
-        <!-- RESOURCE 7: Bibliography -->
-        <article class="resource">
-            <div class="resource-header">
-                <div class="resource-number">7</div>
-                <h2>Bibliography</h2>
-            </div>
-            <p class="resource-subtitle">Complete references from "Beyond the Hype: Safe AI Supervision in Anesthesia"</p>
+          <p><strong>Clinical reality:</strong></p>
+          <p>A weather app ranking rainy days above sunny ones but saying 90% rain when actual rate is 40% leaves you carrying an umbrella unnecessarily.</p>
+        </div>
+      </div>
 
-            <div class="bib-section">
-                <h3>Core Citations</h3>
-                
-                <div class="bib-item">
-                    <span class="bib-number">1.</span>
-                    <span class="bib-authors">Hashimoto DA, Rosman G, Rus D, Meireles OR.</span>
-                    <span class="bib-title">Artificial intelligence in surgery: promises and perils. Ann Surg. 2018;268(1):70-76. doi:10.1097/SLA.0000000000002693</span>
-                </div>
+      <div class="checklist-section">
+        <h4>Three Critical Questions to Ask Every Vendor</h4>
+        <div style="margin-top: 1rem;">
+          <p style="margin-bottom: 0.75rem;"><strong>Q1:</strong> "What is the calibration of this model in your external validation cohort, and do you have a calibration plot we can review?"</p>
+          <p style="margin-bottom: 1.5rem; padding-left: 1rem; color: var(--color-text-muted);">Red flag: Vendor only shows AUROC and cannot produce a calibration plot.</p>
 
-                <div class="bib-item">
-                    <span class="bib-number">2.</span>
-                    <span class="bib-authors">Hashimoto DA, Witkowski E, Gao L, Meireles O, Rosman G.</span>
-                    <span class="bib-title">Artificial intelligence in anesthesiology: current techniques, clinical applications, and limitations. Anesthesiology. 2020;132(2):379-394. doi:10.1097/ALN.0000000000003012</span>
-                </div>
+          <p style="margin-bottom: 0.75rem;"><strong>Q2:</strong> "Was this model validated on a population similar to ours — in terms of age, ASA class, procedure type, and EMR platform?"</p>
+          <p style="margin-bottom: 1.5rem; padding-left: 1rem; color: var(--color-text-muted);">Red flag: Validation cohort is academic, predominantly young, or from a single institution with different workflows.</p>
 
-                <div class="bib-item">
-                    <span class="bib-number">3.</span>
-                    <span class="bib-authors">Estrada Alamo CE, Ramirez JL, Kaye AD, Urman RD.</span>
-                    <span class="bib-title">Attitudes of United States anesthesiologists toward artificial intelligence in anesthesiology. Anesth Analg. 2021;133(2):406-413. doi:10.1213/ANE.0000000000005519</span>
-                </div>
+          <p style="margin-bottom: 0.75rem;"><strong>Q3:</strong> "When was the model last recalibrated? Do you offer local recalibration, and what does that process look like?"</p>
+          <p style="padding-left: 1rem; color: var(--color-text-muted);">Red flag: Vendor cannot define a recalibration schedule or says it is not needed post-deployment.</p>
+        </div>
+      </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">4.</span>
-                    <span class="bib-authors">Han L, Abidi A, Balasubramanian PS, McCunn M.</span>
-                    <span class="bib-title">Artificial intelligence in anesthesiology: current state and future directions. Anesthesiology. 2024;141(2):379-387. doi:10.1097/ALN.0000000000005037</span>
-                </div>
+      <div class="highlight-box">
+        High ROC ≠ Local Trustworthiness
+      </div>
+    </article>
 
-                <div class="bib-item">
-                    <span class="bib-number">5.</span>
-                    <span class="bib-authors">Goudra BG, Singh PM.</span>
-                    <span class="bib-title">Failure of Sedasys: destiny or poor design? Anesth Analg. 2017;124(2):686-688. doi:10.1213/ANE.0000000000001643</span>
-                </div>
+    <!-- RESOURCE 6: How to Build Department AI Guide -->
+    <article class="resource" aria-labelledby="resource-6-title">
+      <div class="resource-header">
+        <div class="resource-number" aria-hidden="true">6</div>
+        <h2 id="resource-6-title">How to Build a Department AI Guide</h2>
+      </div>
+      <p class="resource-subtitle">Strategic roadmap for institutional AI governance</p>
 
-                <div class="bib-item">
-                    <span class="bib-number">6.</span>
-                    <span class="bib-authors">Mulder MP, Joosten A, Scheeren TWL, Saugel B.</span>
-                    <span class="bib-title">Prediction and prevention of hypotension during anesthesia: from physiology to machine learning. Anesthesiology. 2024;141(3):453-462. doi:10.1097/ALN.0000000000005063</span>
-                </div>
+      <p style="margin-bottom: 2rem;">A department-specific AI guide is a written strategic roadmap that answers three fundamental questions for your specialty:</p>
 
-                <div class="bib-item">
-                    <span class="bib-number">7.</span>
-                    <span class="bib-authors">Mukkamala R, Kohl BA, Shelley KH.</span>
-                    <span class="bib-title">Clinical performance of the Hypotension Prediction Index: a systematic review and meta-analysis. Anesth Analg. 2025;141(1):61-73. doi:10.1213/ANE.0000000000006781</span>
-                </div>
+      <div class="framework-grid">
+        <div class="framework-card">
+          <h3>What AI tools are relevant?</h3>
+          <p>How do we evaluate tools for clinical fit, safety, and evidence quality?</p>
+        </div>
+        <div class="framework-card">
+          <h3>How do we deploy them?</h3>
+          <p>What governance structures ensure responsible implementation and ongoing monitoring?</p>
+        </div>
+        <div class="framework-card">
+          <h3>How do we train people?</h3>
+          <p>What competencies do clinicians need to safely supervise AI tools?</p>
+        </div>
+      </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">8.</span>
-                    <span class="bib-authors">Goddard K, Roudsari A, Wyatt JC.</span>
-                    <span class="bib-title">Automation bias: a systematic review of frequency, effect mediators, and mitigators. J Am Med Inform Assoc. 2012;19(1):121-127. doi:10.1136/amiajnl-2011-000089</span>
-                </div>
+      <div class="checklist-section">
+        <h4>Why Your Department Needs One</h4>
+        <div class="check-item">
+          <span class="check-icon" aria-hidden="true">✓</span>
+          <span><strong>AI tools are already arriving</strong> — in vendor contracts, Epic updates, and residents' pockets, with or without department guidance</span>
+        </div>
+        <div class="check-item">
+          <span class="check-icon" aria-hidden="true">✓</span>
+          <span><strong>Governance vacuums cause harm</strong> — Sedasys failed not from bad technology but from unclear ownership and no escalation path</span>
+        </div>
+        <div class="check-item">
+          <span class="check-icon" aria-hidden="true">✓</span>
+          <span><strong>Clinicians need a framework</strong> — 76% of UC Davis staff wanted AI training; 50% had never used AI professionally</span>
+        </div>
+        <div class="check-item">
+          <span class="check-icon" aria-hidden="true">✓</span>
+          <span><strong>External frameworks don't fit</strong> — NIST, AMA, FDA guidance is general. Your specialty's workflows and risks are specific</span>
+        </div>
+      </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">9.</span>
-                    <span class="bib-authors">Finlayson SG, Subbaswamy A, Singh K, et al.</span>
-                    <span class="bib-title">The clinician and dataset shift in artificial intelligence. N Engl J Med. 2021;385(3):283-286. doi:10.1056/NEJMc2104626</span>
-                </div>
+      <div class="checklist-section">
+        <h4>Essential Components</h4>
+        <div class="comparison-item">
+          <span class="bullet" aria-hidden="true">1.</span>
+          <span><strong>Needs Assessment:</strong> Survey current AI use, identify adoption gaps, document barriers by role</span>
+        </div>
+        <div class="comparison-item">
+          <span class="bullet" aria-hidden="true">2.</span>
+          <span><strong>Task Force Composition:</strong> Named membership with defined roles, meeting cadence, methodology transparency</span>
+        </div>
+        <div class="comparison-item">
+          <span class="bullet" aria-hidden="true">3.</span>
+          <span><strong>Governance Framework:</strong> Approved platforms, oversight committee, human-in-the-loop policy, PHI rules</span>
+        </div>
+        <div class="comparison-item">
+          <span class="bullet" aria-hidden="true">4.</span>
+          <span><strong>Clinical Use Cases:</strong> Specialty-specific applications with supervision requirements</span>
+        </div>
+        <div class="comparison-item">
+          <span class="bullet" aria-hidden="true">5.</span>
+          <span><strong>Training &amp; Competency:</strong> Role-based education, verification methods, documentation standards</span>
+        </div>
+        <div class="comparison-item">
+          <span class="bullet" aria-hidden="true">6.</span>
+          <span><strong>Ongoing Monitoring:</strong> Performance metrics, drift detection, periodic review schedule</span>
+        </div>
+        <div class="comparison-item">
+          <span class="bullet" aria-hidden="true">7.</span>
+          <span><strong>Escalation Protocol:</strong> Clear ownership, suspension authority, post-incident review process</span>
+        </div>
+        <div class="comparison-item">
+          <span class="bullet" aria-hidden="true">8.</span>
+          <span><strong>Annual Review:</strong> Update cycle, version control, stakeholder feedback mechanism</span>
+        </div>
+      </div>
+    </article>
 
-                <div class="bib-item">
-                    <span class="bib-number">10.</span>
-                    <span class="bib-authors">Conlon B, O'Brien B, Herbst T, Mushti S, Zimmerman J, Cannesson M.</span>
-                    <span class="bib-title">The future of perioperative artificial intelligence: artificial intelligence-guided ultrasound. J Cardiothorac Vasc Anesth. 2024;38(5):1244-1253. doi:10.1053/j.jvca.2024.02.003</span>
-                </div>
+    <!-- RESOURCE 7: Bibliography -->
+    <article class="resource" aria-labelledby="resource-7-title">
+      <div class="resource-header">
+        <div class="resource-number" aria-hidden="true">7</div>
+        <h2 id="resource-7-title">Bibliography</h2>
+      </div>
+      <p class="resource-subtitle">Complete references from "Beyond the Hype: Safe AI Supervision in Anesthesia"</p>
 
-                <div class="bib-item">
-                    <span class="bib-number">11.</span>
-                    <span class="bib-authors">Lukac PJ, Bosworth A, Boulos S, et al.</span>
-                    <span class="bib-title">Ambient artificial intelligence scribes for documentation of medical visits: randomized clinical trial. NEJM AI. 2025;2(1):AIoa2501000. doi:10.1056/AIoa2501000</span>
-                </div>
+      <div class="bib-section">
+        <h3>Core Citations</h3>
 
-                <div class="bib-item">
-                    <span class="bib-number">12.</span>
-                    <span class="bib-authors">Aljamaan F, Almazyad M, Siddiqui MK, et al.</span>
-                    <span class="bib-title">Performance of ChatGPT and GPT-4 in providing evidence-based medicine information to clinicians: comparative evaluation study. JMIR Med Inform. 2024;12:e54345. doi:10.2196/54345</span>
-                </div>
-            </div>
+        <div class="bib-item">
+          <span class="bib-number">1.</span>
+          <span class="bib-authors">Hashimoto DA, Rosman G, Rus D, Meireles OR.</span>
+          <span class="bib-title">Artificial intelligence in surgery: promises and perils. Ann Surg. 2018;268(1):70-76. doi:10.1097/SLA.0000000000002693</span>
+        </div>
 
-            <div class="bib-section">
-                <h3>Additional Recommended Reading</h3>
+        <div class="bib-item">
+          <span class="bib-number">2.</span>
+          <span class="bib-authors">Hashimoto DA, Witkowski E, Gao L, Meireles O, Rosman G.</span>
+          <span class="bib-title">Artificial intelligence in anesthesiology: current techniques, clinical applications, and limitations. Anesthesiology. 2020;132(2):379-394. doi:10.1097/ALN.0000000000003012</span>
+        </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">13.</span>
-                    <span class="bib-authors">Davis SE, Lasko TA, Chen G, Siew ED, Matheny ME.</span>
-                    <span class="bib-title">Calibration drift in regression and machine learning models for acute kidney injury. J Am Med Inform Assoc. 2017;24(6):1052-1061. doi:10.1093/jamia/ocx030</span>
-                </div>
+        <div class="bib-item">
+          <span class="bib-number">3.</span>
+          <span class="bib-authors">Estrada Alamo CE, Ramirez JL, Kaye AD, Urman RD.</span>
+          <span class="bib-title">Attitudes of United States anesthesiologists toward artificial intelligence in anesthesiology. Anesth Analg. 2021;133(2):406-413. doi:10.1213/ANE.0000000000005519</span>
+        </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">14.</span>
-                    <span class="bib-authors">Wijnberge M, Geerts BF, Hol L, et al.</span>
-                    <span class="bib-title">Effect of a machine learning-derived early warning system for intraoperative hypotension vs standard care on depth and duration of intraoperative hypotension during elective noncardiac surgery: the HYPE randomized clinical trial. JAMA. 2020;323(11):1052-1060. doi:10.1001/jama.2020.0592</span>
-                </div>
+        <div class="bib-item">
+          <span class="bib-number">4.</span>
+          <span class="bib-authors">Han L, Abidi A, Balasubramanian PS, McCunn M.</span>
+          <span class="bib-title">Artificial intelligence in anesthesiology: current state and future directions. Anesthesiology. 2024;141(2):379-387. doi:10.1097/ALN.0000000000005037</span>
+        </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">15.</span>
-                    <span class="bib-authors">Sendak MP, Gao M, Brajer N, Balu S.</span>
-                    <span class="bib-title">Presenting machine learning model information to clinical end users with model facts labels. NPJ Digit Med. 2020;3:41. doi:10.1038/s41746-020-0253-3</span>
-                </div>
+        <div class="bib-item">
+          <span class="bib-number">5.</span>
+          <span class="bib-authors">Goudra BG, Singh PM.</span>
+          <span class="bib-title">Failure of Sedasys: destiny or poor design? Anesth Analg. 2017;124(2):686-688. doi:10.1213/ANE.0000000000001643</span>
+        </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">16.</span>
-                    <span class="bib-authors">Rajkomar A, Hardt M, Howell MD, Corrado G, Chin MH.</span>
-                    <span class="bib-title">Ensuring fairness in machine learning to advance health equity. Ann Intern Med. 2018;169(12):866-872. doi:10.7326/M18-1990</span>
-                </div>
+        <div class="bib-item">
+          <span class="bib-number">6.</span>
+          <span class="bib-authors">Mulder MP, Joosten A, Scheeren TWL, Saugel B.</span>
+          <span class="bib-title">Prediction and prevention of hypotension during anesthesia: from physiology to machine learning. Anesthesiology. 2024;141(3):453-462. doi:10.1097/ALN.0000000000005063</span>
+        </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">17.</span>
-                    <span class="bib-authors">Char DS, Shah NH, Magnus D.</span>
-                    <span class="bib-title">Implementing machine learning in health care - addressing ethical challenges. N Engl J Med. 2018;378(11):981-983. doi:10.1056/NEJMp1714229</span>
-                </div>
+        <div class="bib-item">
+          <span class="bib-number">7.</span>
+          <span class="bib-authors">Mukkamala R, Kohl BA, Shelley KH.</span>
+          <span class="bib-title">Clinical performance of the Hypotension Prediction Index: a systematic review and meta-analysis. Anesth Analg. 2025;141(1):61-73. doi:10.1213/ANE.0000000000006781</span>
+        </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">18.</span>
-                    <span class="bib-authors">Kelly CJ, Karthikesalingam A, Suleyman M, Corrado G, King D.</span>
-                    <span class="bib-title">Key challenges for delivering clinical impact with artificial intelligence. BMC Med. 2019;17(1):195. doi:10.1186/s12916-019-1426-2</span>
-                </div>
+        <div class="bib-item">
+          <span class="bib-number">8.</span>
+          <span class="bib-authors">Goddard K, Roudsari A, Wyatt JC.</span>
+          <span class="bib-title">Automation bias: a systematic review of frequency, effect mediators, and mitigators. J Am Med Inform Assoc. 2012;19(1):121-127. doi:10.1136/amiajnl-2011-000089</span>
+        </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">19.</span>
-                    <span class="bib-authors">Emanuel EJ, Wachter RM.</span>
-                    <span class="bib-title">Artificial intelligence in health care: will the value match the hype? JAMA. 2019;321(23):2281-2282. doi:10.1001/jama.2019.4914</span>
-                </div>
+        <div class="bib-item">
+          <span class="bib-number">9.</span>
+          <span class="bib-authors">Finlayson SG, Subbaswamy A, Singh K, et al.</span>
+          <span class="bib-title">The clinician and dataset shift in artificial intelligence. N Engl J Med. 2021;385(3):283-286. doi:10.1056/NEJMc2104626</span>
+        </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">20.</span>
-                    <span class="bib-authors">Obermeyer Z, Powers B, Vogeli C, Mullainathan S.</span>
-                    <span class="bib-title">Dissecting racial bias in an algorithm used to manage the health of populations. Science. 2019;366(6464):447-453. doi:10.1126/science.aax2342</span>
-                </div>
-            </div>
+        <div class="bib-item">
+          <span class="bib-number">10.</span>
+          <span class="bib-authors">Conlon B, O'Brien B, Herbst T, Mushti S, Zimmerman J, Cannesson M.</span>
+          <span class="bib-title">The future of perioperative artificial intelligence: artificial intelligence-guided ultrasound. J Cardiothorac Vasc Anesth. 2024;38(5):1244-1253. doi:10.1053/j.jvca.2024.02.003</span>
+        </div>
 
-            <div class="bib-section">
-                <h3>Framework Development Resources</h3>
+        <div class="bib-item">
+          <span class="bib-number">11.</span>
+          <span class="bib-authors">Lukac PJ, Bosworth A, Boulos S, et al.</span>
+          <span class="bib-title">Ambient artificial intelligence scribes for documentation of medical visits: randomized clinical trial. NEJM AI. 2025;2(1):AIoa2501000. doi:10.1056/AIoa2501000</span>
+        </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">21.</span>
-                    <span class="bib-title">National Academy of Medicine. Artificial Intelligence in Health Care: The Hope, the Hype, the Promise, the Peril. Washington, DC: The National Academies Press; 2019. doi:10.17226/27111</span>
-                </div>
+        <div class="bib-item">
+          <span class="bib-number">12.</span>
+          <span class="bib-authors">Aljamaan F, Almazyad M, Siddiqui MK, et al.</span>
+          <span class="bib-title">Performance of ChatGPT and GPT-4 in providing evidence-based medicine information to clinicians: comparative evaluation study. JMIR Med Inform. 2024;12:e54345. doi:10.2196/54345</span>
+        </div>
+      </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">22.</span>
-                    <span class="bib-title">World Health Organization. Ethics and Governance of Artificial Intelligence for Health: WHO Guidance. Geneva: World Health Organization; 2021.</span>
-                </div>
+      <div class="bib-section">
+        <h3>Additional Recommended Reading</h3>
 
-                <div class="bib-item">
-                    <span class="bib-number">23.</span>
-                    <span class="bib-title">American Medical Association. AMA Principles for Augmented Intelligence Development, Deployment and Use. Chicago, IL: American Medical Association; 2023. Accessed January 15, 2026. https://www.ama-assn.org/amaone/augmented-intelligence-ai</span>
-                </div>
+        <div class="bib-item">
+          <span class="bib-number">13.</span>
+          <span class="bib-authors">Davis SE, Lasko TA, Chen G, Siew ED, Matheny ME.</span>
+          <span class="bib-title">Calibration drift in regression and machine learning models for acute kidney injury. J Am Med Inform Assoc. 2017;24(6):1052-1061. doi:10.1093/jamia/ocx030</span>
+        </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">24.</span>
-                    <span class="bib-title">Food and Drug Administration. Artificial Intelligence and Machine Learning (AI/ML)-Enabled Medical Devices. Silver Spring, MD: US Food and Drug Administration; Updated December 2023. Accessed January 15, 2026. https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-and-machine-learning-aiml-enabled-medical-devices</span>
-                </div>
+        <div class="bib-item">
+          <span class="bib-number">14.</span>
+          <span class="bib-authors">Wijnberge M, Geerts BF, Hol L, et al.</span>
+          <span class="bib-title">Effect of a machine learning-derived early warning system for intraoperative hypotension vs standard care on depth and duration of intraoperative hypotension during elective noncardiac surgery: the HYPE randomized clinical trial. JAMA. 2020;323(11):1052-1060. doi:10.1001/jama.2020.0592</span>
+        </div>
 
-                <div class="bib-item">
-                    <span class="bib-number">25.</span>
-                    <span class="bib-title">Coalition for Health AI. Blueprint for Trustworthy AI Implementation Guidance and Assurance for Healthcare. Published 2023. Accessed January 15, 2026. https://www.coalitionforhealthai.org/blueprint</span>
-                </div>
-            </div>
-        </article>
-    </main>
+        <div class="bib-item">
+          <span class="bib-number">15.</span>
+          <span class="bib-authors">Sendak MP, Gao M, Brajer N, Balu S.</span>
+          <span class="bib-title">Presenting machine learning model information to clinical end users with model facts labels. NPJ Digit Med. 2020;3:41. doi:10.1038/s41746-020-0253-3</span>
+        </div>
 
-    <footer>
-        <p style="margin-bottom: 0.5rem; font-weight: 500;">Beyond the Hype: Safe AI Supervision in Anesthesia</p>
-        <p>Brian Pitts, MD, MS, MEHP · UC Davis Anesthesiology Update 2026</p>
-        <p style="margin-top: 1rem; font-size: 0.8125rem;">Additional resources and interactive tools available at gothere.click/ai</p>
-    </footer>
+        <div class="bib-item">
+          <span class="bib-number">16.</span>
+          <span class="bib-authors">Rajkomar A, Hardt M, Howell MD, Corrado G, Chin MH.</span>
+          <span class="bib-title">Ensuring fairness in machine learning to advance health equity. Ann Intern Med. 2018;169(12):866-872. doi:10.7326/M18-1990</span>
+        </div>
 
-    <script>
-        function toggleDarkMode() {
-            const isDark = document.body.classList.toggle('dark-mode');
-            const sunIcon = document.getElementById('sun-icon');
-            const moonIcon = document.getElementById('moon-icon');
-            
-            if (isDark) {
-                sunIcon.style.display = 'block';
-                moonIcon.style.display = 'none';
-            } else {
-                sunIcon.style.display = 'none';
-                moonIcon.style.display = 'block';
-            }
-            
-            localStorage.setItem('darkMode', isDark);
-        }
+        <div class="bib-item">
+          <span class="bib-number">17.</span>
+          <span class="bib-authors">Char DS, Shah NH, Magnus D.</span>
+          <span class="bib-title">Implementing machine learning in health care - addressing ethical challenges. N Engl J Med. 2018;378(11):981-983. doi:10.1056/NEJMp1714229</span>
+        </div>
 
-        // Load saved preference
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedMode = localStorage.getItem('darkMode');
-            const isDark = savedMode === null || savedMode === 'true';
-            const sunIcon = document.getElementById('sun-icon');
-            const moonIcon = document.getElementById('moon-icon');
-            
-            if (isDark) {
-                document.body.classList.add('dark-mode');
-                sunIcon.style.display = 'block';
-                moonIcon.style.display = 'none';
-            } else {
-                sunIcon.style.display = 'none';
-                moonIcon.style.display = 'block';
-            }
-        });
-    </script>
+        <div class="bib-item">
+          <span class="bib-number">18.</span>
+          <span class="bib-authors">Kelly CJ, Karthikesalingam A, Suleyman M, Corrado G, King D.</span>
+          <span class="bib-title">Key challenges for delivering clinical impact with artificial intelligence. BMC Med. 2019;17(1):195. doi:10.1186/s12916-019-1426-2</span>
+        </div>
+
+        <div class="bib-item">
+          <span class="bib-number">19.</span>
+          <span class="bib-authors">Emanuel EJ, Wachter RM.</span>
+          <span class="bib-title">Artificial intelligence in health care: will the value match the hype? JAMA. 2019;321(23):2281-2282. doi:10.1001/jama.2019.4914</span>
+        </div>
+
+        <div class="bib-item">
+          <span class="bib-number">20.</span>
+          <span class="bib-authors">Obermeyer Z, Powers B, Vogeli C, Mullainathan S.</span>
+          <span class="bib-title">Dissecting racial bias in an algorithm used to manage the health of populations. Science. 2019;366(6464):447-453. doi:10.1126/science.aax2342</span>
+        </div>
+      </div>
+
+      <div class="bib-section">
+        <h3>Framework Development Resources</h3>
+
+        <div class="bib-item">
+          <span class="bib-number">21.</span>
+          <span class="bib-title">National Academy of Medicine. Artificial Intelligence in Health Care: The Hope, the Hype, the Promise, the Peril. Washington, DC: The National Academies Press; 2019. doi:10.17226/27111</span>
+        </div>
+
+        <div class="bib-item">
+          <span class="bib-number">22.</span>
+          <span class="bib-title">World Health Organization. Ethics and Governance of Artificial Intelligence for Health: WHO Guidance. Geneva: World Health Organization; 2021.</span>
+        </div>
+
+        <div class="bib-item">
+          <span class="bib-number">23.</span>
+          <span class="bib-title">American Medical Association. AMA Principles for Augmented Intelligence Development, Deployment and Use. Chicago, IL: American Medical Association; 2023. Accessed January 15, 2026. https://www.ama-assn.org/amaone/augmented-intelligence-ai</span>
+        </div>
+
+        <div class="bib-item">
+          <span class="bib-number">24.</span>
+          <span class="bib-title">Food and Drug Administration. Artificial Intelligence and Machine Learning (AI/ML)-Enabled Medical Devices. Silver Spring, MD: US Food and Drug Administration; Updated December 2023. Accessed January 15, 2026. https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-and-machine-learning-aiml-enabled-medical-devices</span>
+        </div>
+
+        <div class="bib-item">
+          <span class="bib-number">25.</span>
+          <span class="bib-title">Coalition for Health AI. Blueprint for Trustworthy AI Implementation Guidance and Assurance for Healthcare. Published 2023. Accessed January 15, 2026. https://www.coalitionforhealthai.org/blueprint</span>
+        </div>
+      </div>
+    </article>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer" id="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__author">Brian Pitts, MD, MS, MEHP &middot; Clinical Professor of Anesthesiology &amp; Pain Medicine, UC Davis Health</p>
+    <div class="site-footer__links">
+      <button class="site-footer__link" data-modal="disclaimer">Disclaimer</button>
+      <button class="site-footer__link" data-modal="privacy">Privacy Policy</button>
+      <button class="site-footer__link" data-modal="terms">Terms of Service</button>
+    </div>
+  </div>
+</footer>
+
+<!-- Legal Modal -->
+<div class="modal-overlay" id="legal-modal" role="dialog" aria-modal="true" aria-label="Legal information">
+  <div class="modal">
+    <button class="modal-close" id="modal-close" aria-label="Close">
+      <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+    <div id="modal-content-disclaimer" style="display:none;">
+      <h2>Disclaimer</h2>
+      <p>This is a personal educational site created and maintained by Brian Pitts, MD, MS, MEHP. The content, views, and opinions expressed here are solely those of the author and do not necessarily reflect the official policy or position of UC Davis, UC Davis Health, or the Department of Anesthesiology &amp; Pain Medicine.</p>
+      <p>The information provided on this site is intended for educational purposes only and should not be considered a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of a qualified healthcare provider with any questions regarding a medical condition or clinical decision-making.</p>
+      <p>While every effort is made to ensure accuracy, the author makes no warranties or representations regarding the completeness, reliability, or timeliness of the content. Use of any information on this site is at your own risk.</p>
+    </div>
+    <div id="modal-content-privacy" style="display:none;">
+      <h2>Privacy Policy</h2>
+      <p>AnesthesiaSmartSite is committed to protecting your privacy. This policy describes how information is collected and used when you visit this site.</p>
+      <h3>Information Collection</h3>
+      <p>This site does not collect personally identifiable information unless you voluntarily provide it. Standard web server logs may record technical information such as your IP address, browser type, and pages visited for site maintenance and analytics purposes.</p>
+      <h3>Cookies</h3>
+      <p>This site may use cookies or local storage to remember your preferences, such as your light/dark mode setting. No tracking cookies or third-party advertising cookies are used.</p>
+      <h3>Third-Party Services</h3>
+      <p>This site may use third-party services such as web fonts. These services may collect anonymous usage data subject to their own privacy policies.</p>
+      <h3>Data Sharing</h3>
+      <p>No personal information is sold, traded, or otherwise transferred to third parties. Anonymous, aggregated usage statistics may be reviewed to improve the site.</p>
+    </div>
+    <div id="modal-content-terms" style="display:none;">
+      <h2>Terms of Service</h2>
+      <p>By accessing and using AnesthesiaSmartSite, you agree to the following terms and conditions.</p>
+      <h3>Educational Use</h3>
+      <p>All content on this site is provided for educational and informational purposes only. It is not intended to serve as medical advice or to replace the clinical judgment of a licensed healthcare professional.</p>
+      <h3>Intellectual Property</h3>
+      <p>Unless otherwise noted, all content on this site is the intellectual property of the author. You may reference and share content for non-commercial educational purposes with appropriate attribution.</p>
+      <h3>Accuracy</h3>
+      <p>While the author strives to provide accurate and current information, medicine is a rapidly evolving field. The author does not guarantee that all content is complete, current, or error-free.</p>
+      <h3>Limitation of Liability</h3>
+      <p>The author shall not be held liable for any damages arising from the use of or reliance on information provided on this site. Clinical decisions should always be based on individual patient assessment and current evidence-based guidelines.</p>
+      <h3>Changes</h3>
+      <p>These terms may be updated from time to time. Continued use of the site constitutes acceptance of any changes.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "Clinical Resource Guide — Beyond the Hype",
+  "headline": "Clinical Resource Guide for Safe AI Supervision in Anesthesia",
+  "description": "VDD framework, governance checklists, calibration concepts, and annotated bibliography for safe AI supervision in anesthesia practice.",
+  "url": "https://www.anesthesiasmartsite.com/ai/bth/resource-guide.html",
+  "author": {
+    "@type": "Person",
+    "name": "Brian Pitts",
+    "jobTitle": "Clinical Professor of Anesthesiology & Pain Medicine",
+    "affiliation": {
+      "@type": "Organization",
+      "name": "UC Davis Health"
+    }
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Anesthesia SmartSite",
+    "url": "https://www.anesthesiasmartsite.com"
+  },
+  "about": [
+    "Artificial Intelligence in Anesthesiology",
+    "Clinical AI Governance",
+    "VDD Framework"
+  ]
+}
+</script>
+
+<script src="../../js/site.js"></script>
 </body>
 </html>

@@ -1,0 +1,81 @@
+{
+  "site": {
+    "name": "Anesthesia SmartSite",
+    "tagline": "Advancing Anesthesia Education with AI",
+    "author": "Brian Pitts, MD, MS, MEHP",
+    "authorTitle": "Clinical Professor of Anesthesiology & Pain Medicine, UC Davis Health",
+    "logo": "/img/logo-icon.png"
+  },
+  "navigation": {
+    "home": [
+      { "label": "AI Resources", "href": "#ai" },
+      { "label": "Clinical Education", "href": "#education" },
+      { "label": "Protocols", "href": "#education" },
+      { "label": "About", "href": "#about" }
+    ],
+    "bth": [
+      { "label": "Home", "href": "/" },
+      { "label": "Beyond the Hype", "href": "/ai/bth/" },
+      { "label": "Resource Guide", "href": "/ai/bth/resource-guide.html" },
+      { "label": "Quiz", "href": "/ai/bth/beyond-the-hype-quiz.html" }
+    ]
+  },
+  "legal": {
+    "disclaimer": {
+      "title": "Disclaimer",
+      "sections": [
+        "This is a personal educational site created and maintained by Brian Pitts, MD, MS, MEHP. The content, views, and opinions expressed here are solely those of the author and do not necessarily reflect the official policy or position of UC Davis, UC Davis Health, or the Department of Anesthesiology & Pain Medicine.",
+        "The information provided on this site is intended for educational purposes only and should not be considered a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of a qualified healthcare provider with any questions regarding a medical condition or clinical decision-making.",
+        "While every effort is made to ensure accuracy, the author makes no warranties or representations regarding the completeness, reliability, or timeliness of the content. Use of any information on this site is at your own risk."
+      ]
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "intro": "AnesthesiaSmartSite is committed to protecting your privacy. This policy describes how information is collected and used when you visit this site.",
+      "sections": [
+        {
+          "heading": "Information Collection",
+          "text": "This site does not collect personally identifiable information unless you voluntarily provide it. Standard web server logs may record technical information such as your IP address, browser type, and pages visited for site maintenance and analytics purposes."
+        },
+        {
+          "heading": "Cookies",
+          "text": "This site may use cookies or local storage to remember your preferences, such as your light/dark mode setting. No tracking cookies or third-party advertising cookies are used."
+        },
+        {
+          "heading": "Third-Party Services",
+          "text": "This site may use third-party services such as web fonts. These services may collect anonymous usage data subject to their own privacy policies."
+        },
+        {
+          "heading": "Data Sharing",
+          "text": "No personal information is sold, traded, or otherwise transferred to third parties. Anonymous, aggregated usage statistics may be reviewed to improve the site."
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "intro": "By accessing and using AnesthesiaSmartSite, you agree to the following terms and conditions.",
+      "sections": [
+        {
+          "heading": "Educational Use",
+          "text": "All content on this site is provided for educational and informational purposes only. It is not intended to serve as medical advice or to replace the clinical judgment of a licensed healthcare professional."
+        },
+        {
+          "heading": "Intellectual Property",
+          "text": "Unless otherwise noted, all content on this site is the intellectual property of the author. You may reference and share content for non-commercial educational purposes with appropriate attribution."
+        },
+        {
+          "heading": "Accuracy",
+          "text": "While the author strives to provide accurate and current information, medicine is a rapidly evolving field. The author does not guarantee that all content is complete, current, or error-free."
+        },
+        {
+          "heading": "Limitation of Liability",
+          "text": "The author shall not be held liable for any damages arising from the use of or reliance on information provided on this site. Clinical decisions should always be based on individual patient assessment and current evidence-based guidelines."
+        },
+        {
+          "heading": "Changes",
+          "text": "These terms may be updated from time to time. Continued use of the site constitutes acceptance of any changes."
+        }
+      ]
+    }
+  }
+}
