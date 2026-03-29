@@ -1,0 +1,12 @@
+{
+  "name": "Anesthesia SmartSite",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "icon": "book",
+        "groups": []
+      }
+    ]
+  }
+}
