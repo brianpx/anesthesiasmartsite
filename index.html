@@ -373,6 +373,8 @@
             gap: 0.5rem;
             font-size: 0.9rem;
             transition: gap 0.2s ease;
+            padding: 0.5rem 0;
+            min-height: 44px;
         }
 
         .feature-link:hover {
@@ -381,6 +383,23 @@
 
         .feature-link::after {
             content: '→';
+        }
+
+        .feature-link--disabled {
+            color: var(--text-muted);
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        .feature-link--disabled::after {
+            content: none;
+        }
+
+        .feature-card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            border-radius: 1rem;
         }
 
         /* Highlight Section */
@@ -782,6 +801,29 @@
                 overflow: hidden;
                 padding-right: var(--scrollbar-width, 0px);
             }
+
+            .feature-card:hover {
+                transform: none;
+                box-shadow: none;
+            }
+
+            .feature-card-link:active .feature-card {
+                background: var(--card-bg-hover);
+                border-color: rgba(43, 159, 212, 0.3);
+            }
+
+            .footer-link {
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+            }
+
+            .modal-close,
+            .mobile-nav-close,
+            .mobile-menu-toggle {
+                min-width: 44px;
+                min-height: 44px;
+            }
         }
     </style>
 </head>
@@ -799,7 +841,7 @@
         <div class="nav-links">
             <a href="#ai" class="nav-link">AI Resources</a>
             <a href="#education" class="nav-link">Clinical Education</a>
-            <a href="#protocols" class="nav-link">Protocols</a>
+            <a href="#education" class="nav-link">Protocols</a>
             <a href="#about" class="nav-link">About</a>
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
                 <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -825,7 +867,7 @@
     </button>
     <a href="#ai" class="nav-link">AI Resources</a>
     <a href="#education" class="nav-link">Clinical Education</a>
-    <a href="#protocols" class="nav-link">Protocols</a>
+    <a href="#education" class="nav-link">Protocols</a>
     <a href="#about" class="nav-link">About</a>
     <div class="mobile-theme-toggle">
         <span class="mobile-theme-label">Appearance</span>
@@ -858,22 +900,26 @@
         </p>
     </div>
     <div class="feature-grid">
+        <a href="/ai/bth/resource-guide.html" class="feature-card-link">
         <div class="feature-card">
             <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="17" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/></svg></div>
             <h3 class="feature-title">Resource Guide</h3>
             <p class="feature-description">
                 Curated collection of articles, frameworks, and tools for understanding clinical AI governance and implementation.
             </p>
-            <a href="/ai/resource-guide.html" class="feature-link">Access guide</a>
+            <span class="feature-link">Access guide</span>
         </div>
+        </a>
+        <a href="/ai/bth/beyond-the-hype-quiz.html" class="feature-card-link">
         <div class="feature-card">
             <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
             <h3 class="feature-title">Knowledge Quiz</h3>
             <p class="feature-description">
                 Interactive quiz to test your understanding of AI supervision, verification methods, and clinical decision frameworks.
             </p>
-            <a href="/ai/resources/beyond-the-hype-quiz.html" class="feature-link">Take quiz</a>
+            <span class="feature-link">Take quiz</span>
         </div>
+        </a>
     </div>
 </section>
 
@@ -910,23 +956,25 @@
             <p class="feature-description">
                 Comprehensive protocols for awake spine surgery, including patient selection, anesthetic techniques, and management strategies.
             </p>
-            <a href="#" class="feature-link">Coming soon</a>
+            <span class="feature-link feature-link--disabled">Coming soon</span>
         </div>
+        <a href="/ai/bth" class="feature-card-link">
         <div class="feature-card">
             <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
             <h3 class="feature-title">Beyond the Hype</h3>
             <p class="feature-description">
                 Comprehensive CME presentation on the VDD framework—Verify, Decide, Document—for supervised AI use in anesthesiology practice.
             </p>
-            <a href="/ai/bth" class="feature-link">View presentation</a>
+            <span class="feature-link">View presentation</span>
         </div>
+        </a>
         <div class="feature-card">
             <div class="feature-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
             <h3 class="feature-title">Crisis Management</h3>
             <p class="feature-description">
                 Rapid-response protocols for perioperative emergencies, cognitive aids, and team-based crisis resource management.
             </p>
-            <a href="#" class="feature-link">Coming soon</a>
+            <span class="feature-link feature-link--disabled">Coming soon</span>
         </div>
     </div>
 </section>
