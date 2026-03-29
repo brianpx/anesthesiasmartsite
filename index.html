@@ -71,7 +71,7 @@
 
         /* Navigation */
         .navbar {
-            position: fixed;
+            position: sticky;
             top: 0;
             width: 100%;
             padding: 1.25rem 2rem;
@@ -160,7 +160,11 @@
 
         /* Hero Section */
         .hero {
-            padding: 140px 2rem 100px;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -730,7 +734,8 @@
             }
 
             .hero {
-                padding: 110px 1.5rem 60px;
+                min-height: calc(100vh - 60px);
+                padding: 3rem 1.5rem;
             }
 
             .hero-subtitle {
@@ -840,13 +845,6 @@
         <p class="hero-subtitle">
             Evidence-based resources, protocols, and cutting-edge AI guidance for anesthesiologists committed to clinical excellence and patient safety.
         </p>
-        <div class="hero-cta">
-            <a href="/ai/bth" class="btn btn-primary">
-                <span>Beyond the Hype</span>
-                <span>→</span>
-            </a>
-            <a href="#education" class="btn btn-secondary">Browse Resources</a>
-        </div>
     </div>
 </section>
 
@@ -859,14 +857,6 @@
         </p>
     </div>
     <div class="feature-grid">
-        <div class="feature-card">
-            <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-            <h3 class="feature-title">Beyond the Hype</h3>
-            <p class="feature-description">
-                Comprehensive CME presentation on the VDD framework—Verify, Decide, Document—for supervised AI use in anesthesiology practice.
-            </p>
-            <a href="/ai/bth" class="feature-link">View presentation</a>
-        </div>
         <div class="feature-card">
             <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="17" y2="7"/><line x1="9" y1="11" x2="15" y2="11"/></svg></div>
             <h3 class="feature-title">Resource Guide</h3>
@@ -922,12 +912,12 @@
             <a href="#" class="feature-link">Coming soon</a>
         </div>
         <div class="feature-card">
-            <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2v6m0 4v10"/><circle cx="12" cy="12" r="3"/><path d="M6 8l1.5 2M18 8l-1.5 2M6 16l1.5-2M18 16l-1.5-2"/></svg></div>
-            <h3 class="feature-title">Regional Anesthesia</h3>
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+            <h3 class="feature-title">Beyond the Hype</h3>
             <p class="feature-description">
-                Evidence-based approaches to regional techniques, ultrasound guidance, and complication management.
+                Comprehensive CME presentation on the VDD framework—Verify, Decide, Document—for supervised AI use in anesthesiology practice.
             </p>
-            <a href="#" class="feature-link">Coming soon</a>
+            <a href="/ai/bth" class="feature-link">View presentation</a>
         </div>
         <div class="feature-card">
             <div class="feature-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
