@@ -44,6 +44,14 @@ Follow these steps to get your account set up quickly.
 
     You now have access to the dashboard.
   </Step>
+
+  <Step title="Accept Terms" icon="file-check">
+    Review and accept the terms of service and privacy policy.
+  </Step>
+
+  <Step title="Set Preferences" icon="settings">
+    Configure your notification and privacy preferences.
+  </Step>
 </Steps>
 
 ## Navigate the Dashboard
@@ -96,6 +104,16 @@ Upload resources like presentation slides or resource guides using these methods
     <Callout kind="tip">
       Use tags for easy searching later.
     </Callout>
+  </Tab>
+
+  <Tab title="API Upload" icon="code">
+    Use our REST API for programmatic uploads with batch processing.
+
+    ```bash
+    curl -X POST https://api.example.com/v1/documents \
+      -H "Authorization: Bearer YOUR_TOKEN" \
+      -F "file=@document.pdf"
+    ```
   </Tab>
 </Tabs>
 
