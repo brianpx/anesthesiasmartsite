@@ -1,0 +1,118 @@
+---
+title: Changelog
+description: Track the latest updates and improvements to Anesthesia SmartSite, ensuring you stay informed on new features and fixes.
+---
+
+## Recent Updates
+
+Follow the development of Anesthesia SmartSite with our changelog. You receive notifications for major releases, new AI framework enhancements, bug fixes, and resource additions. Check back regularly to see how we implement the VDD (Verify–Decide–Document) principles for practical AI in anesthesiology.
+
+<Update label="2024-10-15" description="v1.2.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Introduced interactive VDD framework simulator for anesthesia scenarios
+- Added resource guide integration with direct links to UC Davis Anesthesiology Update materials
+
+## Improvements
+
+- Enhanced quiz engine with personalized scoring based on VDD adherence
+- Optimized performance for mobile access to presentation slides
+
+## Bug Fixes
+
+- Fixed download issues for PDF slides on Safari browsers
+- Resolved caching problems in the Beyond the Hype quiz
+
+</Update>
+
+<Update label="2024-09-20" description="v1.1.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- Launched Beyond the Hype quiz with 20+ questions on ethical AI use
+- Integrated five-tool supervised AI practice module
+
+## Bug Fixes
+
+- Corrected navigation errors in resource guide sections
+- Patched authentication flow for protected presentation downloads
+
+## Improvements
+
+- Updated UI to better reflect brand color `#3B82F6`
+- Improved accessibility for screen readers in quiz results
+
+</Update>
+
+<Update label="2024-08-10" description="v1.0.0" tags={["feature", "breaking"]}>
+
+## Initial Release
+
+- Core VDD framework documentation and Verify-Decide-Document workflow
+- Resource guide with links to Anesthesia SmartSite utilities
+- Basic quiz and presentation slide viewer
+
+## Breaking Changes
+
+- Migrated to new API structure at `https://api.example.com/v1`
+
+</Update>
+
+## Upcoming Features
+
+<Callout kind="info">
+Plan to roll out advanced AI simulation tools, expanded quiz library, and integration with UC Davis 36th Annual Anesthesiology Update content in early 2025. Watch this space for beta access.
+</Callout>
+
+<Columns cols={2}>
+  <Card title="VDD Simulator Beta" icon="zap" href="/quickstart">
+    Test Verify-Decide-Document in simulated cases.
+  </Card>
+  <Card title="New Quiz Modules" icon="book-open" href="/authentication">
+    Explore upcoming ethical AI challenges.
+  </Card>
+</Columns>
+
+## Upgrade Instructions
+
+Follow these steps to update your Anesthesia SmartSite instance to the latest version.
+
+<Steps>
+  <Step title="Backup Current Site" icon="database">
+    Create a full backup of your documentation and resources.
+  </Step>
+  <Step title="Check Release Notes" icon="book-open">
+    Review changes in this changelog for any breaking updates.
+  </Step>
+  <Step title="Run Update Command" icon="download">
+````bash
+npm install anesthesiasmartsite@latest
+````
+  </Step>
+  <Step title="Verify Installation" icon="check-circle">
+    Test VDD framework and quiz functionality.
+  </Step>
+</Steps>
+
+<Expandable title="Advanced Migration Guide" default-open="false">
+
+For sites with custom integrations, update your config file:
+
+````json
+{
+  "aiFramework": "vdd-v1.2",
+  "resources": {
+    "quizEnabled": true,
+    "slidesUrl": "https://www.anesthesiasmartsite.com/AI-in-Anesthesiology_Beyond-the-Hype_Brian-Pitts.pdf"
+  }
+}
+````
+
+Restart your server after changes.
+
+</Expandable>
+
+<Callout kind="tip">
+Subscribe to updates via the dashboard at `https://dashboard.example.com` to get email notifications for new releases.
+</Callout>
