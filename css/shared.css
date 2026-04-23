@@ -307,11 +307,13 @@ a {
   background: var(--color-overlay);
   z-index: var(--z-mobile-overlay);
   opacity: 0;
+  pointer-events: none;
   transition: opacity var(--transition-base);
 }
 
 .mobile-overlay.active {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .mobile-nav {
