@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#000;color-scheme:dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#000000">
+  <style>html,body{background:#000;color:#fff;margin:0}</style>
+  <title>Bibliography &middot; PACU Discharge Safety Interventions in Adults</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(94, 200, 230, 0.06), transparent 60%),
+        radial-gradient(900px 500px at 0% 110%, rgba(94, 200, 179, 0.05), transparent 60%),
+        #000;
+      color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .conf-header {
+      padding: 2rem 2rem 0.5rem;
+      text-align: center;
+    }
+
+    .conf-name {
+      margin: 0;
+      font-size: clamp(0.85rem, 1.4vw, 1rem);
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .conf-meta {
+      margin: 0.7rem 0 0;
+      font-size: clamp(0.75rem, 1.1vw, 0.85rem);
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .conf-meta .sep {
+      margin: 0 0.65em;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 3rem 1.75rem 5rem;
+    }
+
+    .page-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #5ec8b3;
+      margin: 0 0 0.9rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4.2vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin: 0;
+      color: #ffffff;
+    }
+
+    .study-title {
+      margin: 0.85rem 0 0;
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      font-weight: 500;
+      font-style: italic;
+      color: #c9a96e;
+      letter-spacing: 0.005em;
+    }
+
+    .divider {
+      width: 80px;
+      height: 1px;
+      margin: 2rem 0;
+      background: linear-gradient(90deg, #c9a96e, transparent);
+    }
+
+    .refs {
+      list-style: none;
+      counter-reset: ref;
+      margin: 0;
+      padding: 0;
+    }
+
+    .refs > li {
+      counter-increment: ref;
+      position: relative;
+      padding: 1.1rem 0 1.1rem 3.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.98rem;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .refs > li:last-child { border-bottom: none; }
+
+    .refs > li::before {
+      content: counter(ref);
+      position: absolute;
+      left: 0;
+      top: 1.15rem;
+      width: 2.4rem;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      color: #5ec8e6;
+    }
+
+    .refs cite {
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .refs a {
+      color: #5ec8e6;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(94, 200, 230, 0.35);
+      transition: border-color 150ms ease, color 150ms ease;
+      word-break: break-word;
+    }
+
+    .refs a:hover,
+    .refs a:focus-visible {
+      color: #8fdcf0;
+      border-bottom-color: #8fdcf0;
+      outline: none;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 3rem;
+      padding: 0.65rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(20, 22, 30, 0.6);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-decoration: none;
+      transition: border-color 180ms ease, transform 180ms ease;
+    }
+
+    .back-link:hover,
+    .back-link:focus-visible {
+      border-color: rgba(94, 200, 230, 0.55);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .back-link svg {
+      width: 12px;
+      height: 12px;
+      stroke: #5ec8e6;
+    }
+
+    .refs .citation {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.94);
+    }
+
+    .refs .annotation {
+      margin: 0.55rem 0 0;
+      padding-left: 0.95rem;
+      border-left: 2px solid rgba(94, 200, 230, 0.22);
+      font-size: 0.91rem;
+      line-height: 1.62;
+      color: rgba(255, 255, 255, 0.62);
+    }
+  </style>
+</head>
+<body>
+  <header class="conf-header">
+    <h2 class="conf-name">Western Anesthesia Residents&rsquo; Conference</h2>
+    <p class="conf-meta">
+      UC Davis Health<span class="sep">&middot;</span>May 15&ndash;16, 2026<span class="sep">&middot;</span>Sacramento
+    </p>
+  </header>
+
+  <main>
+    <p class="page-eyebrow">Annotated Bibliography</p>
+    <h1>References</h1>
+    <p class="study-title">PACU Discharge Safety Interventions in Adults &mdash; A rapid scoping review and evidence map</p>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <ol class="refs">
+      <li>
+        <p class="citation">Maroufi SS, Movahed MS, Ejmalian A, Sarkhosh M, Behmanesh A. Post-Anesthesia Care Unit (PACU) readiness predictions using machine learning: a comparative study of algorithms. <cite>BMC Medical Informatics and Decision Making</cite>. 2025. doi:<a href="https://doi.org/10.1186/s12911-025-02982-0" target="_blank" rel="noopener">10.1186/s12911-025-02982-0</a></p>
+        <p class="annotation">This single-center Iranian study developed machine-learning models to predict PACU discharge readiness using demographic, surgical, and Aldrete-related data. Random forest and artificial neural network models performed best, with reported AUCs in the mid-to-high 0.80 range. The study is useful for framing PACU discharge readiness as a predictive modeling problem but does not evaluate prospective implementation or clinical outcomes.</p>
+      </li>
+      <li>
+        <p class="citation">Halterman RS, Gaber M, Janjua MST, Hogan GT, Cartwright SMI. Use of a checklist for the postanesthesia care unit patient handoff. <cite>Journal of PeriAnesthesia Nursing</cite>. 2019. doi:<a href="https://doi.org/10.1016/j.jopan.2018.10.007" target="_blank" rel="noopener">10.1016/j.jopan.2018.10.007</a></p>
+        <p class="annotation">This quality-improvement study implemented an SBAR-based PACU handoff checklist. The intervention improved completeness of transferred information during anesthesia-to-PACU handoff. It supports checklist-based standardization but is primarily a process-improvement study rather than an outcomes trial.</p>
+      </li>
+      <li>
+        <p class="citation">Fang L, Wu B, Wu M, Ye Y, Chen L, Xu Y. Development and validation of a discharge assessment scale for outpatients undergoing sedative anesthesia in the ambulatory postanesthesia care unit: a comprehensive Delphi study. <cite>Journal of PeriAnesthesia Nursing</cite>. 2024. doi:<a href="https://doi.org/10.1016/j.jopan.2024.01.006" target="_blank" rel="noopener">10.1016/j.jopan.2024.01.006</a></p>
+        <p class="annotation">This study used a Delphi process to develop a discharge assessment scale for ambulatory PACU patients undergoing sedative anesthesia. The scale was clinically applied and compared with PADSS-based discharge assessment. It is directly relevant to discharge-readiness scoring and demonstrates how expert consensus can be translated into a structured PACU tool.</p>
+      </li>
+      <li>
+        <p class="citation">Dubey S, Santha N. Effectiveness of the practice of standardized handover process using a checklist in the postanesthesia care unit: an observational study. <cite>Annals of African Medicine</cite>. 2024. doi:<a href="https://doi.org/10.4103/aam.aam_47_24" target="_blank" rel="noopener">10.4103/aam.aam_47_24</a></p>
+        <p class="annotation">This prospective pre/post observational study evaluated a structured PACH checklist for anesthesia-to-PACU handover. Checklist use improved transfer of key clinical information and was associated with fewer hypoxemic events. It is relevant to PACU safety interventions but remains single-center and nonrandomized.</p>
+      </li>
+      <li>
+        <p class="citation">Lunn TH, Kristensen BB, Gaarn-Larsen L, Husted H, Kehlet H. Post-anaesthesia care unit stay after total hip and knee arthroplasty under spinal anaesthesia. <cite>Acta Anaesthesiologica Scandinavica</cite>. 2012. doi:<a href="https://doi.org/10.1111/j.1399-6576.2012.02709.x" target="_blank" rel="noopener">10.1111/j.1399-6576.2012.02709.x</a></p>
+        <p class="annotation">This prospective cohort study examined PACU discharge readiness after fast-track hip and knee arthroplasty under spinal anesthesia. Standardized criteria were assessed serially, with many patients meeting discharge criteria early. The study is useful for identifying practical discharge blockers such as oxygen saturation and pain.</p>
+      </li>
+      <li>
+        <p class="citation">Chen L, Glatt E, Kerr P, Weng Y, Lough ME. Stir-up regimen after general anesthesia in the postanesthesia care unit: a nurse-led stepped-wedge cluster randomized control trial. <cite>Journal of PeriAnesthesia Nursing</cite>. 2024. doi:<a href="https://doi.org/10.1016/j.jopan.2023.07.014" target="_blank" rel="noopener">10.1016/j.jopan.2023.07.014</a></p>
+        <p class="annotation">This stepped-wedge cluster trial evaluated a nurse-led &ldquo;Stir-up Regimen&rdquo; initiated early after PACU arrival. The intervention modestly reduced Phase I recovery time. It is relevant as a pragmatic PACU workflow intervention aimed at improving throughput rather than predicting deterioration.</p>
+      </li>
+      <li>
+        <p class="citation">Aasvang EK, J&oslash;rgensen CC, Laursen MB, Madsen J, Solgaard S, Kr&oslash;igaard M, Kj&aelig;rsgaard-Andersen P, et al. Safety aspects of postanesthesia care unit discharge without motor function assessment after spinal anesthesia: a randomized, multicenter, semiblinded, noninferiority, controlled trial. <cite>Anesthesiology</cite>. 2017. doi:<a href="https://doi.org/10.1097/ALN.0000000000001629" target="_blank" rel="noopener">10.1097/ALN.0000000000001629</a></p>
+        <p class="annotation">This multicenter noninferiority RCT tested PACU discharge after spinal anesthesia with versus without lower-limb motor assessment. Discharge without motor assessment was noninferior for fast-track outcomes and did not increase early ward adverse events. This is one of the stronger studies supporting selective simplification of PACU discharge criteria.</p>
+      </li>
+      <li>
+        <p class="citation">Rivas E, Cohen B, Saasouh W, Mao G, Yalcin EK, Rodriguez-Patarroyo F, Ruetzler K, Turan A. Hypoventilation in the PACU is associated with hypoventilation in the surgical ward: post-hoc analysis of a randomized clinical trial. <cite>Journal of Clinical Anesthesia</cite>. 2023;84:110989. doi:<a href="https://doi.org/10.1016/j.jclinane.2022.110989" target="_blank" rel="noopener">10.1016/j.jclinane.2022.110989</a></p>
+        <p class="annotation">This post-hoc analysis examined whether PACU hypoventilation predicted ward hypoventilation using respiratory volume monitoring. PACU hypoventilation was strongly associated with subsequent ward hypoventilation. The study supports PACU respiratory monitoring as a possible risk-stratification signal before ward transfer.</p>
+      </li>
+      <li>
+        <p class="citation">de Souza Gutierrez C, Bottega K, de Jezus Castro SM, Gravina GL, Toralles EK, Silveira Martins OR, et al. The impact of the incorporation of a feasible postoperative mortality model at the Post-Anaesthetic Care Unit (PACU) on postoperative clinical deterioration: a pragmatic trial with 5,353 patients. <cite>PLOS ONE</cite>. 2021. doi:<a href="https://doi.org/10.1371/journal.pone.0257941" target="_blank" rel="noopener">10.1371/journal.pone.0257941</a></p>
+        <p class="annotation">This pragmatic Brazilian trial incorporated a mortality-risk model into PACU workflow to identify high-risk surgical patients. High-risk patients were routed through an enhanced postoperative care pathway. The study is important because it evaluates an implemented risk model linked to clinical deterioration processes, not merely retrospective prediction.</p>
+      </li>
+      <li>
+        <p class="citation">Halterman RS, Darnell B, Anukam C, Wilkes E, Broxton S. Evaluation of postanesthesia handoff checklist on patient outcomes in an adult postanesthesia care unit. <cite>Journal of PeriAnesthesia Nursing</cite>. 2025. doi:<a href="https://doi.org/10.1016/j.jopan.2024.08.008" target="_blank" rel="noopener">10.1016/j.jopan.2024.08.008</a></p>
+        <p class="annotation">This retrospective pre/post study evaluated patient outcomes after implementation of a PACU handoff checklist. The postintervention period showed fewer desaturation episodes and improved pain-severity distribution. It extends earlier checklist work by linking handoff standardization to patient-centered PACU outcomes.</p>
+      </li>
+      <li>
+        <p class="citation">Street M, Phillips NM, Mohebbi M, Kent B. Effect of a newly designed observation, response and discharge chart in the post anaesthesia care unit on patient outcomes: a quasi-experimental study in Australia. <cite>BMJ Open</cite>. 2017. doi:<a href="https://doi.org/10.1136/bmjopen-2016-015149" target="_blank" rel="noopener">10.1136/bmjopen-2016-015149</a></p>
+        <p class="annotation">This quasi-experimental study evaluated the Post-Anaesthetic Care Tool, a combined observation, response, and discharge chart. The intervention improved recognition and response processes and was associated with fewer post-PACU adverse events. It is highly relevant to track-and-trigger style PACU safety systems.</p>
+      </li>
+      <li>
+        <p class="citation">Wortham TC, Rice AN, Gupta DK, Goode V. Implementation of an obstructive sleep apnea protocol in the postanesthesia care unit for patients undergoing spinal fusion surgery. <cite>Journal of PeriAnesthesia Nursing</cite>. 2019. doi:<a href="https://doi.org/10.1016/j.jopan.2018.10.008" target="_blank" rel="noopener">10.1016/j.jopan.2018.10.008</a></p>
+        <p class="annotation">This QI study implemented a PACU protocol for spinal fusion patients with diagnosed or suspected OSA. The protocol incorporated risk stratification and structured monitoring. It is relevant to PACU triage and respiratory safety, though limited by small sample size.</p>
+      </li>
+      <li>
+        <p class="citation">Gavitt LN, Tola DH, Funk E, Hooge NB, Pinero S, De Gagne JC. Implementation of continuous capnography protocol in a postanesthesia care unit for adult patients at high risk of postoperative respiratory depression. <cite>Journal of PeriAnesthesia Nursing</cite>. 2025. doi:<a href="https://doi.org/10.1016/j.jopan.2024.02.011" target="_blank" rel="noopener">10.1016/j.jopan.2024.02.011</a></p>
+        <p class="annotation">This pre/post QI project implemented continuous capnography for high-risk same-day surgery patients. The study assessed PACU length of stay, respiratory events, and protocol adherence. It is useful for monitoring-protocol feasibility but provides limited evidence for improved clinical outcomes.</p>
+      </li>
+      <li>
+        <p class="citation">Zhang N, Xue Z, Xu B, Zhou S, Chen J, Chen X, Wei X. Incidence and risk factors for unplanned intensive care unit transfer from the postanesthesia care unit: a case-control study. <cite>BMC Anesthesiology</cite>. 2025. doi:<a href="https://doi.org/10.1186/s12871-025-03444-w" target="_blank" rel="noopener">10.1186/s12871-025-03444-w</a></p>
+        <p class="annotation">This large retrospective case-control study identified risk factors for unplanned ICU admission from PACU. The authors developed an internally validated nomogram with strong discrimination. It is directly relevant to PACU escalation prediction but remains nonimplemented and internally validated.</p>
+      </li>
+      <li>
+        <p class="citation">Holt L, Newsom C, Daugherty J. Decreasing postsurgical length of stay in the postanesthesia care unit for obstructive sleep apnea and obese patients using ExSpiron minute ventilation monitoring. <cite>Journal of PeriAnesthesia Nursing</cite>. 2025. doi:<a href="https://doi.org/10.1016/j.jopan.2024.05.021" target="_blank" rel="noopener">10.1016/j.jopan.2024.05.021</a></p>
+        <p class="annotation">This study evaluated ExSpiron minute ventilation monitoring in high-risk OSA/obese PACU patients. Monitoring was associated with shorter PACU length of stay. The study is relevant to respiratory monitoring and throughput, though the design appears observational.</p>
+      </li>
+      <li>
+        <p class="citation">Haskins IN, Vaziri K, Huang LC, Phillips SE, Farrell TM, Perez AJ. Appropriate patient selection facilitates safe discharge from the PACU after laparoscopic ventral hernia repair: an analysis of the AHSQC database. <cite>Surgical Endoscopy</cite>. 2021. doi:<a href="https://doi.org/10.1007/s00464-020-07761-8" target="_blank" rel="noopener">10.1007/s00464-020-07761-8</a></p>
+        <p class="annotation">This registry analysis compared patients discharged from PACU versus admitted after laparoscopic ventral hernia repair. The study identified factors associated with admission and 30-day outcomes. It is useful for procedure-specific patient-selection logic rather than real-time PACU physiologic prediction.</p>
+      </li>
+      <li>
+        <p class="citation">Eisen SH, Hindman BJ, Bayman EO, Dexter F, Hasan DM. Elective endovascular treatment of unruptured intracranial aneurysms: a management case series of patient outcomes after institutional change to admit patients principally to postanesthesia care unit rather than to intensive care. <cite>Anesthesia &amp; Analgesia</cite>. 2015. doi:<a href="https://doi.org/10.1213/ANE.0000000000000699" target="_blank" rel="noopener">10.1213/ANE.0000000000000699</a></p>
+        <p class="annotation">This case series evaluated an institutional shift from routine ICU admission to selective PACU-based recovery after elective aneurysm treatment. ICU use decreased without an apparent increase in neurologic adverse events. It supports procedure-specific PACU-first triage pathways in selected neurovascular patients.</p>
+      </li>
+      <li>
+        <p class="citation">Voscopoulos C, Theos K, Tillmann Hein HA, George E. A risk stratification algorithm using non-invasive respiratory volume monitoring to improve safety when using post-operative opioids in the PACU. <cite>Journal of Clinical Monitoring and Computing</cite>. 2017. doi:<a href="https://doi.org/10.1007/s10877-016-9841-9" target="_blank" rel="noopener">10.1007/s10877-016-9841-9</a></p>
+        <p class="annotation">This study used noninvasive respiratory volume monitoring to classify PACU patients at risk for opioid-related hypoventilation. The algorithm focused on minute ventilation thresholds before and after opioid dosing. It provides a physiologic framework for respiratory risk stratification, though not a clinical implementation trial.</p>
+      </li>
+      <li>
+        <p class="citation">Schumann R, Harvey B, Zahedi F, Bonney I. Minute ventilation assessment in the PACU is useful to predict postoperative respiratory depression following discharge to the floor: a prospective cohort study. <cite>Journal of Clinical Anesthesia</cite>. 2019. doi:<a href="https://doi.org/10.1016/j.jclinane.2018.09.005" target="_blank" rel="noopener">10.1016/j.jclinane.2018.09.005</a></p>
+        <p class="annotation">This prospective cohort study examined whether low minute-ventilation events before PACU discharge predicted ward respiratory depression. Low-minute-ventilation events had a high negative predictive value. It is relevant to identifying patients who may require enhanced respiratory surveillance after PACU discharge.</p>
+      </li>
+      <li>
+        <p class="citation">Ludbrook G, Grocott MPW, Heyman K, Clarke-Errey S, Royse C, Sleigh J, Solomon LB. Outcomes of postoperative overnight high-acuity care in medium-risk patients undergoing elective and unplanned noncardiac surgery. <cite>JAMA Surgery</cite>. 2023. doi:<a href="https://doi.org/10.1001/jamasurg.2023.1035" target="_blank" rel="noopener">10.1001/jamasurg.2023.1035</a></p>
+        <p class="annotation">This study evaluated an advanced recovery room care model providing overnight high-acuity postoperative care. The model increased days at home at 30 days compared with usual care. It is relevant to PACU-extension models and early detection of postoperative complications.</p>
+      </li>
+      <li>
+        <p class="citation">Rice AN, Muckler VC, Miller WR, Vacchiano CA. Fast-tracking ambulatory surgery patients following anesthesia. <cite>Journal of PeriAnesthesia Nursing</cite>. 2015. doi:<a href="https://doi.org/10.1016/j.jopan.2014.01.006" target="_blank" rel="noopener">10.1016/j.jopan.2014.01.006</a></p>
+        <p class="annotation">This pre/post project evaluated the White Fast-Track Score for PACU-bypass eligibility in ambulatory surgery patients. The protocol increased PACU bypass and reduced postoperative holding time. It is relevant to discharge-readiness scoring and ambulatory throughput.</p>
+      </li>
+      <li>
+        <p class="citation">Barker AB, Melvin RL, Godwin RC, Benz D, Wagener BM. Machine learning predicts unplanned care escalations for post-anesthesia care unit patients during the perioperative period: a single-center retrospective study. <cite>Journal of Medical Systems</cite>. 2024. doi:<a href="https://doi.org/10.1007/s10916-024-02085-9" target="_blank" rel="noopener">10.1007/s10916-024-02085-9</a></p>
+        <p class="annotation">This retrospective study developed a machine-learning model to predict unexpected care escalation after PACU discharge. The model used perioperative EHR variables and reported AUC around 0.75. It is directly relevant to PACU escalation prediction but requires external validation and implementation testing.</p>
+      </li>
+      <li>
+        <p class="citation">Schuster ST, Bondarsky E, Hardwick CJ, Reilly T, Mourad BM, Dweck EE. Safety of a novel obstructive sleep apnea triage tool for postoperative orthopedic surgery patients. <cite>Journal of PeriAnesthesia Nursing</cite>. 2022. doi:<a href="https://doi.org/10.1016/j.jopan.2021.07.006" target="_blank" rel="noopener">10.1016/j.jopan.2021.07.006</a></p>
+        <p class="annotation">This QI evaluation assessed an OSA triage tool for postoperative orthopedic patients. The tool supported disposition decisions and critical care consultation for higher-risk patients. It is useful for PACU respiratory triage but not a predictive model.</p>
+      </li>
+      <li>
+        <p class="citation">Revell CC, Rice AN, Gupta DK, Muckler VC. Implementation of physiological scoring to determine discharge readiness for patients undergoing otolaryngology head and neck procedures. <cite>Journal of PeriAnesthesia Nursing</cite>. 2019. doi:<a href="https://doi.org/10.1016/j.jopan.2018.07.011" target="_blank" rel="noopener">10.1016/j.jopan.2018.07.011</a></p>
+        <p class="annotation">This implementation study evaluated physiologic scoring for PACU discharge readiness after otolaryngology procedures. The tool shifted discharge decisions away from time-based criteria. It is relevant to procedure-specific discharge readiness and PACU efficiency.</p>
+      </li>
+      <li>
+        <p class="citation">Rochon RM, Gimon T, Buie WD, Brar MS, Dixon E, MacLean AR. Expedited discharge in uncomplicated acute appendicitis: decreasing the length of stay while maintaining quality. <cite>American Journal of Surgery</cite>. 2019. doi:<a href="https://doi.org/10.1016/j.amjsurg.2019.03.007" target="_blank" rel="noopener">10.1016/j.amjsurg.2019.03.007</a></p>
+        <p class="annotation">This QI study implemented an expedited discharge protocol for uncomplicated appendicitis. Length of stay decreased without an apparent increase in 30-day emergency visits, imaging, or readmissions. It is relevant to post-PACU discharge workflow but less specific to PACU physiologic deterioration.</p>
+      </li>
+      <li>
+        <p class="citation">Ludbrook G, Lloyd C, Story D, Maddern G, Riedel B, Richardson I, Scott D, Louise J, Edwards S. The effect of advanced recovery room care on postoperative outcomes in moderate-risk surgical patients: a multicentre feasibility study. <cite>Anaesthesia</cite>. 2021. doi:<a href="https://doi.org/10.1111/anae.15260" target="_blank" rel="noopener">10.1111/anae.15260</a></p>
+        <p class="annotation">This multicenter feasibility study evaluated advanced recovery room care for moderate-risk surgical patients. The model extended PACU-level care into the early postoperative period with structured reviews and escalation criteria. It is relevant to PACU-as-high-acuity-care models and pathway feasibility.</p>
+      </li>
+      <li>
+        <p class="citation">Weingarten TN, Chong EY, Schroeder DR, Sprung J. Predictors and outcomes following naloxone administration during Phase I anesthesia recovery. <cite>Journal of Anesthesia</cite>. 2016. doi:<a href="https://doi.org/10.1007/s00540-015-2082-0" target="_blank" rel="noopener">10.1007/s00540-015-2082-0</a></p>
+        <p class="annotation">This retrospective matched case-control study examined predictors and outcomes associated with naloxone administration during Phase I recovery. OSA, higher ASA status, and greater opioid exposure were associated with naloxone use. It is useful because naloxone administration serves as a clinically meaningful marker of opioid-related respiratory depression.</p>
+      </li>
+      <li>
+        <p class="citation">Hoffman SE, Gupta S, O&rsquo;Connor M, Jarvis CA, Zhao M, Hauser BM, Bernstock JD, Murphy S, Raftery SM, et al. Reduced time to imaging, length of stay, and hospital charges following implementation of a novel postoperative pathway for craniotomy. <cite>Journal of Neurosurgery</cite>. 2023. doi:<a href="https://doi.org/10.3171/2022.12.JNS222123" target="_blank" rel="noopener">10.3171/2022.12.JNS222123</a></p>
+        <p class="annotation">This retrospective cohort study evaluated a PACU-to-floor pathway after selected craniotomies. The pathway shortened time to MRI, reduced length of stay and charges, and had low ICU escalation rates. It is directly relevant to PACU-based neuro-surgical triage protocols.</p>
+      </li>
+      <li>
+        <p class="citation">Weingarten TN, Herasevich V, McGlinch MC, Beatty NC, Christensen ED, Hannifan SK, Koenig AE, Klanke J, et al. Predictors of delayed postoperative respiratory depression assessed from naloxone administration. <cite>Anesthesia &amp; Analgesia</cite>. 2015. doi:<a href="https://doi.org/10.1213/ANE.0000000000000792" target="_blank" rel="noopener">10.1213/ANE.0000000000000792</a></p>
+        <p class="annotation">This retrospective study used naloxone administration as a trigger to identify delayed postoperative respiratory depression. The paper identifies predictors of respiratory depression after initial recovery. It is relevant to post-PACU safety because deterioration may occur after apparently acceptable PACU recovery.</p>
+      </li>
+      <li>
+        <p class="citation">Levy N, Santer P, Zucco L, Nabel S, Korsunsky G, Ramachandran SK. Evaluation of early postoperative intravenous opioid rescue as a novel quality measure in patients who receive thoracic epidural analgesia: a retrospective cohort analysis and prospective performance improvement intervention. <cite>BMC Anesthesiology</cite>. 2021. doi:<a href="https://doi.org/10.1186/s12871-021-01332-7" target="_blank" rel="noopener">10.1186/s12871-021-01332-7</a></p>
+        <p class="annotation">This study evaluated early PACU IV opioid rescue as a quality marker for inadequate thoracic epidural analgesia. The intervention added improved documentation of sensory level assessment. It is relevant to PACU quality monitoring, analgesic failure detection, and process improvement.</p>
+      </li>
+      <li>
+        <p class="citation">Pando C, Etges AP, Marcolino MZ, Cardoso RB, Stahlschmidt A, Polanczyk CA, Stefani LC. Cost-effectiveness analysis of a postoperative 48-hour care bundle for high-risk patients undergoing abdominal surgery. <cite>PLOS ONE</cite>. 2025. doi:<a href="https://doi.org/10.1371/journal.pone.0320968" target="_blank" rel="noopener">10.1371/journal.pone.0320968</a></p>
+        <p class="annotation">This study evaluated the cost-effectiveness of a 48-hour postoperative care bundle for high-risk abdominal surgery patients. The bundle included risk communication, PACU-to-ward discharge processes, intensified monitoring, and early deterioration response. It is relevant to care-transition safety and economic evaluation of postoperative pathways.</p>
+      </li>
+      <li>
+        <p class="citation">Osorio JA, Safaee MM, Viner J, Sankaran S, Imershein S, Adigun E, Weigel G, Berger MS, McDermott MW. Cost-effectiveness development for the postoperative care of craniotomy patients: a safe transitions pathway in neurological surgery. <cite>Neurosurgical Focus</cite>. 2018. doi:<a href="https://doi.org/10.3171/2018.2.FOCUS1812" target="_blank" rel="noopener">10.3171/2018.2.FOCUS1812</a></p>
+        <p class="annotation">This pilot pathway diverted selected craniotomy patients from routine neuro-ICU admission to a lower-acuity postoperative pathway. The study reported no escalations or readmissions in a small pilot sample and estimated cost reduction. It is relevant to PACU-to-step-down triage and pathway development, though the sample is very small.</p>
+      </li>
+      <li>
+        <p class="citation">Cameron S, Lusnia A, Roberson T, Harlow M, Wofford K, Canale M, Stanfield S. Implementation of a pain management checklist to improve postoperative pain in adult surgical patients. <cite>Journal of PeriAnesthesia Nursing</cite>. 2026. doi:<a href="https://doi.org/10.1016/j.jopan.2025.08.017" target="_blank" rel="noopener">10.1016/j.jopan.2025.08.017</a></p>
+        <p class="annotation">The supplied year appeared as 2026 in the journal record despite a 2025 DOI. This QI project implemented a PAIN checklist to improve postoperative pain assessment and communication in PACU. It is relevant as a handoff/process checklist study, although its effect on discharge pain scores appears mixed.</p>
+      </li>
+      <li>
+        <p class="citation">Fang L, Chen L, Wu B, Xu Y, Chen L. Using clinical-based discharge criteria to discharge patients after endoscopy procedures under drug-induced intravenous sedation in the outpatient care unit: an observational study. <cite>Journal of PeriAnesthesia Nursing</cite>. 2024. doi:<a href="https://doi.org/10.1016/j.jopan.2023.12.023" target="_blank" rel="noopener">10.1016/j.jopan.2023.12.023</a></p>
+        <p class="annotation">This large observational study evaluated PADSS-based clinical discharge criteria after sedated outpatient endoscopy. Clinical-based discharge readiness occurred earlier than mandatory time-based discharge rules. The study supports physiologic discharge criteria in high-volume ambulatory PACU settings.</p>
+      </li>
+      <li>
+        <p class="citation">Jaulin F, Lopes T, Martin F. Standardised handover process with checklist improves quality and safety of care in the postanaesthesia care unit: the Postanaesthesia Team Handover trial. <cite>British Journal of Anaesthesia</cite>. 2021. doi:<a href="https://doi.org/10.1016/j.bja.2021.07.002" target="_blank" rel="noopener">10.1016/j.bja.2021.07.002</a></p>
+        <p class="annotation">This prospective pre/post implementation study evaluated the PATH handover checklist. The intervention improved handover quality and reduced PACU hypoxemic events. It is one of the stronger handoff studies because it links checklist implementation to a measurable safety outcome.</p>
+      </li>
+      <li>
+        <p class="citation">Probst S, Cech C, Haentschel D, Scholz M, Ender J. A specialized post anaesthetic care unit improves fast-track management in cardiac surgery: a prospective randomized trial. <cite>Critical Care</cite>. 2014. doi:<a href="https://doi.org/10.1186/s13054-014-0468-2" target="_blank" rel="noopener">10.1186/s13054-014-0468-2</a></p>
+        <p class="annotation">This randomized trial compared fast-track cardiac surgery management in a specialized PACU versus ICU. PACU management improved fast-track success and reduced ventilation-related recovery time. It is relevant to PACU-based high-acuity recovery models and selective ICU avoidance.</p>
+      </li>
+      <li>
+        <p class="citation">Kuhlenschmidt K, Houshmand N, Bisgaard E, Comish P, Luk SS, Minei JP, Cripps MW. Fast track pathway provides safe, value based care on busy acute care surgery service. <cite>Journal of Trauma and Acute Care Surgery</cite>. 2021. doi:<a href="https://doi.org/10.1097/TA.0000000000003047" target="_blank" rel="noopener">10.1097/TA.0000000000003047</a></p>
+        <p class="annotation">This retrospective cohort study evaluated a fast-track acute cholecystitis pathway. Many patients were discharged directly from PACU, with shorter length of stay and similar readmission or complication rates. It is relevant to pathway-driven PACU discharge after urgent general surgery.</p>
+      </li>
+      <li>
+        <p class="citation">Huang J, Yang J, Qi H, Xu X, Zhu Y, Xu M, Wang Y. Development and validation of a nomogram for predicting critical respiratory events during early anesthesia recovery in elderly patients. <cite>BMC Medical Informatics and Decision Making</cite>. 2024. doi:<a href="https://doi.org/10.1186/s12911-024-02671-4" target="_blank" rel="noopener">10.1186/s12911-024-02671-4</a></p>
+        <p class="annotation">This prospective cohort study developed an internally validated nomogram for critical respiratory events in elderly patients during early recovery. Predictors included frailty, snoring, PCIA, emergence delirium, and cough intensity at extubation. The reported discrimination was very high, but the model needs external validation before clinical use.</p>
+      </li>
+      <li>
+        <p class="citation">Zito A, Berardinelli A, Butler R, Morrison SL, Albert NM. Association of end-tidal carbon dioxide monitoring with nurses&rsquo; confidence in patient readiness for postanesthesia discharge. <cite>Journal of PeriAnesthesia Nursing</cite>. 2019. doi:<a href="https://doi.org/10.1016/j.jopan.2019.01.014" target="_blank" rel="noopener">10.1016/j.jopan.2019.01.014</a></p>
+        <p class="annotation">This prospective one-group pre/post study evaluated how a brief end-tidal CO<sub>2</sub> assessment affected nurses&rsquo; confidence in PACU discharge readiness. Abnormal EtCO<sub>2</sub> values changed confidence ratings. It is relevant to monitoring-informed discharge judgment, but it measures confidence rather than patient outcomes.</p>
+      </li>
+      <li>
+        <p class="citation">Florman JE, Cushing D, Keller LA, Rughani AI. A protocol for postoperative admission of elective craniotomy patients to a non-ICU or step-down setting. <cite>Journal of Neurosurgery</cite>. 2017. doi:<a href="https://doi.org/10.3171/2016.10.JNS16954" target="_blank" rel="noopener">10.3171/2016.10.JNS16954</a></p>
+        <p class="annotation">This prospective cohort evaluated a &ldquo;Four to the Floor&rdquo; protocol for selected elective craniotomy patients. Patients were observed in PACU before transfer to the floor if stable, with defined escalation triggers. The study supports selective ICU avoidance after uncomplicated supratentorial craniotomy.</p>
+      </li>
+      <li>
+        <p class="citation">Wang H, Shang Y, Yang X, Zhan A, Li Y, Wang Z, Lu T, Lin H. Analysis of influence of clinical nursing pathway construction and implementation on patient outcomes in anesthesia recovery. <cite>Journal of Visualized Experiments</cite>. 2025. doi:<a href="https://doi.org/10.3791/68632" target="_blank" rel="noopener">10.3791/68632</a></p>
+        <p class="annotation">This JoVE study evaluated a structured clinical nursing pathway in an anesthesia recovery setting. The pathway used repeated Aldrete scoring and stratified fast versus slow recovery pathways. It is relevant to nursing-led PACU workflow and discharge stratification, although its generalizability should be interpreted cautiously.</p>
+      </li>
+      <li>
+        <p class="citation">Gondusky JS, Choi L, Khalaf N, Patel J, Barnett S, Gorab R. Day of surgery discharge after unicompartmental knee arthroplasty: an effective perioperative pathway. <cite>Journal of Arthroplasty</cite>. 2014. doi:<a href="https://doi.org/10.1016/j.arth.2013.08.021" target="_blank" rel="noopener">10.1016/j.arth.2013.08.021</a></p>
+        <p class="annotation">This prospective pathway study evaluated same-day discharge after unicompartmental knee arthroplasty. The pathway included multimodal analgesia, PACU care, physical therapy assessment, and defined discharge criteria. It is relevant to procedure-specific discharge-readiness pathways rather than PACU deterioration prediction.</p>
+      </li>
+      <li>
+        <p class="citation">Voscopoulos CJ, MacNabb CM, Freeman J, Galvagno SM Jr, Ladd D, George E. Continuous noninvasive respiratory volume monitoring for the identification of patients at risk for opioid-induced respiratory depression and obstructive breathing patterns. <cite>Journal of Trauma and Acute Care Surgery</cite>. 2014. doi:<a href="https://doi.org/10.1097/TA.0000000000000400" target="_blank" rel="noopener">10.1097/TA.0000000000000400</a></p>
+        <p class="annotation">This prospective observational study used continuous respiratory volume monitoring to identify patients at risk for opioid-induced respiratory depression in PACU. The authors proposed minute-ventilation thresholds for &ldquo;at risk&rdquo; and &ldquo;unsafe&rdquo; ventilation states. It is relevant as an early physiologic monitoring framework for PACU respiratory safety.</p>
+      </li>
+    </ol>
+
+    <a class="back-link" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M19 12H5"/>
+        <path d="M12 19l-7-7 7-7"/>
+      </svg>
+      Back to poster
+    </a>
+  </main>
+</body>
+</html>
