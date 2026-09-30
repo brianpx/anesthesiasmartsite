@@ -10,6 +10,7 @@
     "home": [
       { "label": "AI Resources", "href": "#ai" },
       { "label": "Clinical Education", "href": "#education" },
+      { "label": "Journal Club", "href": "/journal-club/" },
       { "label": "Protocols", "href": "#education" },
       { "label": "About", "href": "#about" }
     ],
@@ -17,7 +18,13 @@
       { "label": "Home", "href": "/" },
       { "label": "Beyond the Hype", "href": "/ai/bth/" },
       { "label": "Resource Guide", "href": "/ai/bth/resource-guide.html" },
-      { "label": "Quiz", "href": "/ai/bth/beyond-the-hype-quiz.html" }
+      { "label": "Quiz", "href": "/ai/bth/beyond-the-hype-quiz.html" },
+      { "label": "Journal Club", "href": "/journal-club/" }
+    ],
+    "journalClub": [
+      { "label": "Home", "href": "/" },
+      { "label": "Journal Club", "href": "/journal-club/" },
+      { "label": "Appraisal series", "href": "/journal-club/#appraisal" }
     ]
   },
   "legal": {
