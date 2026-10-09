@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A prediction model is an intervention, and it gets appraised like one. What changes is that the outcome is a prediction rather than a patient event, and that good performance on a test set is not evidence anyone was helped.">
+  <title>Machine-learning studies &mdash; Critical appraisal</title>
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/shared.css">
+  <link rel="stylesheet" href="/journal-club/journal-club.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<nav class="navbar" aria-label="Primary navigation">
+  <div class="nav-content">
+    <a href="/" class="logo" aria-label="Anesthesia SmartSite home">
+      <img src="/img/logo-icon.png" alt="" width="44" height="44">
+      <div class="logo-text">
+        <span class="logo-title"><span class="logo-anesthesia">Anesthesia </span><span class="logo-smartsite">SmartSite</span></span>
+        <span class="logo-subtitle">Advancing Anesthesia Education with AI</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="/#ai" class="nav-link" data-label="AI Resources">AI Resources</a>
+      <a href="/#education" class="nav-link" data-label="Clinical Education">Clinical Education</a>
+      <a href="/journal-club/" class="nav-link" aria-current="page" data-label="Journal Club">Journal Club</a>
+      <a href="/#about" class="nav-link" data-label="About">About</a>
+      <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode"><svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <svg viewBox="0 0 24 24">
+        <line class="hamburger-line" x1="3" y1="6" x2="21" y2="6"/>
+        <line class="hamburger-line" x1="3" y1="12" x2="21" y2="12"/>
+        <line class="hamburger-line" x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+<div class="mobile-overlay" id="mobile-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <button class="mobile-nav-close" aria-label="Close menu" id="mobile-nav-close">
+    <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+      <a href="/#ai" class="nav-link" data-label="AI Resources">AI Resources</a>
+      <a href="/#education" class="nav-link" data-label="Clinical Education">Clinical Education</a>
+      <a href="/journal-club/" class="nav-link" aria-current="page" data-label="Journal Club">Journal Club</a>
+      <a href="/#about" class="nav-link" data-label="About">About</a>
+  <div class="mobile-theme-toggle">
+    <span class="mobile-theme-label">Appearance</span>
+    <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode"><svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+  </div>
+</nav>
+<div class="section-bar">
+  <nav class="section-nav" aria-label="Journal Club">
+  <a href="/journal-club/">Sessions</a>
+  <a href="/journal-club/how-a-session-runs.html">How a session runs</a>
+  <a href="/journal-club/how-to-read-a-paper.html">How to read a paper</a>
+  <a href="/journal-club/appraisal/" aria-current="page">Critical appraisal</a>
+  </nav>
+</div>
+<main id="main-content" class="jc-page jc-prose">
+
+  <header>
+    <div class="jc-part-meta">
+      <p class="jc-kicker"><a href="/journal-club/appraisal/">Critical appraisal</a> <span aria-hidden="true">&middot;</span> Part 7 of 7</p>
+      <nav class="jc-part-nav" aria-label="Series">
+        <a href="/journal-club/appraisal/ai-assisted-research.html" rel="prev"><span aria-hidden="true">&lsaquo;</span><span class="jc-part-nav-label">AI-assisted research</span><span class="jc-sr">Previous part: AI-assisted research</span></a>
+      </nav>
+    </div>
+    <h1>Machine-learning studies</h1>
+    <p class="jc-intro">A prediction model is an intervention, and it gets appraised like one. What changes is that the outcome is a prediction rather than a patient event, and that good performance on a test set is not evidence anyone was helped.</p>
+  </header>
+
+  <details class="jc-toc-details">
+    <summary>On this page <span class="jc-toc-count">9 sections</span></summary>
+    <nav class="jc-toc" aria-label="On this page">
+      <a class="jc-toc-link" href="#reading">The reading for this part</a>
+      <a class="jc-toc-link" href="#same">What is different, and what is not</a>
+      <a class="jc-toc-link" href="#data">Read the data before the model</a>
+      <a class="jc-toc-link" href="#performance">How performance was measured</a>
+      <a class="jc-toc-link" href="#comparator">Compared with what</a>
+      <a class="jc-toc-link" href="#deployment">Performance is not benefit</a>
+      <a class="jc-toc-link" href="#guidelines">The reporting guidelines</a>
+      <a class="jc-toc-link" href="#table">At the table</a>
+      <a class="jc-toc-link" href="#refs">References</a>
+    </nav>
+  </details>
+
+  <section id="reading" aria-labelledby="reading-title">
+    <h2 id="reading-title">The reading for this part</h2>
+    <p>Liu Y, Chen PC, Krause J, Peng L. How to read articles that use machine learning: users&rsquo; guides to the medical literature. <cite>JAMA</cite>. 2019;322(18):1806-1816. <a class="jc-link" href="https://pubmed.ncbi.nlm.nih.gov/31714992/" target="_blank" rel="noopener noreferrer">PubMed</a></p>
+    <p>Read it before the session. This page is the scaffold to read it against, and it uses the same framing the rest of the series uses: start from the decision, name the comparator, and ask what the result would have to be before you changed anything.</p>
+  </section>
+
+  <section id="same" aria-labelledby="same-title">
+    <h2 id="same-title">What is different, and what is not</h2>
+    <p>Not different: you still ask what decision the model is meant to change, who it was studied in, what it was compared with, what outcome it moved, and whether the difference is big enough to act on. A model that flags difficult airways is a diagnostic aid. A model that drives an alert is an intervention. Both get the appraisal their design calls for.</p>
+    <p>Three things are genuinely different, and they are where the appraisal goes wrong.</p>
+    <p>The outcome is usually a prediction rather than a patient event. A paper can report excellent discrimination for postoperative acute kidney injury and contain no evidence that any patient fared better.</p>
+    <p>The unit of analysis is often not the patient. It may be an image, an encounter, a five-minute window, or a waveform segment. One patient can contribute hundreds of units, which inflates the apparent sample size and, if the split was done by unit rather than by patient, quietly puts the same patient in training and test.</p>
+    <p>And the model is not a fixed thing. It has hyperparameters that were tuned, it was selected from among many candidates, and its performance depends on a threshold that someone chose. Each of those is a place where the reported number got better than it should be.</p>
+  </section>
+
+  <section id="data" aria-labelledby="data-title">
+    <h2 id="data-title">Read the data before the model</h2>
+    <p>Spend most of your reading here. The architecture matters far less than what it was fed.</p>
+    <ul class="jc-list">
+      <li><strong>Where the data came from.</strong> How many centers, which years, which EHR vendor, which monitors. A model trained on one institution&rsquo;s practice has learned that institution&rsquo;s practice along with the physiology.</li>
+      <li><strong>What the label is, and who made it.</strong> This is the single most important question. A model trained on billing codes predicts billing codes. A model trained on a structured prospective assessment predicts something closer to the condition. If the label is a chart diagnosis of delirium, the model has learned who gets diagnosed.</li>
+      <li><strong>Class balance.</strong> If the outcome occurs in 2% of cases, a model that always predicts &ldquo;no&rdquo; is 98% accurate. Accuracy is not a usable metric for a rare outcome, and its presence in an abstract is a warning.</li>
+      <li><strong>Missing data.</strong> In clinical data, missingness is informative. A lab that was not ordered tells you what the clinician was thinking, so a model can learn from the pattern of ordering rather than from the values. Ask how missing data were handled and whether the pattern could differ at deployment.</li>
+      <li><strong>Leakage.</strong> Any feature available only because the outcome already happened. A postoperative troponin cannot predict a postoperative myocardial infarction. Nor can a medication that is given as treatment, a transfer order, or a timestamp that encodes the outcome. Leakage is the usual explanation for a suspiciously high AUROC.</li>
+      <li><strong>How the data were split.</strong> By patient, and ideally by site or by time period. Splitting by image, encounter, or window when one patient contributes many is a leak.</li>
+    </ul>
+  </section>
+
+  <section id="performance" aria-labelledby="performance-title">
+    <h2 id="performance-title">How performance was measured</h2>
+    <p>There must be a held-out set the model never saw during training or tuning. Cross-validation and bootstrapping are internal validation: they estimate performance in the same data-generating setting. External validation, in a different site or a different time period, is a different and much stronger claim. A paper that reports only internal validation has developed a model, not validated one.</p>
+    <div class="jc-table-wrap">
+      <table class="jc-table">
+        <caption class="jc-sr">Performance metrics and their traps</caption>
+        <thead>
+          <tr><th scope="col">Metric</th><th scope="col">What it says</th><th scope="col">The trap</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">AUROC</th><td>Discrimination: how well the model ranks a random case above a random non-case, across all thresholds</td><td>Independent of prevalence, so a high value can coexist with a useless positive predictive value. It also describes no threshold you would actually deploy</td></tr>
+          <tr><th scope="row">AUPRC</th><td>Precision against recall, which is more informative when the outcome is rare</td><td>Depends on prevalence, so it does not transfer between populations</td></tr>
+          <tr><th scope="row">Sensitivity and specificity</th><td>Performance at one chosen threshold</td><td>Ask which threshold, and who chose it. A paper reporting only AUROC has not told you what happens at the alarm level you would use</td></tr>
+          <tr><th scope="row">PPV and NPV</th><td>What a positive or negative result means for a patient</td><td>They move with prevalence. Recompute them for your population before believing them</td></tr>
+          <tr><th scope="row">Calibration</th><td>Whether a predicted 10% risk corresponds to 10% observed risk</td><td>The most clinically important property and the most often omitted. Look for a calibration plot with a slope and intercept, not just a goodness-of-fit p-value</td></tr>
+          <tr><th scope="row">Net benefit</th><td>Whether using the model at a plausible threshold beats treating everyone or no one</td><td>Rare, and worth a great deal when present. A decision curve answers the clinical question directly</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="jc-note-block">
+      <p>A model can discriminate well and be badly calibrated. That model gives you a usable ranking and unusable probabilities, so it can support triage and cannot support a sentence like &ldquo;your risk is 8%.&rdquo; If a paper reports an AUROC and no calibration, you do not know which kind of model you are looking at.</p>
+    </div>
+    <p>Also ask for uncertainty. Performance metrics need confidence intervals as much as treatment effects do, and an AUROC of 0.84 in a test set of 200 patients with 14 events is a wide interval that the paper may not have printed.</p>
+  </section>
+
+  <section id="comparator" aria-labelledby="comparator-title">
+    <h2 id="comparator-title">Compared with what</h2>
+    <p>This is <a class="jc-link" href="/journal-club/appraisal/foundations.html#comparator">Part 1</a> again, and it is the question most machine-learning papers answer worst. A model that beat nothing has beaten nothing.</p>
+    <p>Three comparators are worth asking for, in increasing order of how uncomfortable they make the authors. A simple model: logistic regression on a handful of routinely available variables, which is frequently within a rounding error of the neural network. An existing score, since anesthesia already has plenty. And the clinician, which is the comparator that matters clinically and the one almost never reported.</p>
+    <p>If the paper compares deep learning with logistic regression and the difference in AUROC is 0.02, the honest conclusion is that the predictors carry the signal and the architecture does not.</p>
+  </section>
+
+  <section id="deployment" aria-labelledby="deployment-title">
+    <h2 id="deployment-title">Performance is not benefit</h2>
+    <p>Retrospective performance on held-out data is a claim about the model. Whether care improved is a separate study, and it is rare. The chain has three links, and most papers only report the first: the model predicts accurately, the prediction reaches someone in time to act, and acting on it changes an outcome. A model can be excellent and change nothing, because the action it implies was already being taken or because the alert arrives during induction and gets dismissed.</p>
+    <p>Four more questions before deployment means anything.</p>
+    <ul class="jc-list">
+      <li><strong>Alert burden.</strong> At the chosen threshold, how many alerts per day and what fraction are actionable. This is where good models die.</li>
+      <li><strong>Drift.</strong> Practice changes, coding changes, a monitor gets replaced, and the model does not notice. Ask what monitoring and revalidation are planned.</li>
+      <li><strong>Subgroup performance.</strong> Reported separately for the groups where a systematic error would matter. A model that performs worse in a subgroup will move care in that subgroup.</li>
+      <li><strong>Reproducibility.</strong> Is the code available, are the model weights available, can the data be obtained. If none of the three, the paper is an assertion about a system nobody else can examine.</li>
+    </ul>
+    <p class="jc-takeaway">The paper that would change practice is a prospective study, ideally randomized, of clinicians with the model against clinicians without it, reporting a patient outcome. When you read one of those, appraise it with <a class="jc-link" href="/journal-club/appraisal/randomized-trials.html">Part 2</a> and treat the model as the intervention.</p>
+  </section>
+
+  <section id="guidelines" aria-labelledby="guidelines-title">
+    <h2 id="guidelines-title">The reporting guidelines</h2>
+    <ul class="jc-list">
+      <li><strong>TRIPOD+AI</strong> for developing or validating a clinical prediction model, including models built with machine learning.</li>
+      <li><strong>CONSORT-AI</strong> and <strong>SPIRIT-AI</strong> for randomized trials of AI interventions, and their protocols.</li>
+      <li><strong>DECIDE-AI</strong> for early live clinical evaluation, where a model is used on real patients for the first time.</li>
+      <li><strong>PROBAST</strong>, with an AI extension, for risk of bias in prediction-model studies.</li>
+      <li><strong>STARD-AI</strong> for diagnostic accuracy studies of AI systems, which has been in development.</li>
+    </ul>
+    <p>The rule from <a class="jc-link" href="/journal-club/appraisal/foundations.html#equator">Part 1</a> holds here with particular force. These checklists tell you what should be on the page, and the items most often missing are exactly the ones that matter: the label definition, the calibration plot, the simple-model comparator, and the subgroup results.</p>
+  </section>
+
+  <section id="table" aria-labelledby="table-title">
+    <h2 id="table-title">At the table</h2>
+    <ol class="jc-checklist">
+      <li>
+        <p class="jc-check-title">What decision would this model change, and who acts on it?</p>
+        <p class="jc-check-sub">If nobody can act on it in time, the performance is irrelevant.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">What is the label, and who created it?</p>
+        <p class="jc-check-sub">Codes, chart diagnoses, and prospective assessments are three different outcomes.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Was there a true held-out set, split by patient?</p>
+        <p class="jc-check-sub">And was there external validation in another site or another time period?</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Could any feature only exist because the outcome happened?</p>
+        <p class="jc-check-sub">Name the features and look for leakage explicitly.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Is calibration reported?</p>
+        <p class="jc-check-sub">If not, you have a ranking and not a risk.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">At the deployment threshold, what are the PPV and the alert burden?</p>
+        <p class="jc-check-sub">Recompute the PPV at your prevalence.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">What was the comparator?</p>
+        <p class="jc-check-sub">Logistic regression, the existing score, or a clinician. Not nothing.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Is there any evidence a patient was better off?</p>
+        <p class="jc-check-sub">Say plainly whether this paper is about performance or about benefit.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="refs" aria-labelledby="refs-title">
+    <h2 id="refs-title">References</h2>
+    <ul class="jc-refs">
+      <li>Liu Y, Chen PC, Krause J, Peng L. How to read articles that use machine learning: users&rsquo; guides to the medical literature. <cite>JAMA</cite>. 2019;322(18):1806-1816. <a class="jc-link" href="https://pubmed.ncbi.nlm.nih.gov/31714992/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
+      <li>Collins GS, Moons KGM, Dhiman P, et al. TRIPOD+AI statement: updated guidance for reporting clinical prediction models that use regression or machine learning methods. <cite>BMJ</cite>. 2024;385:e078378. <a class="jc-link" href="https://pubmed.ncbi.nlm.nih.gov/38626948/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
+      <li>Liu X, Cruz Rivera S, Moher D, Calvert MJ, Denniston AK; for the SPIRIT-AI and CONSORT-AI Working Group. Reporting guidelines for clinical trial reports for interventions involving artificial intelligence: the CONSORT-AI extension. <cite>Nat Med</cite>. 2020;26(9):1364-1374. <a class="jc-link" href="https://pubmed.ncbi.nlm.nih.gov/32908283/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
+      <li>Reporting guidelines for AI studies, collected: <a class="jc-link" href="https://www.equator-network.org/" target="_blank" rel="noopener noreferrer">equator-network.org</a></li>
+      <li>Verifying model-assisted work: <a class="jc-link" href="/journal-club/appraisal/ai-assisted-research.html">Part 6</a></li>
+    </ul>
+  </section>
+
+  <nav class="jc-pager" aria-label="Series">
+    <a class="jc-link" href="/journal-club/appraisal/ai-assisted-research.html" rel="prev"><span class="jc-pager-dir">Previous</span><span class="jc-pager-part">Part 6. AI-assisted research</span></a>
+  </nav>
+</main>
+
+<footer class="site-footer" id="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__author">Brian Pitts, MD, MS, MEHP &middot; Clinical Professor of Anesthesiology &amp; Pain Medicine, UC Davis Health</p>
+    <div class="site-footer__links">
+      <button class="site-footer__link" data-modal="disclaimer">Disclaimer</button>
+      <button class="site-footer__link" data-modal="privacy">Privacy Policy</button>
+      <button class="site-footer__link" data-modal="terms">Terms of Service</button>
+    </div>
+  </div>
+</footer>
+<div class="modal-overlay" id="legal-modal" role="dialog" aria-modal="true" aria-label="Legal information"></div>
+<script src="/js/site.js"></script>
+</body>
+</html>

@@ -117,6 +117,12 @@ const LegalModal = {
 
 /* ---------- Footer & Modal Injection ---------- */
 const SiteFooter = {
+  siteUrl(path) {
+    const value = String(path || '');
+    if (/^(?:[a-z][a-z\d+.-]*:|#)/i.test(value)) return value;
+    return new URL(value.replace(/^\//, ''), this.base || new URL('./', window.location.href)).href;
+  },
+
   async loadAndInject() {
     const footerEl = document.getElementById('site-footer');
     const modalEl = document.getElementById('legal-modal');
@@ -125,8 +131,8 @@ const SiteFooter = {
     let data;
     try {
       const scriptEl = document.querySelector('script[src*="site.js"]');
-      const base = scriptEl ? scriptEl.src.replace(/js\/site\.js.*$/, '') : '/';
-      const resp = await fetch(base + 'data/site.json');
+      this.base = scriptEl ? scriptEl.src.replace(/js\/site\.js.*$/, '') : new URL('./', window.location.href).href;
+      const resp = await fetch(this.base + 'data/site.json');
       data = await resp.json();
     } catch {
       return; // Fail silently — footer/modal HTML may already be in-page
@@ -148,7 +154,26 @@ const SiteFooter = {
 
   renderFooter(data) {
     const { author, authorTitle } = data.site;
+    const groups = data.footerNav || [];
+    // Long pages (the appraisal parts run past a thousand words) end here, so
+    // the footer is the natural place to offer somewhere to go next.
+    const nav = groups.length
+      ? `<nav class="site-footer__nav" aria-label="Site">
+          ${groups
+            .map(
+              (group) => `<div class="site-footer__group">
+              <h2 class="site-footer__heading">${group.heading}</h2>
+              <ul>${group.links
+                .map((link) => `<li><a href="${this.siteUrl(link.href)}">${link.label}</a></li>`)
+                .join('')}</ul>
+            </div>`
+            )
+            .join('')}
+        </nav>`
+      : '';
+
     return `
+      ${nav}
       <div class="site-footer__inner">
         <p class="site-footer__author">${author} &middot; ${authorTitle}</p>
         <div class="site-footer__links">
@@ -192,10 +217,137 @@ const SiteFooter = {
   },
 };
 
+/* ---------- Sticky chrome measurement ----------
+ * The section nav sticks directly beneath the navbar, and anchor links have to
+ * clear both. Neither height is a constant (the navbar reflows with viewport
+ * width, and the subnav is absent on most pages), so publish them as custom
+ * properties instead of hardcoding a magic number in the CSS.
+ */
+const SiteChrome = {
+  init() {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+    const subnavBar = document.querySelector('.section-bar');
+
+    const measure = () => {
+      const navH = navbar.offsetHeight;
+      const root = document.documentElement;
+      root.style.setProperty('--nav-h', navH + 'px');
+      root.style.setProperty('--sticky-h', navH + (subnavBar ? subnavBar.offsetHeight : 0) + 'px');
+    };
+
+    measure();
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(measure);
+      ro.observe(navbar);
+      if (subnavBar) ro.observe(subnavBar);
+    }
+    addEventListener('resize', measure, { passive: true });
+    // Webfont swap changes the nav's height after first paint.
+    if (document.fonts?.ready) document.fonts.ready.then(measure);
+  },
+};
+
+/* ---------- Current-section highlighting ----------
+ * Pages that live at their own URL mark the matching nav link with
+ * aria-current="page" in the HTML, so the state is right before this file
+ * runs. The home page's nav points at in-page sections instead, which markup
+ * alone cannot resolve, so track the section being read and mark it
+ * aria-current="true" ("a current item" rather than "the current page").
+ *
+ * Deliberately a scroll handler rather than an IntersectionObserver: there are
+ * four sections, the work is a handful of getBoundingClientRect calls behind a
+ * rAF gate, and "which section am I reading" is a question about a threshold
+ * line, which observers express awkwardly through rootMargin.
+ */
+const SectionNav = {
+  // Fraction of the viewport below which a section counts as the one in view.
+  LINE: 0.35,
+
+  init() {
+    const pairs = [];
+    for (const link of document.querySelectorAll('.nav-link')) {
+      const href = link.getAttribute('href') || '';
+      let hash;
+      if (href.startsWith('#')) {
+        hash = href;
+      } else {
+        const url = new URL(href, location.href);
+        if (!url.hash || url.pathname !== location.pathname) continue;
+        hash = url.hash;
+      }
+      const section = document.getElementById(decodeURIComponent(hash.slice(1)));
+      // Every nav link gets its own entry. Desktop and mobile both point at the
+      // same section, so keying a map by section would drop one of them.
+      if (section) pairs.push({ link, section });
+    }
+    if (!pairs.length) return;
+
+    this.pairs = pairs;
+    this.sections = [...new Set(pairs.map((p) => p.section))];
+
+    let queued = false;
+    const onScroll = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => { queued = false; this.update(); });
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll, { passive: true });
+    this.update();
+  },
+
+  update() {
+    const line = innerHeight * this.LINE;
+    let active = null;
+
+    // The section in view is the last one whose top has crossed the line.
+    for (const section of this.sections) {
+      if (section.getBoundingClientRect().top <= line) active = section;
+    }
+    // Above the first section (the hero) nothing is current, which is correct.
+    // At the very bottom the last section wins even if it never crossed.
+    if (scrollY + innerHeight >= document.documentElement.scrollHeight - 2) {
+      active = this.sections[this.sections.length - 1];
+    }
+
+    for (const { link, section } of this.pairs) {
+      if (section === active) {
+        link.setAttribute('aria-current', 'true');
+      } else if (link.getAttribute('aria-current') === 'true') {
+        // Only clear what we set, so a hardcoded aria-current="page" survives.
+        link.removeAttribute('aria-current');
+      }
+    }
+  },
+};
+
 /* ---------- Initialize ---------- */
+/* ---------- Sub-nav overflow hint ----------
+ * On narrow screens the Journal Club tabs scroll sideways. Flag the bar while
+ * tabs are hidden to the right so CSS can fade that edge; clear it at the end.
+ */
+const SubNavFade = {
+  init() {
+    const bar = document.querySelector('.section-bar');
+    const nav = bar?.querySelector('.section-nav');
+    if (!bar || !nav) return;
+    const update = () => {
+      bar.classList.toggle('has-more', nav.scrollLeft + nav.clientWidth < nav.scrollWidth - 2);
+    };
+    nav.addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update, { passive: true });
+    if (document.fonts?.ready) document.fonts.ready.then(update);
+    update();
+  },
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   SiteTheme.init();
+  SiteChrome.init();
   MobileMenu.init();
   LegalModal.init();
+  SectionNav.init();
+  SubNavFade.init();
   SiteFooter.loadAndInject();
 });

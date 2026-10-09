@@ -41,6 +41,13 @@
   --transition-base: 0.3s ease;
 
   --z-nav: 100;
+  --z-subnav: 80;
+
+  /* Sticky-chrome offsets. These defaults match the desktop navbar; the
+     narrow-viewport values are below, and SiteChrome replaces both with
+     measured heights once JS runs. */
+  --nav-h: 87px;
+  --sticky-h: 134px;
   --z-mobile-overlay: 90;
   --z-mobile-nav: 150;
   --z-mobile-toggle: 200;
@@ -64,12 +71,17 @@
   --color-footer-muted: #94a3b8;
   --color-overlay: rgba(0, 0, 0, 0.3);
   --color-glow: rgba(74, 158, 173, 0.06);
+  /* Darkened for contrast on the light background. The dark-theme #4a9ead is
+     only 2.88:1 here, below the 4.5:1 minimum for body text. */
+  --color-accent: #2d7283;
+  --color-accent-hover: #1f5a69;
 }
 
 /* ---------- Reset & Base ---------- */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+  /* Both sticky bars plus a little air. SiteChrome keeps --sticky-h current. */
+  scroll-padding-top: calc(var(--sticky-h, 100px) + 1rem);
 }
 
 *,
@@ -188,17 +200,49 @@ a {
 }
 
 .nav-link {
+  position: relative;
   color: var(--color-text-nav);
   font-size: 0.9rem;
   font-weight: 500;
   transition: color var(--transition-fast);
   letter-spacing: 0.01em;
   white-space: nowrap;
+  padding-bottom: 0.3rem;
 }
 
 .nav-link:hover,
 .nav-link:focus-visible {
   color: var(--color-accent);
+}
+
+/* Current section. Three cues (weight, colour, bar) so the state survives
+   greyscale and colour-blindness; hover above stays colour-only. */
+.nav-link[aria-current] {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.nav-link[aria-current]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--color-accent);
+}
+
+/* Bold widens the text, which would shift its neighbours on every navigation.
+   Reserve the bold width up front so the row never moves. */
+.nav-link::before {
+  content: attr(data-label);
+  display: block;
+  height: 0;
+  overflow: hidden;
+  font-weight: 700;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 /* ---------- Theme Toggle ---------- */
@@ -349,6 +393,18 @@ a {
   border-bottom: none;
 }
 
+.mobile-nav .nav-link {
+  padding-bottom: 1rem;
+}
+
+.mobile-nav .nav-link[aria-current] {
+  background: var(--color-badge-bg);
+}
+
+.mobile-nav .nav-link[aria-current]::after {
+  display: none;
+}
+
 .mobile-nav-close {
   position: absolute;
   top: 1.25rem;
@@ -412,11 +468,128 @@ a {
   }
 }
 
+/* ---------- Section Nav ----------
+   Second-level tabs for a section with its own pages (Journal Club,
+   Beyond the Hype). Sticks directly beneath the navbar. */
+/* Full-bleed strip so the background spans the viewport when content scrolls
+   underneath; the tabs inside align to the .jc-page column. */
+.section-bar {
+  position: sticky;
+  top: var(--nav-h, 80px);
+  z-index: var(--z-subnav);
+  background: var(--color-bg-alpha);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.35rem;
+  max-width: 1264px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.section-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.section-nav a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.section-nav a {
+  color: var(--color-text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 0.6rem 0 0.55rem;
+  border-bottom: 2px solid transparent;
+}
+
+.section-nav a:hover {
+  color: var(--color-text-heading);
+}
+
+.section-nav a[aria-current="page"],
+.section-nav a[aria-current="page"]:hover {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+@media (max-width: 720px) {
+  .section-nav {
+    flex-wrap: nowrap;
+    gap: 1.1rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  /* Edge fade says "more tabs this way"; site.js drops it at the scroll end. */
+  .section-bar.has-more .section-nav {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+  }
+}
+
 /* ---------- Footer ---------- */
 .site-footer {
   padding: 3rem 2rem 2rem;
   border-top: 1px solid var(--color-border);
   text-align: center;
+}
+
+.site-footer__nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 2rem 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto 2.75rem;
+  padding-bottom: 2.25rem;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.site-footer__heading {
+  margin: 0 0 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-heading);
+}
+
+.site-footer__nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-footer__nav li + li {
+  margin-top: 0.1rem;
+}
+
+.site-footer__nav a {
+  display: inline-block;
+  padding: 0.3rem 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  transition: color var(--transition-fast);
+}
+
+.site-footer__nav a:hover,
+.site-footer__nav a:focus-visible {
+  color: var(--color-accent);
+}
+
+@media (max-width: 560px) {
+  .site-footer__nav {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem 1.5rem;
+  }
 }
 
 .site-footer__inner {
@@ -445,6 +618,7 @@ a {
   background: none;
   border: none;
   font-family: inherit;
+  padding: 0.7rem 0.25rem;
 }
 
 .site-footer__link:hover,
@@ -528,6 +702,11 @@ a {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
+  :root {
+    --nav-h: 69px;
+    --sticky-h: 116px;
+  }
+
   .nav-links {
     display: none;
   }
@@ -544,6 +723,10 @@ a {
 
   .navbar {
     padding: 0.75rem 1.25rem;
+  }
+
+  .nav-content {
+    gap: 0.75rem;
   }
 
   .logo img {
@@ -574,5 +757,33 @@ a {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
+  }
+}
+
+/* Keep the brand and menu control inside compact phone viewports. */
+@media (max-width: 360px) {
+  .navbar {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .nav-content {
+    gap: 0.5rem;
+  }
+
+  .logo img {
+    height: 32px;
+  }
+
+  .logo-text {
+    margin-left: 0.45rem;
+  }
+
+  .logo-title {
+    font-size: 1.05rem;
+  }
+
+  .logo-subtitle {
+    display: none;
   }
 }

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Randomization is the only design feature that balances the things you did not think to measure. Everything else in a trial report is about whether that balance survived to the analysis, and how big the difference turned out to be.">
+  <title>Randomized trials and CONSORT &mdash; Critical appraisal</title>
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/shared.css">
+  <link rel="stylesheet" href="/journal-club/journal-club.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<nav class="navbar" aria-label="Primary navigation">
+  <div class="nav-content">
+    <a href="/" class="logo" aria-label="Anesthesia SmartSite home">
+      <img src="/img/logo-icon.png" alt="" width="44" height="44">
+      <div class="logo-text">
+        <span class="logo-title"><span class="logo-anesthesia">Anesthesia </span><span class="logo-smartsite">SmartSite</span></span>
+        <span class="logo-subtitle">Advancing Anesthesia Education with AI</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="/#ai" class="nav-link" data-label="AI Resources">AI Resources</a>
+      <a href="/#education" class="nav-link" data-label="Clinical Education">Clinical Education</a>
+      <a href="/journal-club/" class="nav-link" aria-current="page" data-label="Journal Club">Journal Club</a>
+      <a href="/#about" class="nav-link" data-label="About">About</a>
+      <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode"><svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <svg viewBox="0 0 24 24">
+        <line class="hamburger-line" x1="3" y1="6" x2="21" y2="6"/>
+        <line class="hamburger-line" x1="3" y1="12" x2="21" y2="12"/>
+        <line class="hamburger-line" x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+<div class="mobile-overlay" id="mobile-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <button class="mobile-nav-close" aria-label="Close menu" id="mobile-nav-close">
+    <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+      <a href="/#ai" class="nav-link" data-label="AI Resources">AI Resources</a>
+      <a href="/#education" class="nav-link" data-label="Clinical Education">Clinical Education</a>
+      <a href="/journal-club/" class="nav-link" aria-current="page" data-label="Journal Club">Journal Club</a>
+      <a href="/#about" class="nav-link" data-label="About">About</a>
+  <div class="mobile-theme-toggle">
+    <span class="mobile-theme-label">Appearance</span>
+    <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode"><svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+  </div>
+</nav>
+<div class="section-bar">
+  <nav class="section-nav" aria-label="Journal Club">
+  <a href="/journal-club/">Sessions</a>
+  <a href="/journal-club/how-a-session-runs.html">How a session runs</a>
+  <a href="/journal-club/how-to-read-a-paper.html">How to read a paper</a>
+  <a href="/journal-club/appraisal/" aria-current="page">Critical appraisal</a>
+  </nav>
+</div>
+<main id="main-content" class="jc-page jc-prose">
+
+  <header>
+    <div class="jc-part-meta">
+      <p class="jc-kicker"><a href="/journal-club/appraisal/">Critical appraisal</a> <span aria-hidden="true">&middot;</span> Part 2 of 7</p>
+      <nav class="jc-part-nav" aria-label="Series">
+        <a href="/journal-club/appraisal/foundations.html" rel="prev"><span aria-hidden="true">&lsaquo;</span><span class="jc-part-nav-label">Foundations</span><span class="jc-sr">Previous part: Foundations</span></a>
+        <a href="/journal-club/appraisal/observational-studies.html" rel="next"><span class="jc-part-nav-label">Observational studies</span><span aria-hidden="true">&rsaquo;</span><span class="jc-sr">Next part: Observational studies</span></a>
+      </nav>
+    </div>
+    <h1>Randomized trials and CONSORT</h1>
+    <p class="jc-intro">Randomization is the only design feature that balances the things you did not think to measure. Everything else in a trial report is about whether that balance survived to the analysis, and how big the difference turned out to be.</p>
+  </header>
+
+  <details class="jc-toc-details">
+    <summary>On this page <span class="jc-toc-count">8 sections</span></summary>
+    <nav class="jc-toc" aria-label="On this page">
+      <a class="jc-toc-link" href="#buys">What randomization buys</a>
+      <a class="jc-toc-link" href="#three">Three things, not one</a>
+      <a class="jc-toc-link" href="#blinding">Name who was blinded</a>
+      <a class="jc-toc-link" href="#itt">Intention to treat, and what crossover does</a>
+      <a class="jc-toc-link" href="#size">Read the size, not the p-value</a>
+      <a class="jc-toc-link" href="#consort">CONSORT and the flow diagram</a>
+      <a class="jc-toc-link" href="#table">At the table</a>
+      <a class="jc-toc-link" href="#refs">References</a>
+    </nav>
+  </details>
+
+  <section id="buys" aria-labelledby="buys-title">
+    <h2 id="buys-title">What randomization buys</h2>
+    <p>Allocating by chance makes the two groups alike, in expectation, on everything: age, frailty, ASA class, surgeon, and the things nobody recorded. That last category is the whole point. Adjustment can handle a confounder you measured. Only randomization handles the ones you did not.</p>
+    <p>It does not guarantee balance in any single trial, which is why you still read the baseline table. It guarantees that any imbalance is chance rather than a preference, and it makes the p-value and the confidence interval mean what they claim to mean.</p>
+    <p>So a randomized trial answers a narrow question well. The rest of appraisal is checking that the randomization was real, that it was not undone before the patient was enrolled, and that the result is the size the paper says it is.</p>
+  </section>
+
+  <section id="three" aria-labelledby="three-title">
+    <h2 id="three-title">Three things, not one</h2>
+    <p>Sequence generation, allocation concealment, and blinding get collapsed into &ldquo;it was randomized and blinded.&rdquo; They are separate, they fail separately, and they protect different things.</p>
+    <div class="jc-table-wrap">
+      <table class="jc-table">
+        <caption class="jc-sr">Sequence generation, allocation concealment, and blinding</caption>
+        <thead>
+          <tr><th scope="col">Feature</th><th scope="col">What it protects</th><th scope="col">How it fails</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Sequence generation</th><td>That the order of assignments is genuinely random</td><td>Alternation, day of the week, birth date, or &ldquo;randomized&rdquo; with no method stated</td></tr>
+          <tr><th scope="row">Allocation concealment</th><td>That the person enrolling cannot know or guess the next assignment</td><td>An unsealed list, a translucent envelope, a coordinator who can look ahead and steer a sick patient into the arm they prefer</td></tr>
+          <tr><th scope="row">Blinding</th><td>That knowing the assignment cannot change treatment or the recorded outcome</td><td>An unblinded assessor scoring a subjective outcome, or a clinician who changes rescue analgesia because they know the arm</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Concealment happens before the patient is in a group and applies to every trial. Blinding happens after and is sometimes impossible. A trial with a perfect random sequence and open allocation is not a randomized trial in any useful sense, because selection re-entered at the moment of enrollment. Central or pharmacy-controlled allocation and sequentially numbered opaque envelopes are the usual fixes. If the report does not say how allocation was concealed, that is worth a sentence in the session.</p>
+  </section>
+
+  <section id="blinding" aria-labelledby="blinding-title">
+    <h2 id="blinding-title">Name who was blinded</h2>
+    <p>&ldquo;Double blind&rdquo; carries almost no information. Ask about four groups separately: patients, treating clinicians, outcome assessors, and analysts. Then ask which of them could have moved the outcome.</p>
+    <p>CLEVELAND shows how a block trial gets blinded properly. Every patient received a bilateral four-quadrant injection, and the control was saline rather than an unblinded decision not to do the procedure. Patients, the clinicians adjusting opioid analgesia, the ward nurses scoring pain, and the investigators were all blinded. That matters because the outcome was opioid consumption, which the treating team controls.</p>
+    <p>Now the harder case. In Evered and in ENGAGES the anesthesia clinician cannot be blinded, because the intervention is a number on a monitor they are watching. So the blinding that carries the weight is the delirium assessor, who was blinded in both trials. When the treating clinician cannot be blinded, ask what stops their knowledge from reaching the outcome. A blinded assessor and an objective endpoint are the usual answers. A subjective endpoint scored by the treating team is the usual problem.</p>
+    <div class="jc-note-block">
+      <p>Match the softness of the outcome to who was blinded. Death at one year is hard to bias. Worst pain in the first 24 hours, reported by a patient who knows which anesthetic they had, is not. REGAIN reports both, and they deserve different amounts of trust.</p>
+    </div>
+  </section>
+
+  <section id="itt" aria-labelledby="itt-title">
+    <h2 id="itt-title">Intention to treat, and what crossover does</h2>
+    <p>Intention to treat analyzes every patient in the arm they were randomized to, whatever they actually received. It keeps the randomization intact, and it answers the question a clinician actually faces: what happens if I offer this, knowing some patients will end up with the other thing.</p>
+    <p>The cost is dilution. In REGAIN, a patient assigned to spinal anesthesia who received general anesthesia stays in the spinal arm for the analysis. If that happens often, a difference that was real in the operating room gets pulled toward no difference. So when an intention-to-treat result is null, check the crossover rate before you conclude that the treatments are equivalent.</p>
+    <p>Per-protocol and as-treated analyses answer a different question and reintroduce exactly the confounding randomization removed, because the patients who crossed over did so for reasons. Read them as secondary, and read a trial that reports only per-protocol results with suspicion.</p>
+    <p>Then look at missing outcome data, which is a separate problem from crossover. Ask how much, whether it was balanced between arms, and whether the reasons could differ by arm. REGAIN had vital status at about 365 days for 1,427 of the 1,599 patients who had surgery, which is 89.2%. ENGAGES assessed delirium in 1,213 of 1,232 randomized patients, and the missing assessments were balanced. Those are reassuring numbers, stated plainly, which is what you want to see.</p>
+  </section>
+
+  <section id="size" aria-labelledby="size-title">
+    <h2 id="size-title">Read the size, not the p-value</h2>
+    <p>A p-value answers one narrow question: how surprising is this data if there is no difference. It says nothing about how big the difference is, and nothing about whether you would change anything. Go to the effect size and the interval.</p>
+    <div class="jc-table-wrap">
+      <table class="jc-table">
+        <caption class="jc-sr">Effect measures and their traps</caption>
+        <thead>
+          <tr><th scope="col">Measure</th><th scope="col">What it is</th><th scope="col">The trap</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Relative risk</th><td>Risk in one arm divided by risk in the other</td><td>A 50% reduction of a 0.2% risk is almost nothing. Always ask for the baseline risk</td></tr>
+          <tr><th scope="row">Odds ratio</th><td>Odds in one arm divided by odds in the other</td><td>Exaggerates the relative risk when the outcome is common, which delirium is</td></tr>
+          <tr><th scope="row">Hazard ratio</th><td>Ratio of event rates over time</td><td>Assumes the ratio is roughly constant. Read the survival curves to check</td></tr>
+          <tr><th scope="row">Absolute risk reduction</th><td>The difference in percentage points</td><td>The number that actually tells you the scale of the benefit. Often absent from the abstract</td></tr>
+          <tr><th scope="row">NNT or NNH</th><td>1 divided by the absolute risk difference</td><td>Meaningless without the time horizon and the baseline risk it was computed at</td></tr>
+          <tr><th scope="row">Mean difference</th><td>Difference in a continuous score</td><td>Compare it with the minimal clinically important difference, not with zero</td></tr>
+          <tr><th scope="row">Geometric-mean ratio</th><td>Ratio of multiplicative averages, used for skewed data like opioid dose</td><td>A ratio of 0.86 is a 14% reduction, not 14 milligrams</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Work the interval from both ends</h3>
+    <p>A confidence interval is useful because you can ask two questions of it: if the truth were at this end, would I act, and if the truth were at the other end, would I act. If the answers differ, the trial has not settled the question, whatever the p-value says.</p>
+    <p>CLEVELAND compared liposomal bupivacaine with saline and found a geometric-mean ratio of 0.86 for opioid use in the first 24 hours, with a 97.7% confidence interval of 0.60 to 1.24. One end is a 40% reduction, which you would want. The other is a 24% increase. That interval includes no difference, and it is too wide to call the drugs the same. The honest reading is that this trial did not show a benefit you can count on.</p>
+    <p>ENGAGES is the same lesson in absolute terms. Delirium was 26.0% with EEG guidance and 23.0% with usual care, a difference of 3.0 percentage points with a 95% confidence interval of &minus;2.0 to 8.0 and a p-value of 0.22. A null result is not a demonstration of equivalence. It means this trial did not find a benefit, and its interval still permits a small one in either direction.</p>
+    <h3>And do the arithmetic when it is positive</h3>
+    <p>Evered found delirium in 19% of patients assigned a BIS target of 50 and 28% of those assigned a BIS target of 35, odds ratio 0.58 with a 95% confidence interval of 0.38 to 0.88. Convert it: that is an absolute reduction of about 9 percentage points, so roughly 11 patients treated at the lighter target for one fewer case of delirium. That sentence is worth more at the table than the odds ratio, because everyone in the room can judge whether 1 in 11 is worth it.</p>
+    <p class="jc-takeaway">Say the effect out loud in absolute terms, with the interval, and with the time point attached. If you cannot, you have not read the result yet.</p>
+  </section>
+
+  <section id="consort" aria-labelledby="consort-title">
+    <h2 id="consort-title">CONSORT and the flow diagram</h2>
+    <p>CONSORT is a 25-item checklist for reporting a randomized trial, plus a participant flow diagram. Use the checklist as a list of things that should be on the page. Use the diagram as the fastest thirty seconds in the paper.</p>
+    <p>Read the diagram from top to bottom and compare the numbers: assessed for eligibility, randomized, received the allocated intervention, lost to follow-up, and analyzed. Two gaps are worth a question. If the number analyzed is well below the number randomized, find out why and whether it was balanced. If the number receiving the allocated intervention is well below the number randomized, you have crossover, and the intention-to-treat result is diluted.</p>
+    <p>Then check three things outside the diagram: the trial registration and whether the primary outcome in the paper matches the one in the registry, the sample-size calculation and what difference it was powered to detect, and whether the trial stopped early. A trial powered for a 10-point difference that reports a null result has not shown the absence of a 4-point difference.</p>
+    <p>CONSORT compliance is not quality, which is the point made in <a class="jc-link" href="/journal-club/appraisal/foundations.html#equator">Part 1</a>. For a judgment about the trial itself, the tool is RoB&nbsp;2, which grades bias in five domains: randomization, deviations from the intended intervention, missing outcome data, outcome measurement, and selection of the reported result.</p>
+  </section>
+
+  <section id="table" aria-labelledby="table-title">
+    <h2 id="table-title">At the table</h2>
+    <ol class="jc-checklist">
+      <li>
+        <p class="jc-check-title">How was the sequence generated, and how was allocation concealed?</p>
+        <p class="jc-check-sub">Two questions. The second is the one that gets left out of the paper.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Who was blinded, and who could have moved the outcome?</p>
+        <p class="jc-check-sub">Patients, treating clinicians, outcome assessors, analysts. Match it against how subjective the endpoint is.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Was the baseline table balanced on what matters here?</p>
+        <p class="jc-check-sub">Not every variable. The ones that drive this outcome.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Was the analysis intention to treat, and how much crossover was there?</p>
+        <p class="jc-check-sub">A null intention-to-treat result with heavy crossover is a diluted result, not a negative one.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">How much outcome data is missing, and was it balanced?</p>
+        <p class="jc-check-sub">Ask whether the reasons for missingness could differ by arm.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Say the primary result in absolute terms, with its interval.</p>
+        <p class="jc-check-sub">Percentage points, or an NNT with its time horizon. Then ask what each end of the interval would mean for your practice.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">What harms were reported, and were they collected the same way in both arms?</p>
+        <p class="jc-check-sub">Harms are usually reported worse than benefits. Note it rather than skipping it.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Does the primary outcome match the registration?</p>
+        <p class="jc-check-sub">And is the conclusion in the abstract about the primary outcome, or about a secondary one?</p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="refs" aria-labelledby="refs-title">
+    <h2 id="refs-title">References</h2>
+    <ul class="jc-refs">
+      <li>Schulz KF, Altman DG, Moher D; for the CONSORT Group. CONSORT 2010 statement: updated guidelines for reporting parallel group randomised trials. <cite>BMJ</cite>. 2010;340:c332. <a class="jc-link" href="https://www.equator-network.org/reporting-guidelines/consort/" target="_blank" rel="noopener noreferrer">CONSORT via EQUATOR</a></li>
+      <li>Sterne JAC, Savovi&#263; J, Page MJ, et al. RoB 2: a revised tool for assessing risk of bias in randomised trials. <cite>BMJ</cite>. 2019;366:l4898. <a class="jc-link" href="https://pubmed.ncbi.nlm.nih.gov/31462531/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
+      <li>Evered LA, Chan MTV, Han R, et al. Anaesthetic depth and delirium after major surgery: a randomised clinical trial. <cite>Br J Anaesth</cite>. 2021;127(5):704-712. <a class="jc-link" href="https://pubmed.ncbi.nlm.nih.gov/34465469/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
+      <li>Wildes TS, Mickle AM, Ben Abdallah A, et al.; for the ENGAGES Research Group. Effect of electroencephalography-guided anesthetic administration on postoperative delirium among older adults undergoing major surgery: the ENGAGES randomized clinical trial. <cite>JAMA</cite>. 2019;321(5):473-483. <a class="jc-link" href="https://pubmed.ncbi.nlm.nih.gov/30721296/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
+      <li>Vail EA, Feng R, Sieber F, et al.; for the REGAIN Investigators. Long-term outcomes with spinal versus general anesthesia for hip fracture surgery: a randomized trial. <cite>Anesthesiology</cite>. 2024;140(3):375-386. <a class="jc-link" href="https://pubmed.ncbi.nlm.nih.gov/37831596/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
+      <li>Practice one of these: <a class="jc-link" href="/journal-club/how-to-read-a-paper.html">How to read a paper</a></li>
+    </ul>
+  </section>
+
+  <nav class="jc-pager" aria-label="Series">
+    <a class="jc-link" href="/journal-club/appraisal/foundations.html" rel="prev"><span class="jc-pager-dir">Previous</span><span class="jc-pager-part">Part 1. Foundations</span></a>
+    <a class="jc-link" href="/journal-club/appraisal/observational-studies.html" rel="next"><span class="jc-pager-dir">Next</span><span class="jc-pager-part">Part 3. Observational studies</span></a>
+  </nav>
+</main>
+
+<footer class="site-footer" id="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__author">Brian Pitts, MD, MS, MEHP &middot; Clinical Professor of Anesthesiology &amp; Pain Medicine, UC Davis Health</p>
+    <div class="site-footer__links">
+      <button class="site-footer__link" data-modal="disclaimer">Disclaimer</button>
+      <button class="site-footer__link" data-modal="privacy">Privacy Policy</button>
+      <button class="site-footer__link" data-modal="terms">Terms of Service</button>
+    </div>
+  </div>
+</footer>
+<div class="modal-overlay" id="legal-modal" role="dialog" aria-modal="true" aria-label="Legal information"></div>
+<script src="/js/site.js"></script>
+</body>
+</html>

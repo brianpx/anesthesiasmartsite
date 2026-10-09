@@ -7,26 +7,25 @@
   <title>Journal Club — Anesthesia SmartSite</title>
   <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/shared.css">
-  <link rel="stylesheet" href="/journal-club/journal-club.css">
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="./journal-club.css">
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 <nav class="navbar" aria-label="Primary navigation">
   <div class="nav-content">
-    <a href="/" class="logo" aria-label="Anesthesia SmartSite home">
-      <img src="/img/logo-icon.png" alt="" width="44" height="44">
+    <a href="../" class="logo" aria-label="Anesthesia SmartSite home">
+      <img src="../img/logo-icon.png" alt="" width="44" height="44">
       <div class="logo-text">
         <span class="logo-title"><span class="logo-anesthesia">Anesthesia </span><span class="logo-smartsite">SmartSite</span></span>
         <span class="logo-subtitle">Advancing Anesthesia Education with AI</span>
       </div>
     </a>
     <div class="nav-links">
-      <a href="/#ai" class="nav-link">AI Resources</a>
-      <a href="/#education" class="nav-link">Clinical Education</a>
-      <a href="/journal-club/" class="nav-link" aria-current="page">Journal Club</a>
-      <a href="/#education" class="nav-link">Protocols</a>
-      <a href="/#about" class="nav-link">About</a>
+      <a href="../#ai" class="nav-link" data-label="AI Resources">AI Resources</a>
+      <a href="../#education" class="nav-link" data-label="Clinical Education">Clinical Education</a>
+      <a href="./" class="nav-link" aria-current="page" data-label="Journal Club">Journal Club</a>
+      <a href="../#about" class="nav-link" data-label="About">About</a>
       <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode"><svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
     </div>
     <button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
@@ -43,74 +42,47 @@
   <button class="mobile-nav-close" aria-label="Close menu" id="mobile-nav-close">
     <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
   </button>
-      <a href="/#ai" class="nav-link">AI Resources</a>
-      <a href="/#education" class="nav-link">Clinical Education</a>
-      <a href="/journal-club/" class="nav-link" aria-current="page">Journal Club</a>
-      <a href="/#education" class="nav-link">Protocols</a>
-      <a href="/#about" class="nav-link">About</a>
+      <a href="../#ai" class="nav-link" data-label="AI Resources">AI Resources</a>
+      <a href="../#education" class="nav-link" data-label="Clinical Education">Clinical Education</a>
+      <a href="./" class="nav-link" aria-current="page" data-label="Journal Club">Journal Club</a>
+      <a href="../#about" class="nav-link" data-label="About">About</a>
   <div class="mobile-theme-toggle">
     <span class="mobile-theme-label">Appearance</span>
     <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode"><svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
   </div>
 </nav>
-<nav class="breadcrumb" aria-label="Breadcrumb">
-  <a href="/">Home</a>
-  <span class="separator" aria-hidden="true">&rsaquo;</span>
-  <span class="current" aria-current="page">Journal Club</span>
-</nav>
+<div class="section-bar">
+  <nav class="section-nav" aria-label="Journal Club">
+  <a href="./" aria-current="page">Sessions</a>
+  <a href="./how-a-session-runs.html">How a session runs</a>
+  <a href="./how-to-read-a-paper.html">How to read a paper</a>
+  <a href="./appraisal/">Critical appraisal</a>
+  </nav>
+</div>
 <main id="main-content" class="jc-page" data-jc-page="hub">
 
   <header>
     <h1>Journal Club</h1>
-    <p class="jc-intro">Resident-led critical appraisal for CA-2 anesthesiology. Each session ties a paper to a clinical decision. Search the sessions by date, topic, or presenter.</p>
+    <p class="jc-intro">Resident-led critical appraisal for CA-2 anesthesiology. Each session ties a paper to a clinical decision.</p>
   </header>
-  <div class="jc-search-row">
-    <div class="jc-search-field">
-      <label for="jc-search">Search by date, topic, or presenter</label>
-      <input id="jc-search" type="search" name="q" autocomplete="off" placeholder="October, TAP, Lin, hip fracture">
+  <form class="jc-search" id="jc-search-form" role="search">
+    <div class="jc-search-row">
+      <div class="jc-search-field">
+        <label for="jc-search">Search by date, topic, or presenter</label>
+        <input id="jc-search" type="search" name="q" autocomplete="off" placeholder="Try: TAP block, Lin, October">
+      </div>
+      <button type="button" class="jc-text-button" id="jc-clear" disabled>Clear search</button>
     </div>
-    <button type="button" class="jc-text-button" id="jc-clear">Clear search</button>
-  </div>
+    <div class="jc-examples" role="group" aria-label="Example searches">
+      <button type="button" class="jc-chip" data-jc-example="October" aria-pressed="false">October</button>
+      <button type="button" class="jc-chip" data-jc-example="TAP" aria-pressed="false">TAP</button>
+      <button type="button" class="jc-chip" data-jc-example="Lin" aria-pressed="false">Lin</button>
+      <button type="button" class="jc-chip" data-jc-example="hip fracture" aria-pressed="false">Hip fracture</button>
+    </div>
+  </form>
+  <h2 id="sessions-title">Sessions</h2>
   <p id="jc-status" class="jc-status" aria-live="polite"></p>
-  <div id="jc-results"></div>
-
-  <section aria-labelledby="how-title">
-    <h2 id="how-title">How a session runs</h2>
-    <p>A session is a discussion, not a lecture. A BLUF is the bottom line up front: one sentence on what you would do differently, or the same, because of the evidence.</p>
-    <div class="jc-table-wrap">
-      <table class="jc-agenda">
-        <caption class="jc-sr">Sixty-minute session agenda</caption>
-        <thead>
-          <tr><th scope="col">Time</th><th scope="col">What happens</th><th scope="col">Who leads</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>0–5 min</td><td>Welcome, objectives, and housekeeping</td><td>Faculty</td></tr>
-          <tr><td>5–15 min</td><td>BLUF for each article, about a minute or two</td><td>Resident leads</td></tr>
-          <tr><td>15–30 min</td><td>Validity and results, walked through the checklist</td><td>Group</td></tr>
-          <tr><td>30–45 min</td><td>Applicability, using a clinical vignette</td><td>Group</td></tr>
-          <tr><td>45–55 min</td><td>Does this change our practice?</td><td>Group</td></tr>
-          <tr><td>55–60 min</td><td>Take-home points and anything to follow up</td><td>Faculty</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <h3>Preparing a paper</h3>
-    <p>Start with the question, the design, and the result that would change a plan. Then ask whether the conclusion is supported, and whether it applies to the patient in front of you. The blank handout is the same checklist used in the sessions above.</p>
-    <p><a class="jc-button" href="/journal-club/downloads/Journal-Club-Prehandout-Template.docx" download>Download the blank pre-session handout</a></p>
-  </section>
-
-  <section id="appraisal" aria-labelledby="series-title">
-    <h2 id="series-title">Critical appraisal series</h2>
-    <p>Seven parts from the resident appraisal curriculum. This page is the map. It is not the facilitator script.</p>
-    <ol class="jc-series">
-      <li><strong>Foundations, PICO, and the EQUATOR network.</strong> Why appraisal changes a clinical decision, and how a vague question becomes a PICO with a reporting guideline beside it.</li>
-      <li><strong>Randomized trials and CONSORT.</strong> Randomization, allocation concealment, blinding, and reading the size of an effect instead of stopping at a p-value.</li>
-      <li><strong>Observational studies and STROBE.</strong> Cohort versus case-control, and confounding, selection, and measurement.</li>
-      <li><strong>Systematic reviews, PRISMA, and figure forensics.</strong> How a review is assembled, and how to read a forest plot without taking the summary estimate on faith.</li>
-      <li><strong>GRADE.</strong> Moving from one study to a judgment about certainty.</li>
-      <li><strong>AI-assisted research.</strong> What still has to be checked when a model helps search, screen, or draft.</li>
-      <li><strong>Machine-learning studies.</strong> The reading for this part is Liu et al., How to read articles that use machine learning, <cite>JAMA</cite> 2019. <a class="jc-link" href="https://pubmed.ncbi.nlm.nih.gov/31714992/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
-    </ol>
-  </section>
+  <div id="jc-results" aria-labelledby="sessions-title"></div>
 
 </main>
 <footer class="site-footer" id="site-footer">
@@ -124,7 +96,7 @@
   </div>
 </footer>
 <div class="modal-overlay" id="legal-modal" role="dialog" aria-modal="true" aria-label="Legal information"></div>
-<script src="/js/site.js"></script>
-<script src="/js/journal-club.js"></script>
+<script src="../js/site.js"></script>
+<script src="../js/journal-club.js"></script>
 </body>
 </html>

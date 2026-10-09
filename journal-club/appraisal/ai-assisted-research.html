@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A model can search, screen, extract, and draft. It cannot be accountable for a sentence. That single asymmetry decides which steps you can delegate and which ones you still do by hand.">
+  <title>AI-assisted research &mdash; Critical appraisal</title>
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/shared.css">
+  <link rel="stylesheet" href="/journal-club/journal-club.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<nav class="navbar" aria-label="Primary navigation">
+  <div class="nav-content">
+    <a href="/" class="logo" aria-label="Anesthesia SmartSite home">
+      <img src="/img/logo-icon.png" alt="" width="44" height="44">
+      <div class="logo-text">
+        <span class="logo-title"><span class="logo-anesthesia">Anesthesia </span><span class="logo-smartsite">SmartSite</span></span>
+        <span class="logo-subtitle">Advancing Anesthesia Education with AI</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="/#ai" class="nav-link" data-label="AI Resources">AI Resources</a>
+      <a href="/#education" class="nav-link" data-label="Clinical Education">Clinical Education</a>
+      <a href="/journal-club/" class="nav-link" aria-current="page" data-label="Journal Club">Journal Club</a>
+      <a href="/#about" class="nav-link" data-label="About">About</a>
+      <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode"><svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <svg viewBox="0 0 24 24">
+        <line class="hamburger-line" x1="3" y1="6" x2="21" y2="6"/>
+        <line class="hamburger-line" x1="3" y1="12" x2="21" y2="12"/>
+        <line class="hamburger-line" x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+<div class="mobile-overlay" id="mobile-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <button class="mobile-nav-close" aria-label="Close menu" id="mobile-nav-close">
+    <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+      <a href="/#ai" class="nav-link" data-label="AI Resources">AI Resources</a>
+      <a href="/#education" class="nav-link" data-label="Clinical Education">Clinical Education</a>
+      <a href="/journal-club/" class="nav-link" aria-current="page" data-label="Journal Club">Journal Club</a>
+      <a href="/#about" class="nav-link" data-label="About">About</a>
+  <div class="mobile-theme-toggle">
+    <span class="mobile-theme-label">Appearance</span>
+    <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode"><svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+  </div>
+</nav>
+<div class="section-bar">
+  <nav class="section-nav" aria-label="Journal Club">
+  <a href="/journal-club/">Sessions</a>
+  <a href="/journal-club/how-a-session-runs.html">How a session runs</a>
+  <a href="/journal-club/how-to-read-a-paper.html">How to read a paper</a>
+  <a href="/journal-club/appraisal/" aria-current="page">Critical appraisal</a>
+  </nav>
+</div>
+<main id="main-content" class="jc-page jc-prose">
+
+  <header>
+    <div class="jc-part-meta">
+      <p class="jc-kicker"><a href="/journal-club/appraisal/">Critical appraisal</a> <span aria-hidden="true">&middot;</span> Part 6 of 7</p>
+      <nav class="jc-part-nav" aria-label="Series">
+        <a href="/journal-club/appraisal/grade.html" rel="prev"><span aria-hidden="true">&lsaquo;</span><span class="jc-part-nav-label">GRADE</span><span class="jc-sr">Previous part: GRADE</span></a>
+        <a href="/journal-club/appraisal/machine-learning.html" rel="next"><span class="jc-part-nav-label">Machine-learning studies</span><span aria-hidden="true">&rsaquo;</span><span class="jc-sr">Next part: Machine-learning studies</span></a>
+      </nav>
+    </div>
+    <h1>AI-assisted research</h1>
+    <p class="jc-intro">A model can search, screen, extract, and draft. It cannot be accountable for a sentence. That single asymmetry decides which steps you can delegate and which ones you still do by hand.</p>
+  </header>
+
+  <details class="jc-toc-details">
+    <summary>On this page <span class="jc-toc-count">7 sections</span></summary>
+    <nav class="jc-toc" aria-label="On this page">
+      <a class="jc-toc-link" href="#asymmetry">The work that does not transfer</a>
+      <a class="jc-toc-link" href="#tasks">Task by task, with the check each one needs</a>
+      <a class="jc-toc-link" href="#every">Check these every time</a>
+      <a class="jc-toc-link" href="#search">A reproducible search</a>
+      <a class="jc-toc-link" href="#disclosure">Disclosure and what goes in the prompt</a>
+      <a class="jc-toc-link" href="#table">At the table</a>
+      <a class="jc-toc-link" href="#refs">References</a>
+    </nav>
+  </details>
+
+  <section id="asymmetry" aria-labelledby="asymmetry-title">
+    <h2 id="asymmetry-title">The work that does not transfer</h2>
+    <p>Language models are good at the parts of research that look like handling text: finding candidates, summarizing, restructuring, tightening prose. They are unreliable at the part that matters most in appraisal, which is whether a specific claim is true of a specific paper.</p>
+    <p>The failure mode is not that models are often wrong. It is that a model which is confident and wrong reads exactly like a model which is confident and right. There is no tell. Fluency is not evidence, and the smoothness of a summary carries no information about its accuracy. That is why every use below comes with a check performed against the paper itself.</p>
+    <p>The practical rule for a journal club: you may use a model to decide what to read. You may not use it to decide what a paper says.</p>
+  </section>
+
+  <section id="tasks" aria-labelledby="tasks-title">
+    <h2 id="tasks-title">Task by task, with the check each one needs</h2>
+    <div class="jc-table-wrap">
+      <table class="jc-table">
+        <caption class="jc-sr">Uses of a model in research, and the verification each requires</caption>
+        <thead>
+          <tr><th scope="col">Task</th><th scope="col">Genuinely useful for</th><th scope="col">What you must verify</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Finding papers</th>
+            <td>Synonyms you would not have thought of, a starting set, orienting in an unfamiliar field</td>
+            <td>That every citation exists. Open the DOI or the PMID, not the title. Fabricated and subtly mismatched references are the signature failure</td>
+          </tr>
+          <tr>
+            <th scope="row">Building a search strategy</th>
+            <td>MeSH terms, Boolean structure, a first draft of the string</td>
+            <td>Run it yourself in PubMed or Embase and record the exact string and the date. A search you did not execute is not a search</td>
+          </tr>
+          <tr>
+            <th scope="row">Screening</th>
+            <td>First-pass triage of titles and abstracts against explicit criteria</td>
+            <td>A human reviews every exclusion. If a model made exclusion decisions in a systematic review, you cannot claim two independent human screeners, and you have to report what the model did</td>
+          </tr>
+          <tr>
+            <th scope="row">Extracting numbers</th>
+            <td>Pulling effect sizes and intervals into a table quickly</td>
+            <td>Every number against the paper, including the sign and both ends of the interval. Transposed limits and dropped minus signs are common and quiet</td>
+          </tr>
+          <tr>
+            <th scope="row">Summarizing a paper</th>
+            <td>Orientation before you read, and a check on your own reading afterward</td>
+            <td>Read the paper. A summary cannot tell you whether allocation was concealed, and it will flatten the comparator</td>
+          </tr>
+          <tr>
+            <th scope="row">Drafting</th>
+            <td>Structure, tightening, a first attempt at a BLUF you then rewrite</td>
+            <td>Every sentence, because you are now the author of it. Check that no claim arrived without a source</td>
+          </tr>
+          <tr>
+            <th scope="row">Statistics and code</th>
+            <td>Explaining a method, writing analysis code you will inspect</td>
+            <td>The method against a textbook, and the code against a worked example with a known answer</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="jc-note-block">
+      <p>The distinction a summary is most likely to lose is the comparator, which is also the distinction appraisal turns on. Ask a model about TAP blocks and it will happily blend Grape and CLEVELAND into one claim about whether TAP blocks work. Those are two questions with two different control groups, as <a class="jc-link" href="/journal-club/appraisal/foundations.html#comparator">Part 1</a> lays out, and blending them produces a sentence that is wrong about both.</p>
+    </div>
+  </section>
+
+  <section id="every" aria-labelledby="every-title">
+    <h2 id="every-title">Check these every time</h2>
+    <ol class="jc-checklist">
+      <li>
+        <p class="jc-check-title">Does the citation exist?</p>
+        <p class="jc-check-sub">Resolve the DOI or the PMID. A plausible author list, journal, and year assembled around a paper that was never written is the most common failure, and it survives a search by title because the title sounds right.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Does the paper say what the summary said?</p>
+        <p class="jc-check-sub">Check the population, the comparator, the outcome, and the time point specifically. Those four are where a summary drifts.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Are the numbers right?</p>
+        <p class="jc-check-sub">Point estimate, both interval limits, the direction, and the units. Read them off the paper, not off the summary of the paper.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">What is missing?</p>
+        <p class="jc-check-sub">A model summarizes what it retrieved or remembers, which is not the literature. Ask specifically for the strongest evidence against the claim, then go and check whether that evidence exists too.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Is the search reproducible?</p>
+        <p class="jc-check-sub">Database, full string, date run, and number of records. Without those you have a reading list, not a search.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Whose words are these?</p>
+        <p class="jc-check-sub">Generated text you have not rewritten and cannot source is a problem of authorship, not of style.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">What did you put in the prompt?</p>
+        <p class="jc-check-sub">No protected health information and no unpublished data belong in a tool that has not been approved for them.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="search" aria-labelledby="search-title">
+    <h2 id="search-title">A reproducible search</h2>
+    <p>If a model helped build the search, the record has to be able to stand without it. Keep four things: the database and interface, the complete search string including field tags and limits, the date the search was run, and the number of records returned at each step. That is what makes the search a method rather than an anecdote, and it is what <a class="jc-link" href="/journal-club/appraisal/systematic-reviews.html#assembled">Part 4</a> asks you to look for in someone else&rsquo;s review.</p>
+    <p>Tools that retrieve live sources and show you the retrieved passages are easier to verify than a model answering from memory, because you can open what it opened. That makes verification faster. It does not make it optional, and a quoted passage can still be attached to the wrong claim.</p>
+  </section>
+
+  <section id="disclosure" aria-labelledby="disclosure-title">
+    <h2 id="disclosure-title">Disclosure and what goes in the prompt</h2>
+    <p>A model cannot be an author. Authorship carries accountability for the work and the ability to approve the final version, and a tool can do neither. Journals expect you to disclose what you used and what it did, typically in the methods or the acknowledgments, and the requirements differ between journals. Check the instructions for the journal you are actually submitting to before you write the statement.</p>
+    <p>On inputs, treat any prompt as a disclosure. Patient identifiers, unpublished data from a colleague, and text under review elsewhere do not go into a general-purpose tool. Institutional approval for a specific tool is about where the data goes, and it is not transferable to whichever tool is open in another tab.</p>
+    <p class="jc-takeaway">Use a model to get to the papers faster. Do the appraisal yourself. The sentence you say at the table is yours, and so is the error in it.</p>
+  </section>
+
+  <section id="table" aria-labelledby="table-title">
+    <h2 id="table-title">At the table</h2>
+    <ol class="jc-checklist">
+      <li>
+        <p class="jc-check-title">Say where the model was used.</p>
+        <p class="jc-check-sub">Search, screening, extraction, drafting. One sentence, not a confession.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Show that you opened the papers.</p>
+        <p class="jc-check-sub">Quote a number off the page, with its interval.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Name the comparator yourself.</p>
+        <p class="jc-check-sub">This is the thing a summary gets wrong, so it is the thing to state from the paper.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Bring the search string if you built one.</p>
+        <p class="jc-check-sub">Database, string, date, record count.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Bring the strongest paper against your BLUF.</p>
+        <p class="jc-check-sub">If you could not find one, say how you looked.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="refs" aria-labelledby="refs-title">
+    <h2 id="refs-title">References</h2>
+    <ul class="jc-refs">
+      <li>International Committee of Medical Journal Editors. Recommendations for the conduct, reporting, editing, and publication of scholarly work in medical journals. <a class="jc-link" href="https://www.icmje.org/recommendations/" target="_blank" rel="noopener noreferrer">icmje.org</a></li>
+      <li>EQUATOR Network. Reporting guidelines, including extensions for studies involving artificial intelligence. <a class="jc-link" href="https://www.equator-network.org/" target="_blank" rel="noopener noreferrer">equator-network.org</a></li>
+      <li>Appraising a model as a study: <a class="jc-link" href="/journal-club/appraisal/machine-learning.html">Part 7</a></li>
+    </ul>
+  </section>
+
+  <nav class="jc-pager" aria-label="Series">
+    <a class="jc-link" href="/journal-club/appraisal/grade.html" rel="prev"><span class="jc-pager-dir">Previous</span><span class="jc-pager-part">Part 5. GRADE</span></a>
+    <a class="jc-link" href="/journal-club/appraisal/machine-learning.html" rel="next"><span class="jc-pager-dir">Next</span><span class="jc-pager-part">Part 7. Machine-learning studies</span></a>
+  </nav>
+</main>
+
+<footer class="site-footer" id="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__author">Brian Pitts, MD, MS, MEHP &middot; Clinical Professor of Anesthesiology &amp; Pain Medicine, UC Davis Health</p>
+    <div class="site-footer__links">
+      <button class="site-footer__link" data-modal="disclaimer">Disclaimer</button>
+      <button class="site-footer__link" data-modal="privacy">Privacy Policy</button>
+      <button class="site-footer__link" data-modal="terms">Terms of Service</button>
+    </div>
+  </div>
+</footer>
+<div class="modal-overlay" id="legal-modal" role="dialog" aria-modal="true" aria-label="Legal information"></div>
+<script src="/js/site.js"></script>
+</body>
+</html>

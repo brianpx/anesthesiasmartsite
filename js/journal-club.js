@@ -2,8 +2,13 @@
  * Journal Club catalog: search on the hub, handout render on the session page.
  */
 const JournalClub = {
+  siteUrl(path) {
+    const siteRoot = new URL('../', window.location.href);
+    return new URL(String(path).replace(/^\//, ''), siteRoot).href;
+  },
+
   async load() {
-    const resp = await fetch('/data/journal-club.json');
+    const resp = await fetch(this.siteUrl('data/journal-club.json'));
     if (!resp.ok) throw new Error('Catalog request failed');
     return resp.json();
   },
@@ -49,6 +54,16 @@ const JournalClub = {
     ];
   },
 
+  dateParts(iso) {
+    const [year, month, day] = iso.split('-').map(Number);
+    const utc = new Date(Date.UTC(year, month - 1, day));
+    return {
+      month: new Intl.DateTimeFormat('en-US', { month: 'short', timeZone: 'UTC' }).format(utc),
+      day: String(day),
+      year: String(year),
+    };
+  },
+
   normalize(value) {
     return String(value)
       .toLowerCase()
@@ -90,17 +105,87 @@ const JournalClub = {
     return tokenHit;
   },
 
-  presenters(session) {
-    const names = [...(session.residents || []), ...(session.faculty || [])];
-    if (names.length && session.cohort) return `${names.join(', ')} · ${session.cohort}`;
-    if (names.length) return names.join(', ');
-    if (session.cohort) return session.cohort;
-    return 'Presenters not listed';
+  indexName(name) {
+    return String(name).replace(/(?:,\s*(?:MD|MS|MEHP|DO|PhD|MPH|MBA))+$/i, '').trim();
+  },
+
+  roleLine(label, names, showEmpty = false) {
+    const clean = (names || []).map((name) => this.indexName(name)).filter(Boolean);
+    if (!clean.length && !showEmpty) return null;
+    const line = this.el('span', { className: 'jc-meta-line' });
+    const title = clean.length === 1 ? label : `${label}s`;
+    line.append(this.el('span', { className: 'jc-meta-label', text: `${title}:` }));
+    if (clean.length) {
+      line.append(document.createTextNode(` ${clean.join(', ')}`));
+    } else {
+      line.append(this.el('span', { className: 'jc-details', text: ' —' }));
+    }
+    return line;
+  },
+
+  articleHref(article) {
+    if (article.doi) return `https://doi.org/${article.doi}`;
+    return article.pubmed || '';
+  },
+
+  todayIso() {
+    const now = new Date();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${now.getFullYear()}-${month}-${day}`;
+  },
+
+  nextSessionId(sessions) {
+    const today = this.todayIso();
+    const upcoming = sessions
+      .filter((session) => session.date >= today)
+      .sort((a, b) => (a.date < b.date ? -1 : 1));
+    return upcoming[0] ? upcoming[0].id : null;
   },
 
   handoutName(path) {
     const file = path.split('/').pop() || 'handout';
     return file.endsWith('.pdf') ? 'Download handout (PDF)' : 'Download handout (Word)';
+  },
+
+  handoutMeta(path, bytes) {
+    const kind = path.endsWith('.pdf') ? 'PDF' : 'Word document';
+    if (!bytes) return kind;
+    const kb = Math.round(bytes / 1024);
+    return kb >= 1024 ? `${kind} \u00b7 ${(kb / 1024).toFixed(1)} MB` : `${kind} \u00b7 ${kb} KB`;
+  },
+
+  svg(paths, className) {
+    const node = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    node.setAttribute('viewBox', '0 0 24 24');
+    node.setAttribute('aria-hidden', 'true');
+    if (className) node.setAttribute('class', className);
+    node.innerHTML = paths;
+    return node;
+  },
+
+  downloadRow(session) {
+    const link = this.el('a', { href: this.siteUrl(session.handout), className: 'jc-download' });
+    link.setAttribute('download', '');
+
+    const icon = this.el('span', { className: 'jc-download-icon' });
+    icon.append(this.svg(
+      '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>' +
+      '<polyline points="14 2 14 8 20 8"/>'
+    ));
+
+    const text = this.el('span', { className: 'jc-download-text' });
+    text.append(this.el('span', { className: 'jc-download-title', text: 'Pre-session handout' }));
+    text.append(this.el('span', {
+      className: 'jc-download-meta',
+      text: this.handoutMeta(session.handout, session.handoutBytes),
+    }));
+
+    link.append(icon, text, this.svg(
+      '<path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/>',
+      'jc-download-arrow'
+    ));
+    return link;
   },
 
   el(tag, options = {}) {
@@ -140,6 +225,11 @@ const JournalClub = {
 
       const matches = this.sorted(data.sessions).filter((session) => this.matches(session, query));
       list.replaceChildren();
+      document.querySelectorAll('[data-jc-example]').forEach((button) => {
+        const example = button.getAttribute('data-jc-example') || '';
+        button.setAttribute('aria-pressed', query.toLowerCase() === example.toLowerCase() ? 'true' : 'false');
+      });
+      if (clearBtn) clearBtn.disabled = !query;
 
       if (!matches.length) {
         status.textContent = 'No sessions match that search.';
@@ -151,59 +241,103 @@ const JournalClub = {
         return;
       }
 
-      const noun = matches.length === 1 ? 'session' : 'sessions';
-      status.textContent = query
-        ? `${matches.length} ${noun} match that search.`
-        : `${matches.length} ${noun}.`;
+      const nextId = this.nextSessionId(data.sessions);
+      const next = matches.find((session) => session.id === nextId) || null;
+      const grouped = !query && next;
+      if (query) {
+        status.textContent = matches.length === 1
+          ? '1 session matches that search.'
+          : `${matches.length} sessions match that search.`;
+      } else if (next) {
+        status.textContent = `Next session is ${this.formatDate(next.date)}.`;
+      } else {
+        status.textContent = `${matches.length} sessions, newest first.`;
+      }
 
-      matches.forEach((session) => {
-        const article = this.el('article', { className: 'jc-row' });
-        const when = this.el('p', {
-          className: 'jc-kicker',
-          text: session.time ? `${this.formatDate(session.date)} · ${session.time}` : this.formatDate(session.date),
-        });
-        const title = this.el('h3');
-        title.append(
-          this.el('a', {
-            href: `/journal-club/session.html?id=${encodeURIComponent(session.id)}`,
-            text: session.topic,
-            className: 'jc-row-title',
-          })
-        );
-        const who = this.el('p', { className: 'jc-meta', text: this.presenters(session) });
-        const papers = this.el('p', {
-          className: 'jc-meta',
-          text: session.articles.map((item) => item.label).join(' · '),
-        });
-        const actions = this.el('p', { className: 'jc-actions' });
-        actions.append(
-          this.el('a', {
-            href: `/journal-club/session.html?id=${encodeURIComponent(session.id)}`,
-            text: 'Open handout',
-            className: 'jc-link',
-          })
-        );
-        if (session.handout) {
-          const download = this.el('a', {
-            href: session.handout,
-            text: this.handoutName(session.handout),
-            className: 'jc-link',
-          });
-          download.setAttribute('download', '');
-          actions.append(download);
-        }
-        article.append(when, title, who, papers, actions);
-        list.append(article);
-      });
+      const today = this.todayIso();
+      const past = grouped ? matches.filter((session) => session.date < today) : [];
+      const rows = grouped
+        ? matches.filter((session) => session.date >= today).sort((a, b) => (a.date < b.date ? -1 : 1))
+        : matches;
+      rows.forEach((session) => list.append(this.sessionRow(session, session.id === nextId)));
+      if (past.length) {
+        list.append(this.el('h3', { className: 'jc-past-title', text: 'Past meetings' }));
+        past.forEach((session) => list.append(this.sessionRow(session, false)));
+      }
     };
 
     input.addEventListener('input', render);
+    document.getElementById('jc-search-form')?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      render();
+    });
+    document.querySelectorAll('[data-jc-example]').forEach((button) => {
+      button.addEventListener('click', () => {
+        input.value = button.getAttribute('data-jc-example') || '';
+        input.focus();
+        render();
+      });
+    });
     clearBtn?.addEventListener('click', () => {
       input.value = '';
       input.focus();
       render();
     });
     render();
+  },
+
+  sessionRow(session, isNext) {
+    const article = this.el('article', { className: isNext ? 'jc-row is-next' : 'jc-row' });
+    const parts = this.dateParts(session.date);
+    const date = this.el('div', { className: 'jc-date' });
+    const spoken = isNext
+      ? `Next session, ${this.formatDate(session.date)}`
+      : this.formatDate(session.date);
+    date.append(this.el('span', { className: 'jc-sr', text: spoken }));
+    const visual = this.el('span', { className: 'jc-date-visual', attrs: { 'aria-hidden': 'true' } });
+    visual.append(this.el('span', { className: 'jc-date-month', text: parts.month }));
+    visual.append(this.el('span', { className: 'jc-date-day', text: parts.day }));
+    visual.append(this.el('span', { className: 'jc-date-year', text: parts.year }));
+    if (isNext) visual.append(this.el('span', { className: 'jc-next', text: 'Next' }));
+    date.append(visual);
+
+    const body = this.el('div', { className: 'jc-row-body' });
+    const title = this.el('h3');
+    title.append(
+      this.el('a', {
+        href: this.siteUrl(`journal-club/session.html?id=${encodeURIComponent(session.id)}`),
+        text: session.topic,
+        className: 'jc-row-title',
+      })
+    );
+    const who = this.el('p', { className: 'jc-meta' });
+    // Same three lines on every row so the list scans as a table; a missing
+    // value shows a dash instead of dropping the line.
+    who.append(this.roleLine('Presenter', session.residents, true));
+    who.append(this.roleLine('Facilitator', session.faculty, true));
+    const details = [session.cohort, session.time].filter(Boolean);
+    who.append(this.el('span', { className: 'jc-meta-line jc-details', text: details.length ? details.join(', ') : '—' }));
+    const papers = this.el('ul', { className: 'jc-papers' });
+    session.articles.forEach((item) => {
+      const li = this.el('li');
+      const href = this.articleHref(item);
+      li.append(href ? this.externalLink(href, item.label) : document.createTextNode(item.label));
+      papers.append(li);
+    });
+    body.append(title, who, papers);
+    article.append(date, body);
+    if (session.handout) {
+      const actions = this.el('p', { className: 'jc-actions' });
+      const download = this.el('a', {
+        href: this.siteUrl(session.handout),
+        text: this.handoutName(session.handout),
+        className: 'jc-link',
+      });
+      download.setAttribute('download', '');
+      actions.append(download);
+      article.append(actions);
+    }
+    return article;
   },
 
   appendList(parent, items, ordered) {
@@ -214,6 +348,7 @@ const JournalClub = {
 
   renderChecklist(data, mount) {
     const section = this.el('section');
+    section.id = 'checklist';
     section.append(this.el('h2', { text: 'Critical appraisal checklist' }));
     section.append(
       this.el('p', {
@@ -224,10 +359,8 @@ const JournalClub = {
     const ordered = this.el('ol', { className: 'jc-checklist' });
     data.checklist.forEach((group) => {
       const item = this.el('li');
-      const title = this.el('p', { className: 'jc-check-title' });
-      title.append(document.createTextNode(group.heading));
-      title.append(this.el('span', { className: 'jc-check-sub', text: ` (${group.subtitle})` }));
-      item.append(title);
+      item.append(this.el('p', { className: 'jc-check-title', text: group.heading }));
+      item.append(this.el('p', { className: 'jc-check-sub', text: group.subtitle }));
       const questions = this.el('ul', { className: 'jc-list' });
       group.items.forEach((question) => questions.append(this.el('li', { text: question })));
       item.append(questions);
@@ -240,6 +373,7 @@ const JournalClub = {
   renderNotes(session, mount) {
     if (!session.appraisalNotes?.length) return;
     const section = this.el('section');
+    section.id = 'notes';
     section.append(this.el('h2', { text: 'Notes prepared with the handout' }));
     section.append(
       this.el('p', {
@@ -263,6 +397,7 @@ const JournalClub = {
     const line = session.bottomLine;
     if (!line) return;
     const section = this.el('section');
+    section.id = 'bottom-line';
     section.append(this.el('h2', { text: 'Bottom line' }));
     if (line.reminders) {
       this.appendList(section, line.reminders, false);
@@ -285,7 +420,6 @@ const JournalClub = {
 
   initSession(data) {
     const mount = document.getElementById('jc-handout');
-    const crumb = document.getElementById('jc-crumb');
     if (!mount) return;
     mount.replaceChildren();
     const id = new URLSearchParams(window.location.search).get('id');
@@ -293,7 +427,6 @@ const JournalClub = {
 
     if (!session) {
       document.title = 'Session not found — Journal Club';
-      if (crumb) crumb.textContent = 'Session not found';
       mount.append(this.el('h1', { text: 'That session is not in the catalog.' }));
       mount.append(
         this.el('p', {
@@ -309,54 +442,59 @@ const JournalClub = {
       ? `${this.formatDate(session.date)} · ${session.time}`
       : this.formatDate(session.date);
     document.title = `${when} — Journal Club`;
-    if (crumb) crumb.textContent = this.formatDate(session.date);
 
     const header = this.el('header', { className: 'jc-session-head' });
-    header.append(this.el('p', { className: 'jc-kicker', text: when }));
-    header.append(this.el('h1', { text: session.topic }));
+    const lead = this.el('div', { className: 'jc-session-lead' });
+    lead.append(
+      this.el('a', { href: this.siteUrl('journal-club/'), text: '← All sessions', className: 'jc-back' })
+    );
+    lead.append(
+      this.el('p', { className: 'jc-kicker', text: session.cohort ? `${when} · ${session.cohort}` : when })
+    );
+    lead.append(this.el('h1', { text: session.topic }));
     const facts = this.el('dl', { className: 'jc-facts' });
     const addFact = (label, value) => {
       if (!value) return;
-      facts.append(this.el('dt', { text: label }));
-      facts.append(this.el('dd', { text: value }));
+      const fact = this.el('div');
+      fact.append(this.el('dt', { text: label }));
+      fact.append(this.el('dd', { text: value }));
+      facts.append(fact);
     };
-    addFact('Cohort', session.cohort);
-    addFact('Resident leads', session.residents?.join(', '));
-    addFact('Faculty leads', session.faculty?.join(', '));
-    header.append(facts);
-    if (session.handout) {
-      const download = this.el('a', {
-        href: session.handout,
-        text: this.handoutName(session.handout),
-        className: 'jc-button',
-      });
-      download.setAttribute('download', '');
-      header.append(download);
-    }
+    addFact('Presenter', session.residents?.join(', '));
+    addFact('Facilitator', session.faculty?.join(', '));
+    if (facts.childElementCount) lead.append(facts);
+    header.append(lead);
+    if (session.handout) header.append(this.downloadRow(session));
     mount.append(header);
 
-    const addSection = (title, paragraphs) => {
+    const addSection = (id, title, paragraphs) => {
       const section = this.el('section');
+      section.id = id;
       section.append(this.el('h2', { text: title }));
       paragraphs.forEach((text) => section.append(this.el('p', { text })));
       mount.append(section);
       return section;
     };
 
-    addSection('Purpose', [session.purpose]);
+    addSection('purpose', 'Purpose', [session.purpose]);
 
     const objectives = this.el('section');
+    objectives.id = 'objectives';
     objectives.append(this.el('h2', { text: 'Objectives' }));
     this.appendList(objectives, session.objectives, true);
     mount.append(objectives);
 
     const articles = this.el('section');
+    articles.id = 'articles';
     articles.append(this.el('h2', { text: 'Articles for review' }));
     session.articles.forEach((article) => {
       const card = this.el('article', { className: 'jc-article' });
-      card.append(this.el('h3', { text: article.label }));
+      const heading = this.el('h3');
+      const href = this.articleHref(article);
+      heading.append(href ? this.externalLink(href, article.label) : document.createTextNode(article.label));
+      card.append(heading);
+      if (article.design) card.append(this.el('p', { className: 'jc-design', text: article.design }));
       card.append(this.el('p', { text: article.citation }));
-      card.append(this.el('p', { className: 'jc-meta', text: article.design }));
       const links = this.el('p', { className: 'jc-actions' });
       if (article.doi) links.append(this.externalLink(`https://doi.org/${article.doi}`, 'DOI'));
       if (article.pubmed) links.append(this.externalLink(article.pubmed, 'PubMed'));
@@ -366,8 +504,9 @@ const JournalClub = {
     mount.append(articles);
 
     const pico = this.el('section');
+    pico.id = 'pico';
     pico.append(this.el('h2', { text: 'PICO at a glance' }));
-    const wrap = this.el('div', { className: 'jc-table-wrap' });
+    const wrap = this.el('div', { className: 'jc-table-wrap jc-pico-table' });
     const table = this.el('table', { className: 'jc-table' });
     const caption = this.el('caption', { className: 'jc-sr', text: `PICO for ${session.topic}` });
     table.append(caption);
@@ -388,13 +527,35 @@ const JournalClub = {
     });
     table.append(head, body);
     wrap.append(table);
-    pico.append(wrap);
+    const stack = this.el('div', { className: 'jc-pico-stack' });
+    const fields = [
+      ['Population', 'population'],
+      ['Intervention', 'intervention'],
+      ['Comparison', 'comparison'],
+      ['Outcomes', 'outcomes'],
+      ['Time', 'time'],
+    ];
+    session.pico.forEach((row) => {
+      const study = this.el('article', { className: 'jc-pico-study' });
+      study.append(this.el('h3', { text: row.study }));
+      const facts = this.el('dl');
+      fields.forEach(([label, key]) => {
+        const pair = this.el('div');
+        pair.append(this.el('dt', { text: label }));
+        pair.append(this.el('dd', { text: row[key] }));
+        facts.append(pair);
+      });
+      study.append(facts);
+      stack.append(study);
+    });
+    pico.append(wrap, stack);
     mount.append(pico);
 
     this.renderChecklist(data, mount);
     this.renderNotes(session, mount);
 
     const prework = this.el('section');
+    prework.id = 'prework';
     prework.append(this.el('h2', { text: 'Pre-work' }));
     this.appendList(prework, data.prework, false);
     if (session.cases?.length) {
@@ -406,6 +567,7 @@ const JournalClub = {
     this.renderBottomLine(session, mount);
 
     const references = this.el('section');
+    references.id = 'references';
     references.append(this.el('h2', { text: 'References' }));
     const refList = this.el('ol', { className: 'jc-refs' });
     session.articles.forEach((article) => {
@@ -418,6 +580,31 @@ const JournalClub = {
     });
     references.append(refList);
     mount.append(references);
+    this.buildToc(mount);
+  },
+
+  buildToc(mount) {
+    const labels = {
+      purpose: 'Purpose',
+      objectives: 'Objectives',
+      articles: 'Articles',
+      pico: 'PICO',
+      checklist: 'Checklist',
+      notes: 'Notes',
+      prework: 'Pre-work',
+      'bottom-line': 'Bottom line',
+      references: 'References',
+    };
+    const sections = [...mount.querySelectorAll(':scope > section[id]')];
+    if (sections.length < 2) return;
+    const nav = this.el('nav', { className: 'jc-toc', attrs: { 'aria-label': 'On this page' } });
+    sections.forEach((section) => {
+      const label = labels[section.id];
+      if (!label) return;
+      nav.append(this.el('a', { href: `#${section.id}`, text: label, className: 'jc-toc-link' }));
+    });
+    const header = mount.querySelector('.jc-session-head');
+    if (header) header.after(nav);
   },
 };
 
