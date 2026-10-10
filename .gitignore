@@ -35,3 +35,7 @@ __pycache__/
 
 # Claude
 .claude/
+
+# Local tooling output
+security-reports/
+.playwright-mcp/
