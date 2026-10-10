@@ -6,20 +6,34 @@
     "authorTitle": "Clinical Professor of Anesthesiology & Pain Medicine, UC Davis Health",
     "logo": "/img/logo-icon.png"
   },
-  "navigation": {
-    "home": [
-      { "label": "AI Resources", "href": "#ai" },
-      { "label": "Clinical Education", "href": "#education" },
-      { "label": "Protocols", "href": "#education" },
-      { "label": "About", "href": "#about" }
-    ],
-    "bth": [
-      { "label": "Home", "href": "/" },
-      { "label": "Beyond the Hype", "href": "/ai/bth/" },
-      { "label": "Resource Guide", "href": "/ai/bth/resource-guide.html" },
-      { "label": "Quiz", "href": "/ai/bth/beyond-the-hype-quiz.html" }
-    ]
-  },
+  "_comment": "footerNav drives the footer sitemap rendered by js/site.js. The primary navbar is hardcoded in each page so it works without JavaScript; it is not configured here.",
+  "footerNav": [
+    {
+      "heading": "AI Resources",
+      "links": [
+        { "label": "Beyond the Hype", "href": "/ai/bth/" },
+        { "label": "Resource Guide", "href": "/ai/bth/resource-guide.html" },
+        { "label": "Knowledge Quiz", "href": "/ai/bth/beyond-the-hype-quiz.html" }
+      ]
+    },
+    {
+      "heading": "Journal Club",
+      "links": [
+        { "label": "Sessions", "href": "/journal-club/" },
+        { "label": "How a session runs", "href": "/journal-club/how-a-session-runs.html" },
+        { "label": "How to read a paper", "href": "/journal-club/how-to-read-a-paper.html" },
+        { "label": "Critical appraisal", "href": "/journal-club/appraisal/" }
+      ]
+    },
+    {
+      "heading": "Site",
+      "links": [
+        { "label": "Home", "href": "/" },
+        { "label": "Clinical Education", "href": "/#education" },
+        { "label": "About", "href": "/#about" }
+      ]
+    }
+  ],
   "legal": {
     "disclaimer": {
       "title": "Disclaimer",

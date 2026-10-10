@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A systematic review is a study whose subjects are other studies. Pooling makes the confidence interval narrower. It does not make the included trials better, and the figure is where that distinction becomes visible.">
+  <title>Systematic reviews, PRISMA, and figure forensics &mdash; Critical appraisal</title>
+  <script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();</script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/shared.css">
+  <link rel="stylesheet" href="/journal-club/journal-club.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<nav class="navbar" aria-label="Primary navigation">
+  <div class="nav-content">
+    <a href="/" class="logo" aria-label="Anesthesia SmartSite home">
+      <img src="/img/logo-icon.png" alt="" width="44" height="44">
+      <div class="logo-text">
+        <span class="logo-title"><span class="logo-anesthesia">Anesthesia </span><span class="logo-smartsite">SmartSite</span></span>
+        <span class="logo-subtitle">Advancing Anesthesia Education with AI</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="/#ai" class="nav-link" data-label="AI Resources">AI Resources</a>
+      <a href="/#education" class="nav-link" data-label="Clinical Education">Clinical Education</a>
+      <a href="/journal-club/" class="nav-link" aria-current="page" data-label="Journal Club">Journal Club</a>
+      <a href="/#about" class="nav-link" data-label="About">About</a>
+      <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode"><svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <svg viewBox="0 0 24 24">
+        <line class="hamburger-line" x1="3" y1="6" x2="21" y2="6"/>
+        <line class="hamburger-line" x1="3" y1="12" x2="21" y2="12"/>
+        <line class="hamburger-line" x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+<div class="mobile-overlay" id="mobile-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <button class="mobile-nav-close" aria-label="Close menu" id="mobile-nav-close">
+    <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+      <a href="/#ai" class="nav-link" data-label="AI Resources">AI Resources</a>
+      <a href="/#education" class="nav-link" data-label="Clinical Education">Clinical Education</a>
+      <a href="/journal-club/" class="nav-link" aria-current="page" data-label="Journal Club">Journal Club</a>
+      <a href="/#about" class="nav-link" data-label="About">About</a>
+  <div class="mobile-theme-toggle">
+    <span class="mobile-theme-label">Appearance</span>
+    <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode"><svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+  </div>
+</nav>
+<div class="section-bar">
+  <nav class="section-nav" aria-label="Journal Club">
+  <a href="/journal-club/">Sessions</a>
+  <a href="/journal-club/how-a-session-runs.html">How a session runs</a>
+  <a href="/journal-club/how-to-read-a-paper.html">How to read a paper</a>
+  <a href="/journal-club/appraisal/" aria-current="page">Critical appraisal</a>
+  </nav>
+</div>
+<main id="main-content" class="jc-page jc-prose">
+
+  <header>
+    <div class="jc-part-meta">
+      <p class="jc-kicker"><a href="/journal-club/appraisal/">Critical appraisal</a> <span aria-hidden="true">&middot;</span> Part 4 of 7</p>
+      <nav class="jc-part-nav" aria-label="Series">
+        <a href="/journal-club/appraisal/observational-studies.html" rel="prev"><span aria-hidden="true">&lsaquo;</span><span class="jc-part-nav-label">Observational studies</span><span class="jc-sr">Previous part: Observational studies</span></a>
+        <a href="/journal-club/appraisal/grade.html" rel="next"><span class="jc-part-nav-label">GRADE</span><span aria-hidden="true">&rsaquo;</span><span class="jc-sr">Next part: GRADE</span></a>
+      </nav>
+    </div>
+    <h1>Systematic reviews, PRISMA, and figure forensics</h1>
+    <p class="jc-intro">A systematic review is a study whose subjects are other studies. Pooling makes the confidence interval narrower. It does not make the included trials better, and the figure is where that distinction becomes visible.</p>
+  </header>
+
+  <details class="jc-toc-details">
+    <summary>On this page <span class="jc-toc-count">8 sections</span></summary>
+    <nav class="jc-toc" aria-label="On this page">
+      <a class="jc-toc-link" href="#isastudy">A review is a study</a>
+      <a class="jc-toc-link" href="#assembled">How a review is assembled</a>
+      <a class="jc-toc-link" href="#ceiling">The included studies set the ceiling</a>
+      <a class="jc-toc-link" href="#forest">Reading a forest plot</a>
+      <a class="jc-toc-link" href="#forensics">Figure forensics</a>
+      <a class="jc-toc-link" href="#prisma">PRISMA</a>
+      <a class="jc-toc-link" href="#table">At the table</a>
+      <a class="jc-toc-link" href="#refs">References</a>
+    </nav>
+  </details>
+
+  <section id="isastudy" aria-labelledby="isastudy-title">
+    <h2 id="isastudy-title">A review is a study</h2>
+    <p>A systematic review has a protocol written before the work starts, a defined population of eligible studies, a reproducible search, and a prespecified synthesis. It should be registered, usually on PROSPERO, and the registration should match the paper. Appraise it the way you appraise a trial: the question, the method, the result, and whether the conclusion is the size of the finding.</p>
+    <p>A narrative or educational review is a different document doing a different job, and mixing the two up is the most common error in a journal club. Haslam 2024, in the September session, is an education review of perioperative care for elective total hip arthroplasty. It is useful, it describes what good practice looks like, and it does not pool anything or estimate a hazard ratio. You can cite it for what the standard pathway is. You cannot cite it as evidence of an effect size.</p>
+    <p class="jc-takeaway">Three questions separate them. Was there a protocol. Was the search reproducible. Were the included studies appraised individually. A review that cannot answer all three is expert opinion with citations, which is worth reading and is not a synthesis.</p>
+  </section>
+
+  <section id="assembled" aria-labelledby="assembled-title">
+    <h2 id="assembled-title">How a review is assembled</h2>
+    <p>Six steps, each with something to check.</p>
+    <ol class="jc-checklist">
+      <li>
+        <p class="jc-check-title">Question and protocol</p>
+        <p class="jc-check-sub">A PICO with eligibility criteria, registered in advance. Compare the paper&rsquo;s primary outcome with the registered one.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Search</p>
+        <p class="jc-check-sub">Which databases, over what date range, with the full search string published. A search of PubMed alone is a narrow search. Look for Embase, the Cochrane register, and a check of reference lists and trial registries.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Screening</p>
+        <p class="jc-check-sub">Two independent reviewers at title and abstract, and again at full text, with a stated method for resolving disagreement.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Data extraction</p>
+        <p class="jc-check-sub">Also in duplicate. Check whether authors were contacted for missing data, and how results reported as medians were converted for pooling.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Risk of bias, per study</p>
+        <p class="jc-check-sub">A named tool such as RoB&nbsp;2, applied to each included study and reported per study. A review that reports one overall quality sentence has skipped this.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Synthesis</p>
+        <p class="jc-check-sub">Whether pooling was appropriate at all, which model was used, and how heterogeneity was handled. A narrative synthesis is the right answer when the studies are too different, and choosing it is a sign of judgment rather than weakness.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="ceiling" aria-labelledby="ceiling-title">
+    <h2 id="ceiling-title">The included studies set the ceiling</h2>
+    <p>A meta-analysis of six small unblinded trials is a precise summary of six small unblinded trials. Pooling addresses random error. It does nothing about systematic error, and averaging biased estimates produces a biased average with a narrower interval, which is worse than the individual studies because it is more persuasive.</p>
+    <p>Grape 2021 pooled 10 trials and 668 patients comparing a TAP block with local anesthetic wound infiltration for laparoscopic cholecystectomy. Pain at rest two hours after surgery was lower with the block, with a mean difference of &minus;0.7 points on a 0 to 10 scale and a 95% confidence interval of &minus;1.2 to &minus;0.2. Pain was also lower at 12 and 24 hours, and morphine use and nausea were lower.</p>
+    <p>Now read that as a review rather than as a headline. The interval is reasonably tight, so the pooling worked. The effect is 0.7 points, which is smaller than the 1 to 2 points many clinicians want before switching technique. And 668 patients across 10 trials averages fewer than 70 patients per trial, which tells you the ceiling on how well any single one was done. The review also includes a trial sequential analysis, which asks whether the accumulated evidence has crossed a boundary for a firm conclusion rather than just crossing p&nbsp;=&nbsp;0.05, and that is worth reading when it is present.</p>
+    <p>The honest summary has all three facts in it: a real difference, a small one, from small trials, for one operation, against one comparator.</p>
+  </section>
+
+  <section id="forest" aria-labelledby="forest-title">
+    <h2 id="forest-title">Reading a forest plot</h2>
+    <p>The anatomy first. Each row is one study. The square is that study&rsquo;s point estimate, and the area of the square is its weight in the pool, so a big square is a big or a precise study. The horizontal line through it is that study&rsquo;s confidence interval. The vertical line down the figure is the value of no effect, which is 0 for a difference and 1 for a ratio. The diamond at the bottom is the pooled estimate, and the width of the diamond is the pooled confidence interval.</p>
+    <p>Then read it in this order, which is not the order your eye wants to use.</p>
+    <ol class="jc-checklist">
+      <li>
+        <p class="jc-check-title">The caption, not the diamond.</p>
+        <p class="jc-check-sub">Which outcome, at which time point, in which subset of the included studies. A review will have several forest plots and they are not interchangeable.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">The scale, and where no effect sits.</p>
+        <p class="jc-check-sub">Ratios belong on a log scale. Check that the axis is not truncated, because a narrow axis makes a trivial difference look decisive.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Whether the rows point the same way.</p>
+        <p class="jc-check-sub">Before any statistic. Studies scattered on both sides of the line mean something different from studies that all lean one way with different strengths.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">The weights.</p>
+        <p class="jc-check-sub">If one trial carries 60% of the weight, the diamond is that trial. Ask whether you would believe it on its own.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">The width of the diamond against a difference you would act on.</p>
+        <p class="jc-check-sub">Put the minimal clinically important difference on the axis mentally, and see which side of it the interval lies.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">How many studies are in this particular plot.</p>
+        <p class="jc-check-sub">A review of 10 trials may have only 4 contributing to the 24-hour outcome.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="forensics" aria-labelledby="forensics-title">
+    <h2 id="forensics-title">Figure forensics</h2>
+    <p>Six things that hide in the figures and the appendix.</p>
+    <h3>Pooled apples</h3>
+    <p>Check what was combined. Pain at 2 hours and pain at 24 hours are different outcomes, and a plot labeled &ldquo;postoperative pain&rdquo; that mixes time points has answered a question nobody asked. The same goes for pooling different drugs, different doses, or a block and a catheter under one heading.</p>
+    <h3>Heterogeneity, read properly</h3>
+    <p>I&sup2; is the proportion of variability across studies that is not chance. It is not a permission test, and a low I&sup2; from four small trials is not reassuring. Read it next to the shape of the plot: high I&sup2; with all rows leaning the same way is a question about magnitude, while high I&sup2; with rows on both sides is a question about whether pooling was legitimate at all. A prediction interval, when reported, is the more useful number, because it describes the range a new study would likely fall in rather than the precision of the average.</p>
+    <h3>Fixed effect or random effects</h3>
+    <p>A fixed-effect model assumes one true effect and that differences between studies are chance. Random effects assume the true effect varies. Random effects give wider intervals and give small studies relatively more weight, which matters when the small studies are the positive ones.</p>
+    <h3>Small-study effects</h3>
+    <p>A funnel plot asks whether small studies are missing from one side. It is worth looking at, and it is uninterpretable with fewer than about ten studies, which describes a lot of anesthesia reviews. An asymmetric funnel is evidence of something, not specifically of publication bias.</p>
+    <h3>Subgroups</h3>
+    <p>A subgroup finding needs three things before it means anything: it was prespecified, there is a test for interaction rather than two separate p-values, and the number of subgroups examined is stated. Without those, a positive subgroup in an otherwise null review is a hypothesis for the next trial.</p>
+    <h3>Sensitivity analyses</h3>
+    <p>Look for what happens when the highest-risk-of-bias studies are removed, or the largest trial, or the one unblinded trial. If the conclusion depends on one study, the review should say so, and if it does not say so, you can often work it out from the weights.</p>
+  </section>
+
+  <section id="prisma" aria-labelledby="prisma-title">
+    <h2 id="prisma-title">PRISMA</h2>
+    <p>PRISMA 2020 is a 27-item reporting checklist plus a flow diagram. Read the flow diagram first, the same way you read the CONSORT diagram in <a class="jc-link" href="/journal-club/appraisal/randomized-trials.html#consort">Part 2</a>: records identified, duplicates removed, records screened, full-text articles assessed, articles excluded with reasons, studies included.</p>
+    <p>Two things to look for. A large number excluded at full text without reasons given is a gap, because full-text exclusions are where a review&rsquo;s judgment lives. And a very small number of records screened for a broad question usually means a narrow search.</p>
+    <p>For a judgment about the review itself, the tool is AMSTAR&nbsp;2, and PRISMA compliance is not a substitute for it. The same principle from <a class="jc-link" href="/journal-club/appraisal/foundations.html#equator">Part 1</a> applies: the checklist governs the page, not the work.</p>
+  </section>
+
+  <section id="table" aria-labelledby="table-title">
+    <h2 id="table-title">At the table</h2>
+    <ol class="jc-checklist">
+      <li>
+        <p class="jc-check-title">Is this a systematic review, or a review?</p>
+        <p class="jc-check-sub">Protocol, reproducible search, per-study appraisal. All three, or it is expert opinion.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">What is the comparator, and how many studies actually contribute?</p>
+        <p class="jc-check-sub">For the specific outcome and time point you care about, not for the review as a whole.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">How good were the included studies?</p>
+        <p class="jc-check-sub">Find the risk-of-bias table. Pooling does not repair bias.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Read the right forest plot, in order.</p>
+        <p class="jc-check-sub">Caption, scale, direction of the rows, weights, then the diamond.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Is the pooled effect bigger than the difference you would act on?</p>
+        <p class="jc-check-sub">Say the number and the units. Grape&rsquo;s 0.7 points on a 0 to 10 scale is the example.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Does the conclusion depend on one trial?</p>
+        <p class="jc-check-sub">Check the weights and the sensitivity analyses.</p>
+      </li>
+      <li>
+        <p class="jc-check-title">Does the abstract&rsquo;s conclusion match the primary outcome?</p>
+        <p class="jc-check-sub">Or is it built from a secondary outcome or a subgroup?</p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="refs" aria-labelledby="refs-title">
+    <h2 id="refs-title">References</h2>
+    <ul class="jc-refs">
+      <li>Page MJ, McKenzie JE, Bossuyt PM, et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. <cite>BMJ</cite>. 2021;372:n71. <a class="jc-link" href="https://www.prisma-statement.org/" target="_blank" rel="noopener noreferrer">prisma-statement.org</a></li>
+      <li>Shea BJ, Reeves BC, Wells G, et al. AMSTAR 2: a critical appraisal tool for systematic reviews that include randomised or non-randomised studies of healthcare interventions, or both. <cite>BMJ</cite>. 2017;358:j4008. <a class="jc-link" href="https://pubmed.ncbi.nlm.nih.gov/28935701/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
+      <li>Grape S, Kirkham KR, Akiki L, Albrecht E. Transversus abdominis plane block versus local anesthetic wound infiltration for optimal analgesia after laparoscopic cholecystectomy: a systematic review and meta-analysis with trial sequential analysis. <cite>J Clin Anesth</cite>. 2021;75:110450. <a class="jc-link" href="https://pubmed.ncbi.nlm.nih.gov/34243030/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
+      <li>Haslam N, Halvey E, Scott C. Perioperative care of patients undergoing total hip arthroplasty. <cite>BJA Educ</cite>. 2024;24(6):183-190. <a class="jc-link" href="https://pubmed.ncbi.nlm.nih.gov/38764444/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
+      <li>Session handout: <a class="jc-link" href="/journal-club/session.html?id=2026-10-06">October 6, 2026. TAP block for abdominal surgery.</a></li>
+    </ul>
+  </section>
+
+  <nav class="jc-pager" aria-label="Series">
+    <a class="jc-link" href="/journal-club/appraisal/observational-studies.html" rel="prev"><span class="jc-pager-dir">Previous</span><span class="jc-pager-part">Part 3. Observational studies</span></a>
+    <a class="jc-link" href="/journal-club/appraisal/grade.html" rel="next"><span class="jc-pager-dir">Next</span><span class="jc-pager-part">Part 5. GRADE</span></a>
+  </nav>
+</main>
+
+<footer class="site-footer" id="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__author">Brian Pitts, MD, MS, MEHP &middot; Clinical Professor of Anesthesiology &amp; Pain Medicine, UC Davis Health</p>
+    <div class="site-footer__links">
+      <button class="site-footer__link" data-modal="disclaimer">Disclaimer</button>
+      <button class="site-footer__link" data-modal="privacy">Privacy Policy</button>
+      <button class="site-footer__link" data-modal="terms">Terms of Service</button>
+    </div>
+  </div>
+</footer>
+<div class="modal-overlay" id="legal-modal" role="dialog" aria-modal="true" aria-label="Legal information"></div>
+<script src="/js/site.js"></script>
+</body>
+</html>

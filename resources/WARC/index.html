@@ -143,6 +143,32 @@
       background: rgba(255, 255, 255, 0.18);
     }
 
+    .site-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.45);
+      transition: color 0.2s ease;
+    }
+
+    .site-link:hover,
+    .site-link:focus-visible {
+      color: #c9a96e;
+    }
+
+    .site-link svg {
+      width: 11px;
+      height: 11px;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      fill: none;
+    }
+
     .cta-row {
       display: flex;
       flex-wrap: wrap;
@@ -263,6 +289,12 @@
     <p class="conf-meta">
       UC Davis Health<span class="sep">&middot;</span>May 15&ndash;16, 2026<span class="sep">&middot;</span>Sacramento
     </p>
+    <a class="site-link" href="/">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+      </svg>
+      Anesthesia SmartSite
+    </a>
   </header>
 
   <main>

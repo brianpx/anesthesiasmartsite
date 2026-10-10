@@ -1,0 +1,4 @@
+# Placeholder curl examples (YOUR_API_KEY / YOUR_TOKEN against api.example.com) in old docs commits.
+cf15db5b469f75a938115e9073c61871ab23e343:integrations.mdx:curl-auth-header:205
+0a790f18bd14ab93079a2be50d4bf25b88ba4e89:docs/quickstart.mdx:curl-auth-header:113
+6713f8c00f06948f814d5737c9b36f706c15a0ac:docs/integrations.mdx:curl-auth-header:205

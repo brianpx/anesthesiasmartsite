@@ -1,0 +1,1332 @@
+/* The page shares the navbar's 1200px column so the logo, section tabs, title
+   and footer start on one left edge; prose blocks keep the narrower measure. */
+.jc-page {
+  max-width: 1264px;
+  margin: 0 auto;
+  padding: 1.75rem 2rem 4.5rem;
+}
+
+.jc-page > * {
+  max-width: 912px;
+}
+
+.jc-page h1 {
+  font-size: clamp(1.85rem, 4vw, 2.55rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text-heading);
+  margin: 0.2rem 0 0.7rem;
+}
+
+.jc-page h2 {
+  font-size: 1.3rem;
+  line-height: 1.3;
+  color: var(--color-text-heading);
+  margin: 2.75rem 0 0.8rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.jc-toc-details + section > h2:first-child {
+  margin-top: 2rem;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.jc-page h3 {
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: var(--color-text-heading);
+  margin: 0.15rem 0 0.35rem;
+}
+
+.jc-page h4 {
+  font-size: 0.95rem;
+  color: var(--color-text-heading);
+  margin: 0.9rem 0 0.3rem;
+}
+
+.jc-page p,
+.jc-page li {
+  line-height: 1.6;
+}
+
+.jc-intro,
+.jc-page section > p,
+.jc-page section > .jc-list,
+.jc-series li {
+  max-width: 68ch;
+}
+
+.jc-kicker {
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Part-page header: series position on the left, step controls on the right,
+   so "where am I / how do I move" is answered before the title. */
+.jc-part-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  flex-wrap: wrap;
+}
+
+.jc-kicker a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+}
+
+.jc-kicker a:hover {
+  color: var(--color-accent-hover);
+}
+
+.jc-part-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.jc-part-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.jc-part-nav a:hover {
+  color: var(--color-accent-hover);
+}
+
+.jc-part-nav a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Jump list, folded away. The sections are ruled and the pages are short
+   enough to scroll; this is for the reader who wants a specific one. */
+.jc-toc-details {
+  margin-top: 1.35rem;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.jc-toc-details summary {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-text-heading);
+  list-style: none;
+}
+
+.jc-toc-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.jc-toc-details summary::before {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-right: 2px solid var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
+  transform: rotate(-45deg);
+  transition: transform var(--transition-fast);
+}
+
+.jc-toc-details[open] summary::before {
+  transform: rotate(45deg);
+}
+
+.jc-toc-details summary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.jc-toc-count {
+  color: var(--color-text-muted);
+  font-weight: 400;
+  font-size: 0.85rem;
+}
+
+.jc-toc-details .jc-toc {
+  margin-top: 0;
+  padding-bottom: 0.9rem;
+}
+
+.jc-intro {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.jc-search {
+  margin: 1.5rem 0 0;
+}
+
+.jc-search-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.jc-search-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.jc-search-field label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--color-text-heading);
+  font-weight: 600;
+}
+
+.jc-search-field input {
+  width: 100%;
+  font: inherit;
+  color: var(--color-text-heading);
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.9rem;
+  min-height: 48px;
+}
+
+.jc-search-field input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+.jc-search-field input:focus-visible,
+.jc-button:focus-visible,
+.jc-download:focus-visible,
+.jc-link:focus-visible,
+.jc-text-button:focus-visible,
+.jc-chip:focus-visible,
+.jc-choice:focus-visible,
+.jc-bluf-input:focus-visible,
+.jc-read summary:focus-visible,
+.jc-toc-link:focus-visible,
+.jc-row-title:focus-visible,
+.jc-series-title:focus-visible,
+.jc-pager a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.jc-search-field input:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.jc-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.1rem;
+  margin-top: 0.7rem;
+}
+
+.jc-chip,
+.jc-text-button,
+.jc-button {
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.jc-chip {
+  min-height: 44px;
+  padding: 0.35rem 0;
+  color: var(--color-accent);
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+}
+
+.jc-chip[aria-pressed="true"],
+.jc-chip[aria-pressed="true"]:hover {
+  color: var(--color-text-heading);
+  text-decoration: none;
+}
+
+.jc-text-button {
+  min-height: 48px;
+  color: var(--color-accent);
+  background: transparent;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.9rem;
+}
+
+.jc-text-button:hover:not(:disabled),
+.jc-chip:hover {
+  color: var(--color-accent-hover);
+}
+
+.jc-text-button:disabled {
+  display: none;
+}
+
+.jc-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: var(--color-brand-dark);
+  color: #f8fafc;
+  border: 0;
+  border-radius: var(--radius-sm);
+  min-height: 48px;
+  padding: 0.7rem 1rem;
+}
+
+.jc-button:hover {
+  background: var(--color-brand-mid);
+}
+
+/* Handout download. A row rather than a filled button, so the format and
+   weight of the file are legible before anyone commits to the click. */
+.jc-download {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
+  max-width: 27rem;
+  margin-top: 1.35rem;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-card-bg);
+  color: var(--color-text-heading);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.jc-download:hover {
+  border-color: var(--color-accent);
+  background: var(--color-card-bg-hover);
+}
+
+.jc-download-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-badge-bg);
+}
+
+.jc-download-icon svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  stroke: var(--color-accent);
+  stroke-width: 1.9;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.jc-download-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.jc-download-title {
+  display: block;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.jc-download-meta {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+.jc-download-arrow {
+  flex-shrink: 0;
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke: var(--color-text-muted);
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke var(--transition-fast), transform var(--transition-fast);
+}
+
+.jc-download:hover .jc-download-arrow {
+  stroke: var(--color-accent);
+  transform: translateY(2px);
+}
+
+.jc-status {
+  min-height: 1.4rem;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  margin: 0.35rem 0 0.15rem;
+}
+
+.jc-row {
+  display: grid;
+  grid-template-columns: 4.75rem minmax(0, 1fr) auto;
+  column-gap: 1.35rem;
+  align-items: start;
+  position: relative;
+  padding: 1.05rem 0.75rem 1.15rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.jc-row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0.2rem;
+}
+
+.jc-date {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.jc-row-body {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  padding-top: 0.12rem;
+}
+
+.jc-date-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  line-height: 1;
+}
+
+.jc-date-day {
+  margin-top: 0.18rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--color-text-heading);
+  font-variant-numeric: tabular-nums;
+}
+
+.jc-date-month,
+.jc-date-year {
+  font-size: 0.78rem;
+  line-height: 1.15;
+  color: var(--color-text-muted);
+}
+
+.jc-date-month {
+  font-weight: 600;
+}
+
+.jc-date-year {
+  margin-top: 0.22rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.jc-row h3 {
+  margin: 0;
+  font-size: 1.12rem;
+  line-height: 1.3;
+  letter-spacing: -0.013em;
+}
+
+.jc-row-title {
+  color: var(--color-text-heading);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.jc-row-title:hover,
+.jc-link:hover,
+.jc-toc-link:hover {
+  color: var(--color-accent-hover);
+}
+
+.jc-row-title:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+}
+
+.jc-meta,
+.jc-papers,
+.jc-design,
+.jc-check-sub,
+.jc-empty,
+.jc-who,
+.jc-lead {
+  color: var(--color-text-muted);
+}
+
+.jc-row .jc-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  margin-top: 0.35rem;
+  color: var(--color-text);
+  font-size: 0.94rem;
+  line-height: 1.35;
+}
+
+.jc-meta-line {
+  display: block;
+}
+
+.jc-meta-label,
+.jc-details {
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.jc-details {
+  font-weight: 400;
+}
+
+.jc-article h3 a {
+  color: var(--color-text-heading);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-underline-offset: 0.16em;
+}
+
+.jc-article h3 a:hover {
+  color: var(--color-accent-hover);
+}
+
+.jc-papers {
+  list-style: none;
+  margin: 0.28rem 0 0;
+  padding: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.jc-papers li + li {
+  margin-top: 0.12rem;
+}
+
+.jc-papers a {
+  color: inherit;
+  font-weight: 400;
+  text-decoration-color: var(--color-border-light);
+  text-underline-offset: 0.16em;
+}
+
+.jc-papers a:hover {
+  color: var(--color-accent-hover);
+  text-decoration-color: currentColor;
+}
+
+.jc-row .jc-actions {
+  grid-column: 3;
+  grid-row: 1;
+  align-self: start;
+  margin: 0.2rem 0 0;
+}
+
+.jc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  margin: 0.35rem 0 0;
+}
+
+.jc-link,
+.jc-toc-link {
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.jc-empty {
+  padding: 0.4rem 0 0.25rem;
+}
+
+/* Handout card sits under the title and facts, where it reads as part of the
+   header rather than floating at the far edge of a wide row. */
+.jc-session-lead {
+  min-width: 0;
+}
+
+.jc-back {
+  display: inline-block;
+  margin-bottom: 0.9rem;
+  padding: 0.5rem 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.jc-back:hover,
+.jc-back:focus-visible {
+  color: var(--color-accent-hover);
+}
+
+.jc-back:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.jc-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.75rem;
+  margin: 1.1rem 0 0;
+}
+
+.jc-facts dt {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.jc-facts dd {
+  margin: 0.12rem 0 0;
+  color: var(--color-text);
+}
+
+.jc-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.1rem;
+  margin-top: 1.35rem;
+}
+
+.jc-list,
+.jc-checklist,
+.jc-refs {
+  margin: 0.35rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.jc-list li,
+.jc-checklist > li,
+.jc-refs li {
+  margin: 0.35rem 0;
+}
+
+.jc-checklist > li {
+  margin: 1.15rem 0;
+}
+
+.jc-check-title {
+  font-weight: 600;
+  color: var(--color-text-heading);
+  margin: 0;
+}
+
+.jc-check-sub {
+  margin: 0.1rem 0 0.25rem;
+}
+
+.jc-article {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.1rem 1.05rem;
+  margin-top: 0.75rem;
+}
+
+.jc-article p {
+  margin: 0.35rem 0 0;
+}
+
+.jc-design {
+  margin-top: 0.15rem;
+  font-size: 0.92rem;
+}
+
+.jc-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 1.75rem;
+}
+
+.jc-column,
+.jc-note-block {
+  background: none;
+  border-radius: 0;
+}
+
+.jc-column {
+  border-top: 2px solid var(--color-border-light);
+  padding-top: 0.8rem;
+}
+
+.jc-note-block {
+  border-left: 3px solid var(--color-border-light);
+  padding: 0.15rem 0 0.15rem 1rem;
+  margin-top: 1.25rem;
+}
+
+.jc-conclusion {
+  margin-top: 0.75rem;
+}
+
+.jc-takeaway {
+  margin-top: 1rem;
+  border-left: 3px solid var(--color-accent);
+  padding-left: 0.9rem;
+  color: var(--color-text-heading);
+}
+
+.jc-table-wrap {
+  overflow-x: auto;
+  margin-top: 0.35rem;
+}
+
+.jc-pico-stack {
+  display: none;
+}
+
+.jc-pico-study {
+  padding: 1rem 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.jc-pico-study:first-child {
+  border-top: 0;
+  padding-top: 0.15rem;
+}
+
+.jc-pico-study dl {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0.55rem 0 0;
+}
+
+.jc-pico-study dt {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.jc-pico-study dd {
+  margin: 0.1rem 0 0;
+}
+
+.jc-table {
+  width: 100%;
+  min-width: 46rem;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.jc-table th,
+.jc-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.7rem 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  line-height: 1.45;
+}
+
+.jc-table th {
+  color: var(--color-text-heading);
+  font-weight: 600;
+}
+
+.jc-table thead th:first-child,
+.jc-table tbody th[scope="row"] {
+  position: sticky;
+  left: 0;
+  background: var(--color-bg);
+  box-shadow: 1px 0 0 var(--color-border);
+  z-index: 1;
+}
+
+.jc-table thead th:first-child {
+  z-index: 2;
+}
+
+
+.jc-next {
+  display: block;
+  margin-top: 0.45rem;
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.jc-row.is-next {
+  background: var(--color-glow);
+}
+
+.jc-row.is-next::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7rem;
+  bottom: 0.7rem;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--color-accent);
+}
+
+.jc-past-title {
+  margin: 1.85rem 0 0.25rem;
+  font-size: 1.05rem;
+}
+
+.jc-timeline {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0 0 0 1.35rem;
+  border-left: 2px solid var(--color-border-light);
+}
+
+.jc-timeline li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 6.75rem minmax(0, 1fr);
+  gap: 0.2rem 1rem;
+  padding: 0 0 1.45rem;
+}
+
+.jc-timeline li:last-child {
+  padding-bottom: 0;
+}
+
+.jc-timeline li::before {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  left: calc(-1.35rem - 5px);
+  top: 0.35rem;
+  border-radius: 50%;
+  background: var(--color-bg);
+  box-shadow: inset 0 0 0 2px var(--color-accent);
+}
+
+.jc-when,
+.jc-what {
+  margin: 0;
+  color: var(--color-text-heading);
+}
+
+.jc-when {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.jc-who {
+  margin: 0.15rem 0 0;
+  font-size: 0.92rem;
+}
+
+.jc-read {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  counter-reset: read;
+}
+
+.jc-read > li {
+  counter-increment: read;
+  position: relative;
+  padding: 1.35rem 0 1.35rem 2.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.jc-read > li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.jc-read > li:last-child {
+  padding-bottom: 0;
+}
+
+.jc-read > li::before {
+  content: counter(read);
+  position: absolute;
+  left: 0;
+  top: 1.4rem;
+  font-weight: 700;
+  font-size: 1.35rem;
+  line-height: 1.15;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.jc-read > li:first-child::before {
+  top: 0.05rem;
+}
+
+.jc-page .jc-read h2 {
+  margin: 0 0 0.35rem;
+  padding: 0;
+  border-top: 0;
+  font-size: 1.15rem;
+}
+
+.jc-read p,
+.jc-read .jc-questions {
+  max-width: 68ch;
+}
+
+.jc-read p {
+  margin: 0.45rem 0 0;
+}
+
+.jc-read .jc-questions {
+  margin: 0.55rem 0 0;
+  padding-left: 1.15rem;
+  color: var(--color-text);
+}
+
+.jc-practice {
+  list-style: none;
+  margin: 0.2rem 0 0;
+  padding: 0;
+}
+
+.jc-practice li {
+  max-width: 68ch;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.jc-practice li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.jc-work {
+  margin: 1.35rem 0 0;
+}
+
+.jc-work-papers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.1rem;
+  margin-top: 0.35rem;
+}
+
+.jc-work-cite,
+.jc-scene,
+.jc-src {
+  max-width: 68ch;
+}
+
+.jc-work-cite,
+.jc-scene {
+  margin: 0.75rem 0 0;
+}
+
+.jc-scene {
+  color: var(--color-text-heading);
+}
+
+.jc-src {
+  margin: 0.45rem 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+}
+
+#jc-work-reset {
+  margin-top: 0.35rem;
+}
+
+.jc-read .jc-onpaper p {
+  margin: 0.45rem 0 0;
+}
+
+.jc-read .jc-onpaper .jc-kicker {
+  margin: 0;
+}
+
+.jc-onpaper {
+  margin-top: 0.9rem;
+  max-width: 68ch;
+}
+
+.jc-prompt {
+  margin: 0.7rem 0 0;
+  color: var(--color-text-heading);
+  font-weight: 600;
+}
+
+.jc-choices {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+}
+
+.jc-choice {
+  font: inherit;
+  text-align: left;
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.85rem;
+  min-height: 48px;
+  cursor: pointer;
+  line-height: 1.45;
+}
+
+.jc-choice:hover {
+  border-color: var(--color-accent);
+}
+
+.jc-choice.is-key,
+.jc-choice.is-key[aria-disabled="true"]:hover {
+  border-color: var(--color-accent);
+  box-shadow: inset 3px 0 0 var(--color-accent);
+  color: var(--color-text-heading);
+}
+
+.jc-choice[aria-pressed="true"]:not(.is-key),
+.jc-choice[aria-pressed="true"]:not(.is-key)[aria-disabled="true"]:hover {
+  border-color: var(--color-text-heading);
+  box-shadow: inset 3px 0 0 var(--color-text-heading);
+  color: var(--color-text-heading);
+}
+
+.jc-choice[aria-disabled="true"] {
+  cursor: default;
+}
+
+.jc-choice[aria-disabled="true"]:hover {
+  border-color: var(--color-border-light);
+}
+
+.jc-feedback {
+  margin: 0.75rem 0 0;
+  padding: 0.15rem 0 0.15rem 0.85rem;
+  border-left: 2px solid var(--color-accent);
+  scroll-margin-top: 110px;
+}
+
+.jc-feedback:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.jc-read .jc-onpaper .jc-hit {
+  margin: 0;
+  color: var(--color-text-heading);
+  font-weight: 600;
+}
+
+.jc-read .jc-onpaper .jc-points {
+  margin: 0.45rem 0 0;
+  padding-left: 1.15rem;
+}
+
+.jc-pico-mini {
+  display: grid;
+  grid-template-columns: 7.25rem minmax(0, 1fr);
+  gap: 0.35rem 0.75rem;
+  margin: 0.7rem 0 0;
+}
+
+.jc-pico-mini dt {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.jc-pico-mini dd {
+  margin: 0;
+}
+
+.jc-read details {
+  margin-top: 0.75rem;
+}
+
+.jc-read summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-accent);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.jc-read summary:hover {
+  color: var(--color-accent-hover);
+}
+
+.jc-bluf-label {
+  display: block;
+  margin: 0.7rem 0 0.35rem;
+  font-weight: 600;
+  color: var(--color-text-heading);
+}
+
+.jc-bluf-input {
+  display: block;
+  width: 100%;
+  min-height: 6.5rem;
+  font: inherit;
+  line-height: 1.5;
+  color: var(--color-text-heading);
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.9rem;
+  resize: vertical;
+}
+
+.jc-onpaper .jc-button {
+  margin-top: 0.65rem;
+}
+
+.jc-series {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0 0;
+}
+
+.jc-series li {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Flow spacing for the long-form appraisal pages. Scoped to .jc-prose so the
+   hub, session, and how-to-read pages keep their own explicit margins. */
+.jc-prose header > * + p,
+.jc-prose section > * + * {
+  margin-top: 0.9rem;
+}
+
+.jc-prose section > h2 + * {
+  margin-top: 0;
+}
+
+.jc-prose section > * + h3 {
+  margin-top: 1.7rem;
+}
+
+.jc-prose section > * + .jc-note-block,
+.jc-prose section > * + .jc-takeaway,
+.jc-prose section > * + .jc-table-wrap {
+  margin-top: 1.35rem;
+}
+
+.jc-series-linked {
+  counter-reset: series;
+}
+
+.jc-series-linked li {
+  display: grid;
+  grid-template-columns: 2.1rem minmax(0, 1fr);
+  column-gap: 0.75rem;
+  counter-increment: series;
+}
+
+.jc-series-linked li::before {
+  content: counter(series) ".";
+  grid-column: 1;
+  grid-row: 1 / -1;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.jc-series-linked > li > * {
+  grid-column: 2;
+}
+
+.jc-series-title {
+  display: block;
+  color: var(--color-text-heading);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+}
+
+.jc-series-title:hover {
+  color: var(--color-accent-hover);
+}
+
+.jc-series-linked p {
+  margin: 0.15rem 0 0;
+  max-width: 68ch;
+  color: var(--color-text-muted);
+}
+
+.jc-pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  justify-content: space-between;
+  margin-top: 2.75rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.jc-pager a {
+  max-width: 24ch;
+}
+
+.jc-pager a:last-child:not(:first-child) {
+  margin-left: auto;
+  text-align: right;
+}
+
+.jc-pager-dir {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.jc-pager-part {
+  display: block;
+}
+
+.jc-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 800px) {
+  .jc-pico-table {
+    display: none;
+  }
+
+  .jc-pico-stack {
+    display: block;
+  }
+}
+
+@media (max-width: 720px) {
+  .jc-page {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .jc-part-nav-label {
+    display: none;
+  }
+
+  .jc-part-nav a {
+    font-size: 1.1rem;
+  }
+
+
+  .jc-search-row,
+  .jc-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .jc-search-row {
+    align-items: stretch;
+  }
+
+  .jc-search-row .jc-text-button {
+    justify-self: end;
+    min-height: 44px;
+    padding: 0.4rem 0.25rem;
+    border-color: transparent;
+  }
+
+  .jc-session-head .jc-button,
+  .jc-session-head .jc-download {
+    flex: 1 1 100%;
+  }
+
+  .jc-session-head .jc-download {
+    min-width: 0;
+  }
+
+  .jc-timeline li {
+    grid-template-columns: 1fr;
+    padding-bottom: 1.25rem;
+  }
+
+  .jc-row {
+    grid-template-columns: 3.45rem minmax(0, 1fr);
+    column-gap: 0.8rem;
+    padding-left: 0.75rem;
+    padding-right: 0.15rem;
+  }
+
+  .jc-date {
+    grid-row: 1 / span 2;
+  }
+
+  .jc-row .jc-actions {
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: 0.45rem;
+  }
+
+  .jc-date-day {
+    font-size: 1.45rem;
+  }
+
+  .jc-pico-mini {
+    grid-template-columns: 1fr;
+  }
+
+  .jc-pico-mini dd {
+    margin: 0 0 0.55rem;
+  }
+
+  .jc-pager {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .jc-pager a,
+  .jc-pager a:last-child:not(:first-child) {
+    max-width: none;
+    margin-left: 0;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jc-page * {
+    scroll-behavior: auto;
+  }
+
+  .jc-download:hover .jc-download-arrow {
+    transform: none;
+  }
+
+  .jc-toc-details summary::before {
+    transition: none;
+  }
+}

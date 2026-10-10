@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -37,7 +37,7 @@
   <style>
     /* Page-specific styles */
     .hero {
-      min-height: calc(100vh - 80px);
+      min-height: min(calc(100vh - 80px), 42rem);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -45,6 +45,68 @@
       text-align: center;
       position: relative;
       overflow: hidden;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem 1rem;
+      margin-top: 2.25rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.7rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+    }
+
+    .btn--primary {
+      background: var(--color-brand-dark);
+      color: #f8fafc;
+    }
+
+    .btn--primary:hover {
+      background: var(--color-brand-mid);
+    }
+
+    .btn--secondary {
+      color: var(--color-text-heading);
+      border: 1px solid var(--color-border-light);
+    }
+
+    .btn--secondary:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent-hover);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    .in-development {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: baseline;
+      gap: 0.35rem 1.75rem;
+      margin-top: 2.5rem;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .in-development__label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text-heading);
     }
 
     .hero::before {
@@ -146,10 +208,10 @@
       </div>
     </a>
     <div class="nav-links">
-      <a href="#ai" class="nav-link">AI Resources</a>
-      <a href="#education" class="nav-link">Clinical Education</a>
-      <a href="#education" class="nav-link">Protocols</a>
-      <a href="#about" class="nav-link">About</a>
+      <a href="#ai" class="nav-link" data-label="AI Resources">AI Resources</a>
+      <a href="#education" class="nav-link" data-label="Clinical Education">Clinical Education</a>
+      <a href="/journal-club/" class="nav-link" data-label="Journal Club">Journal Club</a>
+      <a href="#about" class="nav-link" data-label="About">About</a>
       <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode">
         <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -170,10 +232,10 @@
   <button class="mobile-nav-close" aria-label="Close menu" id="mobile-nav-close">
     <svg viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
   </button>
-  <a href="#ai" class="nav-link">AI Resources</a>
-  <a href="#education" class="nav-link">Clinical Education</a>
-  <a href="#education" class="nav-link">Protocols</a>
-  <a href="#about" class="nav-link">About</a>
+  <a href="#ai" class="nav-link" data-label="AI Resources">AI Resources</a>
+  <a href="#education" class="nav-link" data-label="Clinical Education">Clinical Education</a>
+  <a href="/journal-club/" class="nav-link" data-label="Journal Club">Journal Club</a>
+  <a href="#about" class="nav-link" data-label="About">About</a>
   <div class="mobile-theme-toggle">
     <span class="mobile-theme-label">Appearance</span>
     <button class="theme-toggle" data-action="toggle-theme" aria-label="Toggle light/dark mode">
@@ -201,6 +263,10 @@
          style="color: var(--color-text-muted);">
         Evidence-based resources, protocols, and cutting-edge AI guidance for anesthesiologists committed to clinical excellence and patient safety.
       </p>
+      <div class="hero-actions">
+        <a href="journal-club/" class="btn btn--primary">Open Journal Club</a>
+        <a href="ai/bth/" class="btn btn--secondary">Beyond the Hype</a>
+      </div>
     </div>
   </section>
 
@@ -211,10 +277,19 @@
         AI in Anesthesiology
       </h2>
       <p class="text-lg max-w-[600px] mx-auto" style="color: var(--color-text-muted);">
-        Practical frameworks for safe, ethical AI deployment in perioperative care
+        Beyond the Hype is a CME presentation on supervised AI use in anesthesiology, with a resource guide and a self-assessment.
       </p>
     </header>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <a href="ai/bth/" class="feature-card-link">
+        <article class="feature-card rounded-2xl p-8 text-center border transition-all duration-300 hover:-translate-y-1"
+                 style="background: var(--color-card-bg); border-color: var(--color-border);">
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3 class="text-xl font-semibold mb-3" style="color: var(--color-text-heading);">Beyond the Hype</h3>
+          <p class="leading-relaxed mb-4" style="color: var(--color-text-muted);">The presentation itself: the VDD framework &mdash; Verify, Decide, Document &mdash; for supervised AI use in anesthesiology practice.</p>
+          <span class="feature-link">View presentation</span>
+        </article>
+      </a>
       <a href="ai/bth/resource-guide.html" class="feature-card-link">
         <article class="feature-card rounded-2xl p-8 text-center border transition-all duration-300 hover:-translate-y-1"
                  style="background: var(--color-card-bg); border-color: var(--color-border);">
@@ -241,21 +316,20 @@
   </section>
 
   <!-- Stats -->
-  <section class="py-20 px-8 max-w-[1200px] mx-auto border-t border-b"
-           style="background: var(--color-glow); border-color: var(--color-border);"
-           aria-label="Key statistics">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+  <section class="border-t border-b" style="background: var(--color-glow); border-color: var(--color-border);"
+           aria-label="At a glance">
+    <div class="py-16 px-8 max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
       <div>
-        <div class="text-5xl font-extrabold tracking-tight mb-2" style="color: var(--color-accent);">5</div>
-        <div class="font-medium" style="color: var(--color-text-muted);">Clinical AI Tools in Practice</div>
+        <div class="text-5xl font-extrabold tracking-tight mb-2" style="color: var(--color-accent);">3</div>
+        <div class="font-medium" style="color: var(--color-text-muted);">AI resources: presentation, guide, and quiz</div>
       </div>
       <div>
         <div class="text-5xl font-extrabold tracking-tight mb-2" style="color: var(--color-accent);">VDD</div>
         <div class="font-medium" style="color: var(--color-text-muted);">Verify &middot; Decide &middot; Document Framework</div>
       </div>
       <div>
-        <div class="text-5xl font-extrabold tracking-tight mb-2" style="color: var(--color-accent);">100%</div>
-        <div class="font-medium" style="color: var(--color-text-muted);">Evidence-Based Content</div>
+        <div class="text-5xl font-extrabold tracking-tight mb-2" style="color: var(--color-accent);">7</div>
+        <div class="font-medium" style="color: var(--color-text-muted);">Critical appraisal parts for journal club</div>
       </div>
     </div>
   </section>
@@ -270,37 +344,24 @@
         Protocols, guidelines, and educational materials for anesthesia practice
       </p>
     </header>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <article class="feature-card rounded-2xl p-8 text-center border transition-all duration-300"
-               style="background: var(--color-card-bg); border-color: var(--color-border);">
-        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 3-2 5.5-4 7l-1 1.5h-4L9 16c-2-1.5-4-4-4-7a7 7 0 0 1 7-7z"/><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="21" x2="14" y2="21"/></svg></div>
-        <h3 class="text-xl font-semibold mb-3" style="color: var(--color-text-heading);">Neuroanesthesia</h3>
-        <p class="mb-4 leading-relaxed" style="color: var(--color-text-muted);">
-          Comprehensive protocols for awake spine surgery, including patient selection, anesthetic techniques, and management strategies.
-        </p>
-        <span class="feature-link feature-link--disabled">Coming soon</span>
-      </article>
-      <a href="ai/bth/" class="feature-card-link">
+    <div class="max-w-[26rem] mx-auto">
+      <a href="journal-club/" class="feature-card-link">
         <article class="feature-card rounded-2xl p-8 text-center border transition-all duration-300 hover:-translate-y-1"
                  style="background: var(--color-card-bg); border-color: var(--color-border);">
-          <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-          <h3 class="text-xl font-semibold mb-3" style="color: var(--color-text-heading);">Beyond the Hype</h3>
+          <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/></svg></div>
+          <h3 class="text-xl font-semibold mb-3" style="color: var(--color-text-heading);">Journal Club</h3>
           <p class="mb-4 leading-relaxed" style="color: var(--color-text-muted);">
-            Comprehensive CME presentation on the VDD framework—Verify, Decide, Document—for supervised AI use in anesthesiology practice.
+            CA-2 sessions with pre-session handouts. Search by date, topic, or presenter, and use the same appraisal checklist each month.
           </p>
-          <span class="feature-link">View presentation</span>
+          <span class="feature-link">Open journal club</span>
         </article>
       </a>
-      <article class="feature-card rounded-2xl p-8 text-center border transition-all duration-300"
-               style="background: var(--color-card-bg); border-color: var(--color-border);">
-        <div class="feature-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-        <h3 class="text-xl font-semibold mb-3" style="color: var(--color-text-heading);">Crisis Management</h3>
-        <p class="mb-4 leading-relaxed" style="color: var(--color-text-muted);">
-          Rapid-response protocols for perioperative emergencies, cognitive aids, and team-based crisis resource management.
-        </p>
-        <span class="feature-link feature-link--disabled">Coming soon</span>
-      </article>
     </div>
+    <p class="in-development">
+      <span class="in-development__label">In development</span>
+      <span>Neuroanesthesia: awake spine surgery protocols</span>
+      <span>Crisis Management: perioperative emergency cognitive aids</span>
+    </p>
   </section>
 
   <!-- About -->
